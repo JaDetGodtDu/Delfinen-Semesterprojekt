@@ -7,13 +7,22 @@ async function getMembers() {
   prepareMemberData(data);
   return members;
 }
+// FETCH COMPETITION RESULTS
 async function getCompetitionResults() {
-  const response = await fetch(`${endpoint}/results.json`);
+  const response = await fetch(`${endpoint}/competitionResults.json`);
   const data = await response.json();
   const results = prepareResultData(data);
   prepareResultData(data);
   return results;
 }
+async function getTrainingResults() {
+  const response = await fetch(`${endpoint}/trainingResults.json`);
+  const data = await response.json();
+  const results = prepareResultData(data);
+  prepareResultData(data);
+  return results;
+}
+// CREATE NEW MEMBERS
 async function createMember(firstName, lastName, address, phone, email, compSwimmer, active, gender, dateOfBirth) {
   const newMember = { firstName, lastName, address, phone, email, compSwimmer, active, gender, dateOfBirth };
   const json = JSON.stringify(newMember);
@@ -23,6 +32,7 @@ async function createMember(firstName, lastName, address, phone, email, compSwim
   });
   return response;
 }
+// CREATE NEW RESULTS
 async function createCompetitionResult(discipline, memberId, placement, time, competition) {
   const newResult = { discipline, memberId, placement, time, competition };
   const json = JSON.stringify(newResult);
@@ -41,12 +51,14 @@ async function createTrainingResult(bestTime, date, memberId, discipline) {
   });
   return response;
 }
+// DELETE MEMBERS
 async function deleteMember(id) {
   const response = await fetch(`${endpoint}/members/${id}.json`, {
     method: "DELETE",
   });
   return response;
 }
+// UPDATE MEMBERS
 async function updateMember(firstName, lastName, address, phone, email, compSwimmer, active, gender, dateOfBirth) {
   const memberToUpdate = { firstName, lastName, address, phone, email, compSwimmer, active, gender, dateOfBirth };
   const json = JSON.stringify(memberToUpdate);
@@ -56,6 +68,7 @@ async function updateMember(firstName, lastName, address, phone, email, compSwim
   });
   return response;
 }
+// UPDATE RESULTS
 async function updateCompetitionResult(discipline, memberId, placement, time, competition) {
   const resultToUpdate = { discipline, memberId, placement, time, competition };
   const json = JSON.stringify(resultToUpdate);
@@ -74,4 +87,4 @@ async function updateTrainingResult(bestTime, date, memberId, discipline) {
   });
   return response;
 }
-export { getMembers, getCompetitionResults, createMember, createCompetitionResult, createTrainingResult, deleteMember, updateMember, updateCompetitionResult, updateTrainingResult };
+export { getMembers, getCompetitionResults, getTrainingResults, createMember, createCompetitionResult, createTrainingResult, deleteMember, updateMember, updateCompetitionResult, updateTrainingResult };
