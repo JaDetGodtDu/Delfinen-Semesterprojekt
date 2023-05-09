@@ -7,4 +7,14 @@ function prepareMemberData(dataObject) {
   }
   return memberArray;
 }
-export { prepareMemberData };
+function prepareResultData(dataObject) {
+  const resultArray = [];
+  for (const key in dataObject) {
+    const result = dataObject[key];
+    result.id = key;
+    resultArray.push(result);
+  }
+  return resultArray;
+}
+
+export { prepareMemberData, prepareResultData };
