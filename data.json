@@ -1,0 +1,146 @@
+{
+  "members": {
+    "00": {
+      "firstName": "Laurits",
+      "lastName": "Schou",
+      "address": "Valby Langgade 16",
+      "dateOfBirth": "06.08.1995",
+      "gender": "Mand",
+      "active": true,
+      "compSwimmer": true,
+      "hasPayed": true,
+      "discipline": "Crawl, Butterfly, Brystsvømning, Rygsvømning"
+    },
+    "01": {
+      "firstName": "Mike",
+      "lastName": "Tyson",
+      "adress": "Las Vegas Boulevard 13",
+      "dateOfBirth": "04.06.1957",
+      "gender": "Mand",
+      "active": false,
+      "compSwimmer": false,
+      "hasPayed": false,
+      "discipline": "Crawl, Butterfly, Brystsvømning, Rygsvømning"
+    },
+    "02": {
+      "firstName": "Janet",
+      "lastName": "Jackson",
+      "adress": "Las Vegas Boulevard 574",
+      "dateOfBirth": "04.06.1973",
+      "gender": "Kvinde",
+      "active": false,
+      "compSwimmer": false,
+      "hasPayed": true,
+      "discipline": "Crawl, Butterfly, Brystsvømning, Rygsvømning"
+    },
+    "03": {
+      "firstName": "Donald",
+      "lastName": "Duck",
+      "adress": "Andeby Langgade 43",
+      "dateOfBirth": "04.06.1894",
+      "gender": "Mand",
+      "active": true,
+      "compSwimmer": false,
+      "hasPayed": true,
+      "discipline": "Crawl, Butterfly, Brystsvømning, Rygsvømning"
+    }
+  },
+  "results": {
+    "00": {
+      "memberId": "00",
+      "time": 25000,
+      "discipline": "Crawl",
+      "placement": 3
+    },
+    "01": {
+      "memberId": "00",
+      "time": 250009,
+      "discipline": "Butterfly",
+      "placement": 5
+    },
+    "02": {
+      "memberId": "00",
+      "time": 400009,
+      "discipline": "Rygsvømning",
+      "placement": 8
+    },
+    "03": {
+      "memberId": "00",
+      "time": 570009,
+      "discipline": "Brystsvømning",
+      "placement": 1
+    },
+    "04": {
+      "memberId": "01",
+      "time": 25000,
+      "discipline": "Crawl",
+      "placement": 3
+    },
+    "05": {
+      "memberId": "01",
+      "time": 250009,
+      "discipline": "Butterfly",
+      "placement": 5
+    },
+    "06": {
+      "memberId": "01",
+      "time": 400009,
+      "discipline": "Rygsvømning",
+      "placement": 8
+    },
+    "07": {
+      "memberId": "01",
+      "time": 570009,
+      "discipline": "Brystsvømning",
+      "placement": 1
+    },
+    "08": {
+      "memberId": "02",
+      "time": 25000,
+      "discipline": "Crawl",
+      "placement": 3
+    },
+    "09": {
+      "memberId": "02",
+      "time": 250009,
+      "discipline": "Butterfly",
+      "placement": 5
+    },
+    "10": {
+      "memberId": "02",
+      "time": 400009,
+      "discipline": "Rygsvømning",
+      "placement": 8
+    },
+    "11": {
+      "memberId": "02",
+      "time": 570009,
+      "discipline": "Brystsvømning",
+      "placement": 1
+    },
+    "12": {
+      "memberId": "03",
+      "time": 25000,
+      "discipline": "Crawl",
+      "placement": 3
+    },
+    "13": {
+      "memberId": "03",
+      "time": 250009,
+      "discipline": "Butterfly",
+      "placement": 5
+    },
+    "14": {
+      "memberId": "03",
+      "time": 400009,
+      "discipline": "Rygsvømning",
+      "placement": 8
+    },
+    "15": {
+      "memberId": "03",
+      "time": 570009,
+      "discipline": "Brystsvømning",
+      "placement": 1
+    }
+  }
+}
