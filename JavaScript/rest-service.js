@@ -7,7 +7,7 @@ async function getMembers() {
   prepareMemberData(data);
   return members;
 }
-async function getResults() {
+async function getCompetitionResults() {
   const response = await fetch(`${endpoint}/results.json`);
   const data = await response.json();
   const results = prepareResultData(data);
@@ -23,10 +23,19 @@ async function createMember(firstName, lastName, address, phone, email, compSwim
   });
   return response;
 }
-async function createResult(discipline, memberId, placement, time) {
-  const newResult = { discipline, memberId, placement, time };
+async function createCompetitionResult(discipline, memberId, placement, time, competition) {
+  const newResult = { discipline, memberId, placement, time, competition };
   const json = JSON.stringify(newResult);
-  const response = await fetch(`${endpoint}/results.json`, {
+  const response = await fetch(`${endpoint}/competitionResults.json`, {
+    method: "POST",
+    body: json,
+  });
+  return response;
+}
+async function createTrainingResult(bestTime, date, memberId, discipline) {
+  const newResult = { bestTime, date, memberId, discipline };
+  const json = JSON.stringify(newResult);
+  const response = await fetch(`${endpoint}/trainingResults.json`, {
     method: "POST",
     body: json,
   });
@@ -47,13 +56,22 @@ async function updateMember(firstName, lastName, address, phone, email, compSwim
   });
   return response;
 }
-async function updateResult(discipline, memberId, placement, time) {
-  const resultToUpdate = { discipline, memberId, placement, time };
+async function updateCompetitionResult(discipline, memberId, placement, time, competition) {
+  const resultToUpdate = { discipline, memberId, placement, time, competition };
   const json = JSON.stringify(resultToUpdate);
-  const response = await fetch(`${endpoint}/results/${id}.json`, {
+  const response = await fetch(`${endpoint}/competitionResults/${id}.json`, {
     method: "PUT",
     body: json,
   });
   return response;
 }
-export { getMembers, getResults, createMember, createResult, deleteMember, updateMember, updateResult };
+async function updateTrainingResult(bestTime, date, memberId, discipline) {
+  const resultToUpdate = { bestTime, date, memberId, discipline };
+  const json = JSON.stringify(resultToUpdate);
+  const response = await fetch(`${endpoint}/trainingResults/${id}.json`, {
+    method: "PUT",
+    body: json,
+  });
+  return response;
+}
+export { getMembers, getCompetitionResults, createMember, createCompetitionResult, createTrainingResult, deleteMember, updateMember, updateCompetitionResult, updateTrainingResult };
