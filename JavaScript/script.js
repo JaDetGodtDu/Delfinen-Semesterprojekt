@@ -8,13 +8,15 @@ async function initApp() {
   await showResults();
   await filterMembersByPayed(members);
   await filterMembersByNotPayed(members);
-  filterResultsByDiscipline("crawl");
+  filterResultsByDiscipline("butterfly");
+  filterTop5SwimmersByDiscipline("ryg");
 }
 async function showMembers() {
   members = await getMembers();
 }
 async function showResults() {
   results = await getResults();
+  console.log(results);
 }
 async function filterMembersByPayed(members) {
   const result = members.filter((member) => member.hasPayed === true);
@@ -32,4 +34,12 @@ function filterResultsByDiscipline(searchValue) {
   }
   console.log(result);
   return result;
+}
+function filterTop5SwimmersByDiscipline(searchValue) {
+  searchValue = searchValue.toLowerCase();
+  const filteredResults = results.filter((result) => result.discipline.toLowerCase().includes(searchValue));
+  const sortedResults = filteredResults.sort((a, b) => a.time - b.time);
+  const topFiveResults = sortedResults.slice(0, 4);
+  console.log(topFiveResults);
+  return topFiveResults;
 }
