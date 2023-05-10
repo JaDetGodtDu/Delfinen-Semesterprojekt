@@ -12,11 +12,21 @@
     <link rel="stylesheet" href="CSS/ungdomstræner.css" />
     <link rel="shortcut icon" href="pictures/favicon.ico" type="image/x-icon" />
   </head>
-  <body>
-    <nav></nav>
+  <body ng-app="myAPP">
+    <p><a href="#/!">MAIN</a></p>
+    <a href="#!nav1">NAV1</a>
+    <a href="#!nav2">NAV2</a>
 
-    <main></main>
-    <section></section>
-    <script src="JavaScript/script.js" type="module"></script>
+    <div ng-view></div>
+
+    <script src="JavaScript/script.js" type="module">
+      var app = angular.module("myAPP", ["ngRoute"]);
+      app.config(function($routeProvider){
+        $routeProvider.when("/", {templateURL: "main.htm"})
+        .when("/nav1", {templateURL : "nav1.htm"})
+        .when("/nav2", {templateURL : "nav2.htm"})
+
+      })
+    </script>
   </body>
 </html>
