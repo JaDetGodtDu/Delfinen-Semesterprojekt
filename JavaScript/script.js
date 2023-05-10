@@ -8,6 +8,8 @@ async function initApp() {
   await sortResultsByType();
   await sortResultsByTime();
   await sortResultsByDiscipline();
+  await showMembers();
+  await sortMembersByName();
 }
 async function showResults() {
   results = await getResults();
@@ -26,4 +28,12 @@ async function sortResultsByDiscipline() {
   await showResults();
   results.sort((a, b) => a.discipline.localeCompare(b.discipline));
   console.log(results);
+}
+async function showMembers() {
+  members = await getMembers();
+}
+async function sortMembersByName() {
+  await showMembers();
+  members.sort((a, b) => a.lastName.localeCompare(b.lastName));
+  console.log(members);
 }
