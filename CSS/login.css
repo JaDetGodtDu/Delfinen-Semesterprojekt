@@ -28,7 +28,6 @@
   grid-area: initial;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  background-color: aliceblue;
   border-width: 2px;
 }
 #login-btn-container div {
