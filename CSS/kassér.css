@@ -1,9 +1,13 @@
+
+
+
 table {
   border-collapse: collapse;
 }
 
 table th {
   border: 2px solid black;
+  font-size: 30;
 }
 table td {
   border: 2px solid black;
