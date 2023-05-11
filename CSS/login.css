@@ -24,7 +24,6 @@
 }
 #login-btn-container {
   padding: 75px;
-  height: 50px;
   grid-area: initial;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -34,7 +33,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 50px;
+  padding: 2px;
 }
 .login-btn {
   display: block;
