@@ -1,10 +1,21 @@
 .wrapper {
   display: grid;
-  grid-template-columns: 500px 1fr 2fr;
   border-style: ridge;
+  grid-template-columns: repeat(3, 1fr);
+  color: blue;
+  border: 2px solid black;
 }
 
 .box1 {
+  border: 5px solid black;
+  font-size: large;
+}
+
+.box {
+  border: 2px solid blue;
+}
+
+/* .box1 {
   grid-column-start: 1;
   grid-column-end: 1;
   grid-row-start: 1;
@@ -43,3 +54,10 @@
   grid-row-end: 6;
   border: 2px solid blue;
 }
+
+.box7 {
+  grid-column-start: 1;
+  grid-row-start: 1;
+  grid-row-end: 7;
+  border: 2px solid blue;
+} */
