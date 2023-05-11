@@ -1,5 +1,10 @@
 "use strict";
-import { getMembers, getResults, createMember, createResult } from "./rest-service.js";
+import {
+  getMembers,
+  getResults,
+  createMember,
+  createResult,
+} from "./rest-service.js";
 window.addEventListener("load", initApp);
 let members;
 let results;
@@ -39,7 +44,9 @@ function filterResultsByDiscipline(searchValue) {
 }
 function filterTop5SwimmersByDiscipline(searchValue) {
   searchValue = searchValue.toLowerCase();
-  const filteredResults = results.filter((result) => result.discipline.toLowerCase().includes(searchValue));
+  const filteredResults = results.filter((result) =>
+    result.discipline.toLowerCase().includes(searchValue)
+  );
   const sortedResults = filteredResults.sort((a, b) => a.time - b.time);
   const topFiveResults = sortedResults.slice(0, 4);
   console.log(topFiveResults);
@@ -54,8 +61,15 @@ function ageCalculator(members) {
   return age;
 }
 function filterMembersByAge(members) {
+  const membersOver18 = [];
+  const membersUnder18 = [];
   members.forEach((member) => {
     let age = ageCalculator(member);
-    console.log(`${member.firstName} is ${age} years old.`);
+    if (age >= 18) {
+      membersOver18.push(member);
+    } else {
+      membersUnder18.push(member);
+    }
   });
+  return { over18: membersOver18, under18: membersUnder18 };
 }

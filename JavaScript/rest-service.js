@@ -1,4 +1,5 @@
-const endpoint = "https://delfinen-8e9fa-default-rtdb.europe-west1.firebasedatabase.app/";
+const endpoint =
+  "https://delfinen-8e9fa-default-rtdb.europe-west1.firebasedatabase.app/";
 import { prepareMemberData, prepareResultData } from "./helpers.js";
 // FETCH MEMBERS
 async function getMembers() {
@@ -17,8 +18,28 @@ async function getResults() {
   return results;
 }
 // CREATE NEW MEMBERS
-async function createMember(firstName, lastName, address, phone, email, compSwimmer, active, gender, dateOfBirth) {
-  const newMember = { firstName, lastName, address, phone, email, compSwimmer, active, gender, dateOfBirth };
+async function createMember(
+  firstName,
+  lastName,
+  address,
+  phone,
+  email,
+  compSwimmer,
+  active,
+  gender,
+  dateOfBirth
+) {
+  const newMember = {
+    firstName,
+    lastName,
+    address,
+    phone,
+    email,
+    compSwimmer,
+    active,
+    gender,
+    dateOfBirth,
+  };
   const json = JSON.stringify(newMember);
   const response = await fetch(`${endpoint}/members.json`, {
     method: "POST",
@@ -27,8 +48,24 @@ async function createMember(firstName, lastName, address, phone, email, compSwim
   return response;
 }
 // CREATE NEW RESULTS
-async function createResult(discipline, memberId, placement, time, competition, type, date) {
-  const newResult = { discipline, memberId, placement, time, competition, type, date };
+async function createResult(
+  discipline,
+  memberId,
+  placement,
+  time,
+  competition,
+  type,
+  date
+) {
+  const newResult = {
+    discipline,
+    memberId,
+    placement,
+    time,
+    competition,
+    type,
+    date,
+  };
   const json = JSON.stringify(newResult);
   const response = await fetch(`${endpoint}/results.json`, {
     method: "POST",
@@ -44,8 +81,28 @@ async function deleteMember(id) {
   return response;
 }
 // UPDATE MEMBERS
-async function updateMember(firstName, lastName, address, phone, email, compSwimmer, active, gender, dateOfBirth) {
-  const memberToUpdate = { firstName, lastName, address, phone, email, compSwimmer, active, gender, dateOfBirth };
+async function updateMember(
+  firstName,
+  lastName,
+  address,
+  phone,
+  email,
+  compSwimmer,
+  active,
+  gender,
+  dateOfBirth
+) {
+  const memberToUpdate = {
+    firstName,
+    lastName,
+    address,
+    phone,
+    email,
+    compSwimmer,
+    active,
+    gender,
+    dateOfBirth,
+  };
   const json = JSON.stringify(memberToUpdate);
   const response = await fetch(`${endpoint}/members/${id}.json`, {
     method: "PUT",
@@ -54,8 +111,24 @@ async function updateMember(firstName, lastName, address, phone, email, compSwim
   return response;
 }
 // UPDATE RESULTS
-async function updateResult(discipline, memberId, placement, time, competition, type, date) {
-  const resultToUpdate = { discipline, memberId, placement, time, competition, type, date };
+async function updateResult(
+  discipline,
+  memberId,
+  placement,
+  time,
+  competition,
+  type,
+  date
+) {
+  const resultToUpdate = {
+    discipline,
+    memberId,
+    placement,
+    time,
+    competition,
+    type,
+    date,
+  };
   const json = JSON.stringify(resultToUpdate);
   const response = await fetch(`${endpoint}/results/${id}.json`, {
     method: "PUT",
@@ -63,4 +136,12 @@ async function updateResult(discipline, memberId, placement, time, competition, 
   });
   return response;
 }
-export { getMembers, getResults, createMember, createResult, deleteMember, updateMember, updateResult };
+export {
+  getMembers,
+  getResults,
+  createMember,
+  createResult,
+  deleteMember,
+  updateMember,
+  updateResult,
+};
