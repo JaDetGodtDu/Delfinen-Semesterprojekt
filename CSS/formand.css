@@ -1,7 +1,8 @@
 .wrapper {
   display: grid;
   border-style: ridge;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 3fr 2fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: auto;
   color: blue;
   border: 2px solid black;
 }
