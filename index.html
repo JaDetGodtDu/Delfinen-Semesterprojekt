@@ -16,7 +16,7 @@
   <body>
     <!-- navbar info -->
     <nav>
-      <a href="#formand" class="view-link">Formand</a>
+      <a href="#formand" class="view-link" aktive>Formand</a>
       <a href="#revisor-bogholder" class="view-link">Revisor/Bogholder</a>
       <a href="#seniortraener" class="view-link">seniortræner</a>
       <a href="#ungdomstraener" class="view-link">Ungdomstræner</a>
@@ -27,6 +27,26 @@
       <section id="formand" class="view-content">
         <h2>Formand</h2>
         <p>Her skal jeg som formand kunne tilmelde medlemmer</p>
+
+        <section class="tools-grid">
+          <label for="select-sort-by"
+            >Sorter via:
+            <select id="select-sort-by">
+              <option value="" selected>Intet emne</option>
+              <option value="aktiv">Aktiv</option>
+              <option value="inaktiv">Inaktiv</option>
+              <option value="konkurance">konkurance</option>
+              <option value="motionist">Motionist</option>
+              <option value="ungdom">Ungdom</option>
+              <option value="senior">Senior</option>
+            </select>
+          </label>
+
+          <div>
+            <label for="input-search">Search:</label>
+            <input type="search" id="input-search" placeholder="Soter via emne" />
+          </div>
+        </section>
         <table>
           <thead>
             <th>Medlem</th>
@@ -38,12 +58,53 @@
           </thead>
           <tbody>
             <tr>
-              <td class="member" id="member"></td>
-              <td class="age" id="age"></td>
-              <td class="team" id="team"></td>
-              <td class="email" id=""></td>
-              <td class="phone" id=""></td>
-              <td class="membership" id=""></td>
+              <td>Peter med den lange</td>
+              <td>15</td>
+              <td>konkurance</td>
+              <td>per11@gmail.com</td>
+              <td>38283781</td>
+              <td>Aktiv</td>
+            </tr>
+            <tr>
+              <td>Peter fra l</td>
+              <td>20</td>
+              <td>konkurance</td>
+              <td>die@hotmail.com</td>
+              <td>30686481</td>
+              <td>Inaktiv</td>
+            </tr>
+            <tr>
+              <td>Race fra n</td>
+              <td>65</td>
+              <td>Motionist</td>
+              <td>ptle125@gmail.com</td>
+              <td>30443781</td>
+              <td>Aktiv</td>
+            </tr>
+
+            <tr>
+              <td>Jan</td>
+              <td>10</td>
+              <td>konkurance</td>
+              <td>ptle15@youmail.com</td>
+              <td>30688881</td>
+              <td>Aktiv</td>
+            </tr>
+            <tr>
+              <td>Kristine</td>
+              <td>48</td>
+              <td>Motionist</td>
+              <td>jo@hotmail.com</td>
+              <td>50683711</td>
+              <td>Aktiv</td>
+            </tr>
+            <tr>
+              <td>Lise</td>
+              <td>91</td>
+              <td>konkurance</td>
+              <td>hjrg15@gmail.com</td>
+              <td>30623781</td>
+              <td>Inaktiv</td>
             </tr>
           </tbody>
         </table>
