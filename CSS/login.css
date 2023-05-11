@@ -12,6 +12,8 @@
 }
 #login-view-img {
   margin: -200px;
+  margin-right: 0px;
+  margin-left: 5px;
   display: flex;
   justify-content: center;
   align-items: center;
