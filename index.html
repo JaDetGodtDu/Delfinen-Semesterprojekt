@@ -33,30 +33,27 @@
         </section> -->
 
         <h2>Formand</h2>
-        <p>Her skal jeg som formand kunne tilmelde medlemmer</p>
 
-        <section class="tools-grid">
-          <section>
-            <label for="select-filter-by"
-              >Sorter via:
-              <select id="select-filter-by">
-                <option value="" selected>Intet emne</option>
-                <option value="aktiv">Aktiv</option>
-                <option value="inaktiv">Inaktiv</option>
-                <option value="konkurance">konkurance</option>
-                <option value="motionist">Motionist</option>
-                <option value="ungdom">Ungdom</option>
-                <option value="senior">Senior</option>
-              </select>
-            </label>
-
-            <div>
-              <label for="input-search">Search:</label>
-              <input type="search" id="input-search" placeholder="Soter via emne" />
-            </div>
-          </section>
+        <section id="formand-tools" class="formand-tools">
+          <button id="newMember">Opret medlem</button>
+          <label for="select-filter-by">
+            <select id="select-filter-by">
+              <option value="" selected>Filter</option>
+              <option value="aktiv">Aktiv</option>
+              <option value="inaktiv">Inaktiv</option>
+              <option value="konkurance">konkurance</option>
+              <option value="motionist">Motionist</option>
+              <option value="ungdom">Ungdom</option>
+              <option value="senior">Senior</option>
+            </select>
+          </label>
+          <div>
+            <label for="input-search">Search:</label>
+            <input type="search" id="input-search" placeholder="Soter via emne" />
+          </div>
         </section>
 
+        <br />
         <table>
           <thead>
             <th>Medlem</th>
