@@ -4,7 +4,7 @@ function initViews() {
 }
 
 function viewChange() {
-  let hashLink = "#login"; // default view
+  let hashLink = "#formand"; // default view
 
   if (location.hash) {
     // if there's a hash value, use as link
