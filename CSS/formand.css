@@ -1,4 +1,4 @@
-#formand {
+#formand-view {
 }
 
 #formand-tools {
@@ -11,18 +11,6 @@
 .select-filter-by {
   margin-left: 100px;
 }
-/* .formand-tools {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  background-color: aquamarine;
-} */
-
-/* #formand-table {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-} */
 
 table {
   border-collapse: collapse;
@@ -35,18 +23,3 @@ table th {
 table td {
   border: 2px solid black;
 }
-/* 
-.tools-grid {
-  margin-left: auto;
-} */
-/* 
-#searchbar {
-  margin-left: 800px;
-  margin-top: 50;
-  grid-column-start: 1;
-}
-
-.filter {
-  margin-right: 750px;
-  grid-column-start: 1;
-} */
