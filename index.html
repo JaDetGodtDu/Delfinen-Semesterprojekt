@@ -34,11 +34,59 @@
         </div>
       </article>
     </section>
-    <section id="formand-view" class="hidden"></section>
+
+
+    <!-- main info -->
+    <main>
+      <section id="formand-view" class="hidden">
+
+        <section id="formand-tools" class="formand-tools">
+          <button id="newMember">Opret medlem</button>
+          <label for="select-filter-by">
+            <select id="select-filter-by">
+              <option value="" selected>Filter</option>
+              <option value="aktiv">Aktiv</option>
+              <option value="inaktiv">Inaktiv</option>
+              <option value="konkurance">konkurance</option>
+              <option value="motionist">Motionist</option>
+              <option value="ungdom">Ungdom</option>
+              <option value="senior">Senior</option>
+            </select>
+          </label>
+          <div>
+            <label for="input-search">Search:</label>
+            <input type="search" id="input-search" placeholder="Soter via emne" />
+          </div>
+        </section>
+
+        <br />
+        <table>
+          <thead>
+            <th>Medlem</th>
+            <th>Aldersgruppe</th>
+            <th>Hold</th>
+            <th>Email</th>
+            <th>Tlf.</th>
+            <th>Medlemskab</th>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Peter med den lange</td>
+              <td>15</td>
+              <td>konkurance</td>
+              <td>per11@gmail.com</td>
+              <td>38283781</td>
+              <td>Aktiv</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
     <section id="kassér-view" class="hidden"></section>
     <section id="senior-view" class="hidden"></section>
     <section id="junior-view" class="hidden"></section>
-
+      </section>
+    </main>
     <footer>FOOTER</footer>
     <script src="JavaScript/script.js" type="module"></script>
     <script src="JavaScript/login.js" type="module"></script>
