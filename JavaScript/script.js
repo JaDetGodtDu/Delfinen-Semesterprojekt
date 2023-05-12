@@ -7,7 +7,6 @@ import {
 } from "./rest-service.js";
 window.addEventListener("load", initApp);
 function initApp() {
-  initViews();
   getMembers();
   console.log(getMembers());
   console.log(getResults());

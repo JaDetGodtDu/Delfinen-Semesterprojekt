@@ -1,5 +1,4 @@
-// import{}
-
+"use strict";
 function showTable(member) {
   const html = /*html*/ `
         <article class="grid-item"></article>            
@@ -30,15 +29,22 @@ function showTable(member) {
   document.querySelector("#posts").insertAdjacentHTML("beforeend", html); // append html to the DOM - section#posts
 
   // add event listeners to .btn-delete and .btn-update
-  document.querySelector("#posts article:last-child .btn-delete").addEventListener("click", () => deleteClicked(postObject));
-  document.querySelector("#posts article:last-child .btn-update").addEventListener("click", () => updateClicked(postObject));
+  document
+    .querySelector("#posts article:last-child .btn-delete")
+    .addEventListener("click", () => deleteClicked(postObject));
+  document
+    .querySelector("#posts article:last-child .btn-update")
+    .addEventListener("click", () => updateClicked(postObject));
 
   // called when delete button is clicked
   function deleteClicked() {
     // show title of post you want to delete
-    document.querySelector("#dialog-delete-post-title").textContent = postObject.title;
+    document.querySelector("#dialog-delete-post-title").textContent =
+      postObject.title;
     // set data-id attribute of post you want to delete (... to use when delete)
-    document.querySelector("#form-delete-post").setAttribute("data-id", postObject.id);
+    document
+      .querySelector("#form-delete-post")
+      .setAttribute("data-id", postObject.id);
     // show delete dialog
     document.querySelector("#dialog-delete-post").showModal();
   }

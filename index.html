@@ -17,29 +17,33 @@
   <body>
     <header>Svømmeklubben Delfinen</header>
 
-    <section id="login-view">
-      <div id="login-view-img"><img src="pictures/dolp.png" alt="dolp" /></div>
-      <article id="login-btn-container">
-        <div>
-          <button class="login-btn" id="login-formand-btn">Formand</button>
-        </div>
-        <div>
-          <button class="login-btn" id="login-kassér-btn">Kassér</button>
-        </div>
-        <div>
-          <button class="login-btn" id="login-senior-btn">Senior Træner</button>
-        </div>
-        <div>
-          <button class="login-btn" id="login-junior-btn">Junior Træner</button>
-        </div>
-      </article>
-    </section>
-
-
     <!-- main info -->
     <main>
-      <section id="formand-view" class="hidden">
+      <section id="login-view">
+        <div id="login-view-img">
+          <img src="pictures/dolp.png" alt="dolp" />
+        </div>
+        <article id="login-btn-container">
+          <div>
+            <button class="login-btn" id="login-formand-btn">Formand</button>
+          </div>
+          <div>
+            <button class="login-btn" id="login-kassér-btn">Kassér</button>
+          </div>
+          <div>
+            <button class="login-btn" id="login-senior-btn">
+              Senior Træner
+            </button>
+          </div>
+          <div>
+            <button class="login-btn" id="login-junior-btn">
+              Junior Træner
+            </button>
+          </div>
+        </article>
+      </section>
 
+      <section id="formand-view" class="hidden">
         <section id="formand-tools" class="formand-tools">
           <button id="newMember">Opret medlem</button>
           <label for="select-filter-by">
@@ -55,10 +59,13 @@
           </label>
           <div>
             <label for="input-search">Search:</label>
-            <input type="search" id="input-search" placeholder="Soter via emne" />
+            <input
+              type="search"
+              id="input-search"
+              placeholder="Soter via emne"
+            />
           </div>
         </section>
-
         <br />
         <table>
           <thead>
@@ -81,11 +88,9 @@
           </tbody>
         </table>
       </section>
-
-    <section id="kassér-view" class="hidden"></section>
-    <section id="senior-view" class="hidden"></section>
-    <section id="junior-view" class="hidden"></section>
-      </section>
+      <section id="kassér-view" class="hidden"></section>
+      <section id="senior-view" class="hidden"></section>
+      <section id="junior-view" class="hidden"></section>
     </main>
     <footer>FOOTER</footer>
     <script src="JavaScript/script.js" type="module"></script>
