@@ -1,0 +1,8 @@
+.hidden,
+#login-view.hidden,
+#formand-view.hidden,
+#kassér-view.hidden,
+#senior-view.hidden,
+#junior-view.hidden {
+  display: none;
+}
