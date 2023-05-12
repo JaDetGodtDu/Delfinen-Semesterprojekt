@@ -13,10 +13,47 @@
     <link rel="shortcut icon" href="pictures/favicon.ico" type="image/x-icon" />
   </head>
   <body>
-    <nav></nav>
+    <main>
+      <section id="welcome" class="view-content">
+        <h2>Velkommen til vores svømmeklub</h2>
+        <p>Vælg din brugertype:</p>
+        <form id="userTypeForm">
+          <button type="button">Formand</button>
+          <button type="button">Kassér</button>
+          <button type="button">Seniortræner</button>
+          <button type="button">Ungdomstræner</button>
+        </form>
+      </section>
 
-    <main></main>
-    <section></section>
+      <section id="formandView" class="view-content">
+        <nav id="formandView">
+          <a href="#formandSystem" class="view-link">System</a>
+          <a href="#kontakt" class="view-link">Kontakt Information</a>
+        </nav>
+      </section>
+
+      <section id="kassérView" class="view-content">
+        <nav>
+          <a href="#kassérSystem" class="view-link">System</a>
+          <a href="#kontakt" class="view-link">Kontakt Information</a>
+        </nav>
+      </section>
+
+      <section id="seniorView" class="view-content">
+        <nav>
+          <a href="#seniorSystem" class="view-link">System</a>
+          <a href="#kontakt" class="view-link">Kontakt Information</a>
+        </nav>
+      </section>
+
+      <section id="juniorView" class="view-content">
+        <nav>
+          <a href="#juniorSystem" class="view-link">System</a>
+          <a href="#kontakt" class="view-link">Kontakt Information</a>
+        </nav>
+      </section>
+    </main>
+
     <script src="JavaScript/script.js" type="module"></script>
   </body>
 </html>
