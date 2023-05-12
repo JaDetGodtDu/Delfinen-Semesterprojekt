@@ -14,9 +14,28 @@
   </head>
 
   <body>
+    <!-- login skørm -->
+    <section id="login-view">
+      <div id="login-view-img"><img src="pictures/dolp.png" alt="dolp" /></div>
+      <article id="login-btn-container">
+        <div>
+          <button class="login-btn" id="login-formand-btn">Formand</button>
+        </div>
+        <div>
+          <button class="login-btn" id="login-kassér-btn">Kassér</button>
+        </div>
+        <div>
+          <button class="login-btn" id="login-senior-btn">Senior Træner</button>
+        </div>
+        <div>
+          <button class="login-btn" id="login-junior-btn">Junior Træner</button>
+        </div>
+      </article>
+    </section>
+
     <!-- navbar info -->
     <nav>
-      <a href="#formand" class="view-link" aktive>Formand</a>
+      <a href="#formand-view" class="view-link" aktive>Formand</a>
       <a href="#revisor-bogholder" class="view-link">Revisor/Bogholder</a>
       <a href="#seniortraener" class="view-link">seniortræner</a>
       <a href="#ungdomstraener" class="view-link">Ungdomstræner</a>
@@ -24,7 +43,7 @@
 
     <!-- main info -->
     <main>
-      <section id="formand" class="view-content">
+      <section id="formand-view" class="hidden">
         <!-- <section>
           <nav>
             <a href="#system" class="">System</a>
@@ -72,66 +91,17 @@
               <td>38283781</td>
               <td>Aktiv</td>
             </tr>
-            <tr>
-              <td>Peter fra l</td>
-              <td>20</td>
-              <td>konkurance</td>
-              <td>die@hotmail.com</td>
-              <td>30686481</td>
-              <td>Inaktiv</td>
-            </tr>
-            <tr>
-              <td>Race fra n</td>
-              <td>65</td>
-              <td>Motionist</td>
-              <td>ptle125@gmail.com</td>
-              <td>30443781</td>
-              <td>Aktiv</td>
-            </tr>
-
-            <tr>
-              <td>Jan</td>
-              <td>10</td>
-              <td>konkurance</td>
-              <td>ptle15@youmail.com</td>
-              <td>30688881</td>
-              <td>Aktiv</td>
-            </tr>
-            <tr>
-              <td>Kristine</td>
-              <td>48</td>
-              <td>Motionist</td>
-              <td>jo@hotmail.com</td>
-              <td>50683711</td>
-              <td>Aktiv</td>
-            </tr>
-            <tr>
-              <td>Lise</td>
-              <td>91</td>
-              <td>konkurance</td>
-              <td>hjrg15@gmail.com</td>
-              <td>30623781</td>
-              <td>Inaktiv</td>
-            </tr>
           </tbody>
         </table>
       </section>
 
-      <section id="revisor-bogholder" class="view-content">
-        <h2>Revisor/Bogholder</h2>
-        <p>Her skal jeg kunne se og opretholde økonomiske tilgang til klubben</p>
-      </section>
-
-      <section id="seniortraener" class="view-content">
-        <h2>seniortræner</h2>
-        <p>Jeg indsætter seniortider</p>
-      </section>
-
-      <section id="ungdomstraener" class="view-content">
-        <h2>Ungdomstræner</h2>
-        <p>Jeg indsætter ungdomstider</p>
+    <section id="kassér-view" class="hidden"></section>
+    <section id="senior-view" class="hidden"></section>
+    <section id="junior-view" class="hidden"></section>
       </section>
     </main>
+    <footer>FOOTER</footer>
     <script src="JavaScript/script.js" type="module"></script>
+    <script src="JavaScript/login.js" type="module"></script>
   </body>
 </html>
