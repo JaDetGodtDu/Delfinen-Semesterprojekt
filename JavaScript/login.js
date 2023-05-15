@@ -1,5 +1,8 @@
 "use strict";
 
+import { showMembers } from "./formand.js";
+import { getMembers } from "./rest-service.js";
+
 window.addEventListener("load", initListeners);
 
 function initListeners() {
@@ -16,10 +19,12 @@ function initListeners() {
     .querySelector("#login-junior-btn")
     .addEventListener("click", showJuniorView);
 }
-function showFormandView() {
+async function showFormandView() {
   console.log("show formand view");
   document.querySelector("#login-view").classList.add("hidden");
   document.querySelector("#formand-view").classList.remove("hidden");
+  let members = await getMembers();
+  showMembers(members);
 }
 function showKassérView() {
   console.log("show kassér view");
