@@ -26,6 +26,17 @@ function showTable(member) {
     </tr>
     `;
   document.querySelector("#formand-table-body").insertAdjacentHTML("beforeend", html); // append html to the DOM - section#posts
+  const rows = document.querySelectorAll("#formand-table-body tr");
+  const lastRow = rows[rows.length - 1];
+  lastRow.addEventListener("click", () => memberClicked(member));
+}
+function memberClicked(member) {
+  let memberInfo = /*html*/ `
+  <h3>${member.firstName}</h3>
+  `;
+  console.log("memberclicked");
+  document.querySelector("#member-detail-view").innerHTML = memberInfo;
+  document.querySelector("#member-detail-view").showModal();
 }
 function showCreateMemberDialog() {
   document.querySelector("#create-member-dialog").showModal();
