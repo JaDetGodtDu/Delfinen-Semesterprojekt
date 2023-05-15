@@ -22,5 +22,8 @@ function showTable(member) {
     .querySelector("#formand-table-body")
     .insertAdjacentHTML("beforeend", html); // append html to the DOM - section#posts
 }
+function showCreateMemberDialog() {
+  document.querySelector("#create-member-dialog").showModal();
+}
 
-export { showMembers };
+export { showMembers, showCreateMemberDialog };

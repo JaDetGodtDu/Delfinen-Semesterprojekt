@@ -43,7 +43,7 @@
       </section>
       <section id="formand-view" class="hidden">
         <section id="formand-tools" class="formand-tools">
-          <button id="new-member">Opret medlem</button>
+          <button id="create-new-member-btn">Opret medlem</button>
           <label for="select-filter-by">
             <select id="select-filter-by">
               <option value="" selected>Filter</option>
@@ -84,36 +84,38 @@
     </main>
     <footer>FOOTER</footer>
 
-    <dialog id="create-member-dialog" open>
-      < method="dialog">
+    <dialog id="create-member-dialog">
+      <h1>Registrér nyt medlem</h1>
+      <form method="dialog">
         <label for="firstName">Fornavn:</label>
-        <input type="text" name="firstName" id="firstName" /><br />
+        <input type="text" name="firstName" id="firstName" required /><br />
         <label for="lastName">Efternavn:</label>
-        <input type="text" name="lastName" id="lastName" /><br />
+        <input type="text" name="lastName" id="lastName" required /><br />
         <label for="address">Adresse:</label>
-        <input type="text" name="address" id="address" /><br />
+        <input type="text" name="address" id="address" required /><br />
         <label for="phone">Tlf:</label>
-        <input type="text" name="phone" id="phone" /><br />
+        <input type="text" name="phone" id="phone" required /><br />
         <label for="email">Email:</label>
-        <input type="email" name="email" id="email" /><br />
+        <input type="email" name="email" id="email" required /><br />
         <label for="dateOfBirth">Fødselsdato:</label>
-        <input type="text" name="dateOfBirth" id="dateOfBirth" /><br />
+        <input type="date" name="dateOfBirth" id="dateOfBirth" required /><br />
         <label for="gender">Køn:</label>
-          <select id="gender" name="gender">
-            <option value="male">Mand</option>
-            <option value="female">Kvinde</option>
-            <option value="other">Andet</option>
-          </select><br>
+        <select id="gender" name="gender" required>
+          <option value="male">Mand</option>
+          <option value="female">Kvinde</option>
+          <option value="other">Andet</option></select
+        ><br />
         <label for="active">Medlemskab:</label>
-        <select id="active" name="active">
-            <option value="active">Aktiv</option>
-            <option value="passive">Passiv</option>
-          </select><br>
+        <select id="active" name="active" required>
+          <option value="true">Aktiv</option>
+          <option value="false">Passiv</option></select
+        ><br />
         <label for="compSwimmer">Hold:</label>
-        <select id="compSwimmer" name="compSwimmer">
-            <option value="true">Konkurrence</option>
-            <option value="false">Motonist</option>
-          </select><br>
+        <select id="compSwimmer" name="compSwimmer" required>
+          <option value="true">Konkurrence</option>
+          <option value="false">Motonist</option></select
+        ><br />
+        <input type="submit" value="Registrér nyt medlem" />
       </form>
     </dialog>
 
