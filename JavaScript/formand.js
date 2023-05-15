@@ -18,7 +18,7 @@ function showTable(member) {
   const html = /*html*/ `
     <tr>
       <td>${member.firstName} ${member.lastName}</td>
-      <td>${memberAgegroup(member)}</td>
+      <td>${memberAgeGroup(member)}</td>
       <td>${compSwimmer(member)}</td>
       <td>${member.email}</td>
       <td>${member.phone}</td>
