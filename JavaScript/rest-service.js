@@ -1,5 +1,4 @@
-const endpoint =
-  "https://delfinen-8e9fa-default-rtdb.europe-west1.firebasedatabase.app/";
+const endpoint = "https://delfinen-8e9fa-default-rtdb.europe-west1.firebasedatabase.app/";
 
 import { prepareMemberData, prepareResultData } from "./helpers.js";
 
@@ -22,27 +21,17 @@ async function getResults() {
   return results;
 }
 // CREATE NEW MEMBERS
-async function createMember(
-  firstName,
-  lastName,
-  address,
-  phone,
-  email,
-  compSwimmer,
-  active,
-  gender,
-  dateOfBirth
-) {
+async function createMember(firstName, lastName, address, phone, email, dateOfBirth, active, gender, compSwimmer) {
   const newMember = {
     firstName,
     lastName,
     address,
     phone,
     email,
-    compSwimmer,
+    dateOfBirth,
     active,
     gender,
-    dateOfBirth,
+    compSwimmer,
   };
   const json = JSON.stringify(newMember);
   const response = await fetch(`${endpoint}/members.json`, {
@@ -52,15 +41,7 @@ async function createMember(
   return response;
 }
 // CREATE NEW RESULTS
-async function createResult(
-  discipline,
-  memberId,
-  placement,
-  time,
-  competition,
-  type,
-  date
-) {
+async function createResult(discipline, memberId, placement, time, competition, type, date) {
   const newResult = {
     discipline,
     memberId,
@@ -85,17 +66,7 @@ async function deleteMember(id) {
   return response;
 }
 // UPDATE MEMBERS
-async function updateMember(
-  firstName,
-  lastName,
-  address,
-  phone,
-  email,
-  compSwimmer,
-  active,
-  gender,
-  dateOfBirth
-) {
+async function updateMember(firstName, lastName, address, phone, email, compSwimmer, active, gender, dateOfBirth) {
   const memberToUpdate = {
     firstName,
     lastName,
@@ -115,15 +86,7 @@ async function updateMember(
   return response;
 }
 // UPDATE RESULTS
-async function updateResult(
-  discipline,
-  memberId,
-  placement,
-  time,
-  competition,
-  type,
-  date
-) {
+async function updateResult(discipline, memberId, placement, time, competition, type, date) {
   const resultToUpdate = {
     discipline,
     memberId,
@@ -140,13 +103,4 @@ async function updateResult(
   });
   return response;
 }
-export {
-  members,
-  getMembers,
-  getResults,
-  createMember,
-  createResult,
-  deleteMember,
-  updateMember,
-  updateResult,
-};
+export { members, getMembers, getResults, createMember, createResult, deleteMember, updateMember, updateResult };
