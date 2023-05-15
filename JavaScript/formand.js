@@ -1,6 +1,6 @@
 "use strict";
 
-import { memberAgegroup, compSwimmer, subscriptionType } from "./helpers.js";
+import { memberAgeGroup, compSwimmer, subscriptionType } from "./helpers.js";
 import { getMembers, createMember } from "./rest-service.js";
 
 async function updateMemberTable() {
@@ -37,7 +37,7 @@ function memberClicked(member) {
   <p>${member.phone}</p>
   <p>${member.address}</p>
   <p>${member.dateOfBirth}</p>
-  <p>${memberAgegroup(member)}</p>
+  <p>${memberAgeGroup(member)}</p>
   <p>${member.gender}</p>
   <p>${subscriptionType(member)}</p>
   <p>${compSwimmer(member)}</p>

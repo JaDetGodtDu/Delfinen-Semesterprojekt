@@ -37,7 +37,7 @@ function filterMembersByAge(members) {
   });
   return { over18: membersOver18, under18: membersUnder18 };
 }
-function memberAgegroup(member) {
+function memberAgeGroup(member) {
   let HTML = "";
   if (ageCalculator(member) <= 18) {
     HTML = /*html*/ `
@@ -66,11 +66,4 @@ function subscriptionType(member) {
   }
   return HTML;
 }
-export {
-  prepareMemberData,
-  prepareResultData,
-  ageCalculator,
-  memberAgegroup,
-  compSwimmer,
-  subscriptionType,
-};
+export { prepareMemberData, prepareResultData, ageCalculator, memberAgegroup, compSwimmer, subscriptionType };
