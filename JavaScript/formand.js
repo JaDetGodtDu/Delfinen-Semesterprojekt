@@ -7,7 +7,6 @@ function showMembers(members) {
     showTable(member);
   }
 }
-
 function showTable(member) {
   const html = /*html*/ `
     <tr>

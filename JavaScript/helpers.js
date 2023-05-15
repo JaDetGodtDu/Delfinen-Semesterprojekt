@@ -66,7 +66,6 @@ function subscriptionType(member) {
   }
   return HTML;
 }
-
 export {
   prepareMemberData,
   prepareResultData,

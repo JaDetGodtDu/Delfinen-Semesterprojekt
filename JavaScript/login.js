@@ -1,7 +1,7 @@
 "use strict";
 
 import { showMembers } from "./formand.js";
-import { getMembers, members } from "./rest-service.js";
+import { getMembers } from "./rest-service.js";
 
 window.addEventListener("load", initListeners);
 
