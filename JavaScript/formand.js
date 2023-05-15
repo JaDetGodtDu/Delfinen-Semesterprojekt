@@ -1,5 +1,7 @@
 "use strict";
 
+import { memberAgegroup, compSwimmer, subscriptionType } from "./helpers.js";
+
 function showMembers(members) {
   for (const member of members) {
     showTable(member);
@@ -10,11 +12,11 @@ function showTable(member) {
   const html = /*html*/ `
     <tr>
       <td>${member.firstName} ${member.lastName}</td>
-      <td>${member.age}</td>
-      <td>${member.compSwimmer}</td>
+      <td>${memberAgegroup(member)}</td>
+      <td>${compSwimmer(member)}</td>
       <td>${member.email}</td>
       <td>${member.phone}</td>
-      <td>${member.membership}</td>
+      <td>${subscriptionType(member)}</td>
     </tr>
     `;
   document
