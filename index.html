@@ -83,6 +83,40 @@
       <section id="junior-view" class="hidden"></section>
     </main>
     <footer>FOOTER</footer>
+
+    <dialog id="create-member-dialog" open>
+      < method="dialog">
+        <label for="firstName">Fornavn:</label>
+        <input type="text" name="firstName" id="firstName" /><br />
+        <label for="lastName">Efternavn:</label>
+        <input type="text" name="lastName" id="lastName" /><br />
+        <label for="address">Adresse:</label>
+        <input type="text" name="address" id="address" /><br />
+        <label for="phone">Tlf:</label>
+        <input type="text" name="phone" id="phone" /><br />
+        <label for="email">Email:</label>
+        <input type="email" name="email" id="email" /><br />
+        <label for="dateOfBirth">Fødselsdato:</label>
+        <input type="text" name="dateOfBirth" id="dateOfBirth" /><br />
+        <label for="gender">Køn:</label>
+          <select id="gender" name="gender">
+            <option value="male">Mand</option>
+            <option value="female">Kvinde</option>
+            <option value="other">Andet</option>
+          </select><br>
+        <label for="active">Medlemskab:</label>
+        <select id="active" name="active">
+            <option value="active">Aktiv</option>
+            <option value="passive">Passiv</option>
+          </select><br>
+        <label for="compSwimmer">Hold:</label>
+        <select id="compSwimmer" name="compSwimmer">
+            <option value="true">Konkurrence</option>
+            <option value="false">Motonist</option>
+          </select><br>
+      </form>
+    </dialog>
+
     <script src="JavaScript/script.js" type="module"></script>
     <script src="JavaScript/login.js" type="module"></script>
   </body>
