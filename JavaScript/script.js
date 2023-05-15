@@ -1,4 +1,5 @@
 "use strict";
+
 import {
   getMembers,
   getResults,
@@ -6,6 +7,7 @@ import {
   createResult,
 } from "./rest-service.js";
 window.addEventListener("load", initApp);
+
 function initApp() {
   getMembers();
   console.log(getMembers());
