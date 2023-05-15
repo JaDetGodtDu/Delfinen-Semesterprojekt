@@ -32,7 +32,15 @@ function showTable(member) {
 }
 function memberClicked(member) {
   let memberInfo = /*html*/ `
-  <h3>${member.firstName}</h3>
+  <h3>${member.firstName} ${member.lastName}</h3><br>
+  <p>${member.email}</p>
+  <p>${member.phone}</p>
+  <p>${member.address}</p>
+  <p>${member.dateOfBirth}</p>
+  <p>${memberAgegroup(member)}</p>
+  <p>${member.gender}</p>
+  <p>${subscriptionType(member)}</p>
+  <p>${compSwimmer(member)}</p>
   `;
   console.log("memberclicked");
   document.querySelector("#member-detail-view").innerHTML = memberInfo;
