@@ -46,6 +46,7 @@ async function prepareNewMemberData() {
   if (response.ok) {
     updateMemberTable();
     document.querySelector("#create-member-dialog").close();
+    document.querySelector("#create-member-form").reset();
   }
 }
 export { showMembers, showCreateMemberDialog };
