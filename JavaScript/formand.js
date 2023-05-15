@@ -1,6 +1,12 @@
 "use strict";
 
 import { memberAgegroup, compSwimmer, subscriptionType } from "./helpers.js";
+import { getMembers } from "./rest-service.js";
+
+async function updateMemberTable() {
+  let members = await getMembers();
+  showMembers(members);
+}
 
 function showMembers(members) {
   for (const member of members) {
