@@ -1,5 +1,7 @@
 "use strict";
 
+import { showCreateMemberDialog } from "./formand.js";
+
 import {
   getMembers,
   getResults,
@@ -12,4 +14,8 @@ function initApp() {
   getMembers();
   console.log(getMembers());
   console.log(getResults());
+
+  document
+    .querySelector("#create-new-member-btn")
+    .addEventListener("click", showCreateMemberDialog);
 }

@@ -1,6 +1,12 @@
 "use strict";
 
 import { memberAgegroup, compSwimmer, subscriptionType } from "./helpers.js";
+import { getMembers } from "./rest-service.js";
+
+async function updateMemberTable() {
+  let members = await getMembers();
+  showMembers(members);
+}
 
 function showMembers(members) {
   for (const member of members) {
@@ -22,5 +28,8 @@ function showTable(member) {
     .querySelector("#formand-table-body")
     .insertAdjacentHTML("beforeend", html); // append html to the DOM - section#posts
 }
+function showCreateMemberDialog() {
+  document.querySelector("#create-member-dialog").showModal();
+}
 
-export { showMembers };
+export { showMembers, showCreateMemberDialog };
