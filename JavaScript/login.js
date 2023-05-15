@@ -15,24 +15,77 @@ function initListeners() {
   document
     .querySelector("#login-junior-btn")
     .addEventListener("click", showJuniorView);
+  document
+    .querySelector("#logout-user-btn")
+    .addEventListener("click", showLoginView);
+  window
+    .addEventListener("hashchange", handleHashChange);
+  handleHashChange();
 }
-function showFormandView() {
+
+function handleHashChange() {
+  const hash = window.location.hash;
+  if (hash === "#previous-view") {
+    const previousHash = localStorage.getItem("previousHash");
+    if (previousHash) {
+      window.location.hash = previousHash;
+      return;
+    }
+  }  
+  document.querySelectorAll("section").forEach(section => {
+    section.classList.add("hidden");
+  });
+  if (hash === "#formand-view") {
+    document.querySelector("#formand-view").classList.remove("hidden");
+  } else if (hash === "#kassér-view") {
+    document.querySelector("#kassér-view").classList.remove("hidden");
+  } else if (hash === "#senior-view") {
+    document.querySelector("#senior-view").classList.remove("hidden");
+  } else if (hash === "#junior-view") {
+    document.querySelector("#junior-view").classList.remove("hidden");
+  } else if (hash === "#kontakt-information") {
+    document.querySelector("#kontakt-information").classList.remove("hidden");
+  } else {
+    document.querySelector("#login-view").classList.remove("hidden");
+  }
+}
+
+function showFormandView(event) {
+  event.preventDefault(); 
   console.log("show formand view");
-  document.querySelector("#login-view").classList.add("hidden");
-  document.querySelector("#formand-view").classList.remove("hidden");
+  window.location.hash = "formand-view"; 
+  localStorage.setItem("previousHash", window.location.hash);
 }
-function showKassérView() {
+
+function showKassérView(event) {
+  event.preventDefault(); 
   console.log("show kassér view");
-  document.querySelector("#login-view").classList.add("hidden");
-  document.querySelector("#kassér-view").classList.remove("hidden");
+  window.location.hash = "kassér-view";
+  localStorage.setItem("previousHash", window.location.hash); 
 }
-function showSeniorView() {
+
+function showSeniorView(event) {
+  event.preventDefault(); 
   console.log("show senior view");
-  document.querySelector("#login-view").classList.add("hidden");
-  document.querySelector("#senior-view").classList.remove("hidden");
+  window.location.hash = "senior-view"; 
+  localStorage.setItem("previousHash", window.location.hash);
 }
-function showJuniorView() {
+
+function showJuniorView(event) {
+  event.preventDefault(); 
   console.log("show junior view");
-  document.querySelector("#login-view").classList.add("hidden");
-  document.querySelector("#junior-view").classList.remove("hidden");
+  window.location.hash = "junior-view"; 
+  localStorage.setItem("previousHash", window.location.hash);
 }
+
+function showLoginView(event) {
+  event.preventDefault(); 
+  console.log("show login view");
+  window.location.hash = "login-view"; 
+}
+
+// function showKontaktInformation(event) {
+//   event.preventDefault();
+//   console.log("show kontakt information");
+//   window.location.hash = "kontakt-information"
+// }
