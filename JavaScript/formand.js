@@ -214,6 +214,8 @@ async function filterByChanged() {
     results = members.filter(
       (member) => member[filterValue.substring(1)] === "false"
     );
+  } else if (filterValue === "showAll") {
+    results = members;
   } else {
     results = members.filter((member) => member[filterValue] === "true");
   }
