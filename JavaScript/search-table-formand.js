@@ -3,7 +3,7 @@
 // Get the input field and table
 // Get the input field and table
 var searchInput = document.getElementById("input-search");
-var table = document.getElementById("formand-table");
+var table = document.getElementById("formand-table-body");
 
 // Add an event listener to the input field
 searchInput.addEventListener("input", function () {
