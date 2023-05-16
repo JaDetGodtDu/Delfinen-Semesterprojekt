@@ -6,6 +6,7 @@ import { getMembers } from "./rest-service.js";
 window.addEventListener("load", initListeners);
 
 function initListeners() {
+  console.log("Listening 😏");
   document
     .querySelector("#login-formand-btn")
     .addEventListener("click", showFormandView);
@@ -41,3 +42,5 @@ function showJuniorView() {
   document.querySelector("#login-view").classList.add("hidden");
   document.querySelector("#junior-view").classList.remove("hidden");
 }
+
+export { showFormandView };

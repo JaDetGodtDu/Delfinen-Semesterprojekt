@@ -1,4 +1,9 @@
-nav a {
+nav {
+  grid-template-columns: 1fr 1fr 1fr;
+  display: grid;
+  width: 100%;
+}
+nav button {
   display: inline-block;
   color: var(--text-color-light);
   text-align: center;
@@ -8,30 +13,6 @@ nav a {
   text-transform: uppercase;
   border: 2px solid rgb(38, 76, 89);
 }
-
-/* Change the color of links on hover */
-nav a:hover {
-  background-color: var(--light-green);
-  color: var(--text-color-dark);
-}
-
-/* Add a color to the active/current link */
-nav a.active {
-  background-color: var(--light-green);
-  color: var(--green);
-}
-
-.view-content {
-  display: none;
-  padding: 248px 2em;
-}
-
-@media (min-width: 600px) {
-  .view-content {
-    padding: 94px 2em;
-  }
-}
-
-.view-content.active {
-  display: block;
+nav button:hover {
+  cursor: pointer;
 }
