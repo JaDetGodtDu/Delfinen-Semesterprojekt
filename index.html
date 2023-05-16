@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="CSS/juniortræner.css" />
     <link rel="stylesheet" href="CSS/login.css" />
     <link rel="stylesheet" href="CSS/viewClasses.css" />
+    <link rel="stylesheet" href="CSS/navbar.css" />
     <link rel="shortcut icon" href="pictures/favicon.ico" type="image/x-icon" />
   </head>
   <body>
@@ -37,7 +38,12 @@
           </div>
         </article>
       </section>
-      <section id="formand-view" class="hidden">
+      <section id="formand-view" class="hidden view">
+        <nav>
+          <button id="formand-return-btn">Din side</button>
+          <button id="kontakt-btn">Kontaktinformation</button>
+          <button id="log-out-btn">Log ud</button>
+        </nav>
         <section id="formand-tools" class="formand-tools">
           <button id="create-new-member-btn">Opret medlem</button>
           <label for="select-filter-by">
@@ -70,10 +76,15 @@
           </table>
         </article>
       </section>
-      <section id="kassér-view" class="hidden"></section>
-      <section id="senior-view" class="hidden"></section>
-      <section id="junior-view" class="hidden"></section>
+      <section id="kassér-view" class="hidden view"></section>
+      <section id="senior-view" class="hidden view"></section>
+      <section id="junior-view" class="hidden view"></section>
       <section id="contact-view" class="hidden"></section>
+      <section id="kontaktinformation" class="hidden view">
+        <nav>
+          <button id="log-out-btn">Log ud</button>
+        </nav>
+      </section>
     </main>
     <footer>FOOTER</footer>
 
@@ -114,5 +125,6 @@
 
     <script src="JavaScript/script.js" type="module"></script>
     <script src="JavaScript/login.js" type="module"></script>
+    <script src="JavaScript/navbar.js" type="module"></script>
   </body>
 </html>

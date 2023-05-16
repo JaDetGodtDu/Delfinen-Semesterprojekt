@@ -3,6 +3,10 @@
 #formand-view.hidden,
 #kassér-view.hidden,
 #senior-view.hidden,
-#junior-view.hidden {
+#junior-view.hidden,
+#kontaktinformation.hidden {
   display: none;
+}
+.view {
+  display: block;
 }
