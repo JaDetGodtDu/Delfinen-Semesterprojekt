@@ -39,7 +39,7 @@ function filterMembersByAge(members) {
 }
 function memberAgeGroup(member) {
   let HTML = "";
-  if (ageCalculator(member) <= 18) {
+  if (ageCalculator(member) < 18) {
     HTML = /*html*/ `
     Junior`;
   } else {
@@ -50,19 +50,19 @@ function memberAgeGroup(member) {
 }
 function compSwimmer(member) {
   let HTML = "";
-  if (member.compSwimmer === true) {
-    HTML = /*hmtl*/ `Konkurrence`;
+  if (member.compSwimmer == "true") {
+    HTML = /*html*/ `Konkurrence`;
   } else {
-    HTML = /*hmtl*/ `Motionist`;
+    HTML = /*html*/ `Motionist`;
   }
   return HTML;
 }
 function subscriptionType(member) {
   let HTML = "";
-  if (member.active === true) {
-    HTML = /*hmtl*/ `Aktiv`;
+  if (member.active == "true") {
+    HTML = /*html*/ `Aktiv`;
   } else {
-    HTML = /*hmtl*/ `Passiv`;
+    HTML = /*html*/ `Passiv`;
   }
   return HTML;
 }
