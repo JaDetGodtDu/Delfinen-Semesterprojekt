@@ -119,6 +119,41 @@
         <button type="button" class="btn-cancel">Nej</button>
       </form>
     </dialog>
+    <dialog id="dialog-update-member">
+      <h2>Opdater medlemsoplysninger</h2>
+      <form id="form-update-member" method="dialog">
+        <label for="firstName-update">Fornavn: </label>
+        <input type="text" id="firstName-update" name="firstName" placeholder="Opdater fornavn" />
+        <label for="lastName-update">Efternavn: </label>
+        <input type="text" id="lastName-update" name="lastName" placeholder="Opdater efternavn" />
+        <label for="adress-update">Addresse: </label>
+        <input type="text" id="address-update" name="address" placeholder="Opdater addresse" />
+        <label for="phone-update">Telefon nr: </label>
+        <input type="text" id="phone-update" name="phone" placeholder="Opdater telefon nr." />
+        <label for="email-update">Email: </label>
+        <input type="text" id="email-update" name="email" placeholder="Opdater email" />
+        <label for="dateOfBirth-update">Fødselsdato: </label>
+        <input type="date" id="dateOfBirth-update" name="dateOfBirth" placeholder="Opdater fødselsdato" />
+        <label for="gender-update">Køn: </label>
+        <select id="gender-update" name="gender">
+          <option value="male">Mand</option>
+          <option value="female">Kvinde</option>
+          <option value="other">Andet</option>
+        </select>
+        <label for="active-update">Medlemsskab: </label>
+        <select id="active-update" name="active" required>
+          <option value="true">Aktiv</option>
+          <option value="false">Passiv</option>
+        </select>
+        <label for="compSwimmer-update">Hold: </label>
+        <select id="compSwimmer-update" name="compSwimmer" required>
+          <option value="true">Konkurrence</option>
+          <option value="false">Motionist</option>
+        </select>
+        <button>Opdater</button>
+        <button type="button" class="btn-cancel">Tilbage</button>
+      </form>
+    </dialog>
     <script src="JavaScript/script.js" type="module"></script>
     <script src="JavaScript/login.js" type="module"></script>
   </body>

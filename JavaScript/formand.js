@@ -1,11 +1,12 @@
 "use strict";
 
 import { memberAgeGroup, compSwimmer, subscriptionType } from "./helpers.js";
-import { getMembers, createMember, deleteMember } from "./rest-service.js";
+import { getMembers, createMember, deleteMember, updateMember } from "./rest-service.js";
 
 window.addEventListener("load", initApp);
 
 function initApp() {
+  updateMemberTable();
   document.querySelector("#form-delete-member").addEventListener("submit", deleteMemberClicked);
   document.querySelector("#form-delete-member .btn-cancel").addEventListener("click", deleteCancelClicked);
 }
@@ -77,7 +78,34 @@ async function deleteMemberClicked(event) {
 function deleteCancelClicked() {
   document.querySelector("#dialog-delete-member").close();
 }
-
+function updateClicked(memberObject) {
+  const updateForm = document.querySelector("#form-update-member");
+  updateForm.firstName.value = memberObject.firstName;
+  updateForm.lastName.value = memberObject.lastName;
+  updateForm.address.value = memberObject.address;
+  updateForm.phone.value = memberObject.phone;
+  updateForm.email.value = memberObject.email;
+  updateForm.dateOfBirth.value = memberObject.dateOfBirth;
+  updateForm.gender.value = memberObject.gender;
+  updateForm.active.value = memberObject.active;
+  updateForm.compSwimmer.value = memberObject.compSwimmer;
+  updateForm.setAttribute("data-id", memberObject.id);
+  document.querySelector("#dialog-update-member").showModal();
+}
+function updateMemberClicked(event) {
+  const form = event.target;
+  const firstName = form.firstName.value;
+  const lastName = form.lastName.value;
+  const address = form.address.value;
+  const phone = form.phone.value;
+  const email = form.email.value;
+  const dateOfBirth = form.dateOfBirth.value;
+  const gender = form.gender.value;
+  const active = form.active.value;
+  const compSwimmer = form.compSwimmer.value;
+  const id = form.getAttribute("data-id");
+  updateMember(id, firstName, lastName, address, phone, email, dateOfBirth, gender, active, compSwimmer);
+}
 async function prepareNewMemberData() {
   const firstName = document.querySelector("#firstName").value;
   const lastName = document.querySelector("#lastName").value;
