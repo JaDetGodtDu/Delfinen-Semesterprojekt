@@ -70,7 +70,49 @@
           </table>
         </article>
       </section>
-      <section id="kassér-view" class="hidden"></section>
+      <section id="kassér-view" class="hidden">
+        <h2>Kassérens view</h2>
+        <div class="grid-container">
+          <div class="box container">
+            <div class="box">Årlig kontigent indtjening</div>
+            <div id="yearly-earnings"class="box"></div>
+          </div>
+        </div>
+        <section id="kassér-tools">
+          <label for="select-filter-by"
+            >filter by:
+            <select id="select-filter-by">
+              <option value="" selected>Intet emne</option>
+              <option value="aktiv">Aktiv</option>
+              <option value="inaktiv">Inaktiv</option>
+              <option value="konkurance">konkurance</option>
+              <option value="motionist">Motionist</option>
+              <option value="junior">Junior</option>
+              <option value="senior">Senior</option>
+            </select>
+          </label>
+
+          <div>
+            <label for="input-search">Search:</label>
+            <input type="search" id="input-search" placeholder="Search" />
+          </div>
+        </section>
+
+        <br />
+        <table id="kassér-table">
+          <thead>
+            <tr>
+              <th class="clickable">Navn</th>
+              <th class="clickable">Email</th>
+              <th class="clickable">Tlf</th>
+              <th class="clickable">Aldersgruppe</th>
+              <th class="clickable">Medlemskab</th>
+              <th class="clickable">Restance</th>
+            </tr>
+          </thead>
+          <tbody id="kassér-table-body"></tbody>
+        </table>
+      </section>
       <section id="senior-view" class="hidden"></section>
       <section id="junior-view" class="hidden"></section>
     </main>
