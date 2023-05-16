@@ -2,7 +2,7 @@
 
 // Get the filter select element and table
 var filterSelect = document.getElementById("select-filter-by");
-var table = document.getElementById("formand-table");
+var table = document.getElementById("formand-table-body");
 
 // Add an event listener to the filter select element
 filterSelect.addEventListener("change", function () {
