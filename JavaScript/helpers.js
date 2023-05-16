@@ -39,7 +39,7 @@ function filterMembersByAge(members) {
 }
 function memberAgegroup(member) {
   let HTML = "";
-  if (ageCalculator(member) <= 18) {
+  if (ageCalculator(member) < 18) {
     HTML = /*html*/ `
     Junior`;
   } else {
