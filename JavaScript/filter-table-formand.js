@@ -1,5 +1,7 @@
 "use strict";
 
+import { getMembers } from "./rest-service";
+
 // // Get the filter select element and table
 // var filterSelect = document.getElementById("select-filter-by");
 // var table = document.getElementById("formand-table-body");
@@ -30,6 +32,18 @@
 //     rows[i].style.display = shouldHide ? "none" : "";
 //   }
 // });
+
+function initFilter() {
+  getMembers();
+  if (filterInput) {
+    filterMembersByActive();
+  } else {
+    filterMembersByAge();
+  }
+  {
+    filterMembersByCompSwimmer();
+  }
+}
 
 async function filterMembersByActive(members) {
   const result = members.filter((member) => member.active === true);
