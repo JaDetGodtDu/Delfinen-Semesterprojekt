@@ -2,24 +2,24 @@
 
 // Get the input field and table
 // Get the input field and table
-var searchInput = document.getElementById("input-search");
-var table = document.getElementById("formand-table-body");
+let searchInput = document.getElementById("input-search");
+let table = document.getElementById("formand-table-body");
 
 // Add an event listener to the input field
 searchInput.addEventListener("input", function () {
-  var filter = searchInput.value.toUpperCase();
-  var rows = table.getElementsByTagName("tr");
+  let filter = searchInput.value.toUpperCase();
+  let rows = table.getElementsByTagName("tr");
 
   // Loop through the table rows and hide those that don't match the filter
-  for (var i = 0; i < rows.length; i++) {
-    var cells = rows[i].getElementsByTagName("td");
-    var shouldHide = true;
+  for (let i = 0; i < rows.length; i++) {
+    let cells = rows[i].getElementsByTagName("td");
+    let shouldHide = true;
 
     // Loop through the cells of each row
-    for (var j = 0; j < cells.length; j++) {
-      var cell = cells[j];
+    for (let j = 0; j < cells.length; j++) {
+      let cell = cells[j];
       if (cell) {
-        var cellText = cell.textContent || cell.innerText;
+        let cellText = cell.textContent || cell.innerText;
         if (cellText.toUpperCase().indexOf(filter) > -1) {
           shouldHide = false;
           break;

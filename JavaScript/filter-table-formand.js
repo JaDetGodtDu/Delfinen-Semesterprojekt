@@ -62,3 +62,17 @@ function showTable(member) {
     `;
   document.querySelector("#formand-table-body").insertAdjacentHTML("beforeend", html); // append html to the DOM - section#posts
 }
+
+function filterMembersByAge(members) {
+  const membersOver18 = [];
+  const membersUnder18 = [];
+  members.forEach((member) => {
+    let age = ageCalculator(member);
+    if (age >= 18) {
+      membersOver18.push(member);
+    } else {
+      membersUnder18.push(member);
+    }
+  });
+  return { over18: membersOver18, under18: membersUnder18 };
+}
