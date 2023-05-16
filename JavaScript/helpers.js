@@ -37,7 +37,7 @@ function filterMembersByAge(members) {
   });
   return { over18: membersOver18, under18: membersUnder18 };
 }
-function memberAgegroup(member) {
+function memberAgeGroup(member) {
   let HTML = "";
   if (ageCalculator(member) < 18) {
     HTML = /*html*/ `
@@ -50,27 +50,31 @@ function memberAgegroup(member) {
 }
 function compSwimmer(member) {
   let HTML = "";
-  if (member.compSwimmer === true) {
-    HTML = /*hmtl*/ `Konkurrence`;
+  if (member.compSwimmer == "true") {
+    HTML = /*html*/ `Konkurrence`;
   } else {
-    HTML = /*hmtl*/ `Motionist`;
+    HTML = /*html*/ `Motionist`;
   }
   return HTML;
 }
 function subscriptionType(member) {
   let HTML = "";
-  if (member.active === true) {
-    HTML = /*hmtl*/ `Aktiv`;
+  if (member.active == "true") {
+    HTML = /*html*/ `Aktiv`;
   } else {
-    HTML = /*hmtl*/ `Passiv`;
+    HTML = /*html*/ `Passiv`;
   }
   return HTML;
 }
-export {
-  prepareMemberData,
-  prepareResultData,
-  ageCalculator,
-  memberAgegroup,
-  compSwimmer,
-  subscriptionType,
-};
+function memberGender(member) {
+  let HTML = "";
+  if (member.gender === "male") {
+    HTML = /*html*/ `Mand`;
+  } else if (member.gender === "female") {
+    HTML = /*html*/ `Kvinde`;
+  } else {
+    HTML = /*html*/ `Andet`;
+  }
+  return HTML;
+}
+export { prepareMemberData, prepareResultData, ageCalculator, memberAgeGroup, compSwimmer, subscriptionType, memberGender };

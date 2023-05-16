@@ -21,7 +21,7 @@ async function getResults() {
   return results;
 }
 // CREATE NEW MEMBERS
-async function createMember(firstName, lastName, address, phone, email, dateOfBirth, active, gender, compSwimmer) {
+async function createMember(firstName, lastName, address, phone, email, dateOfBirth, gender, active, compSwimmer) {
   const newMember = {
     firstName,
     lastName,
@@ -29,8 +29,8 @@ async function createMember(firstName, lastName, address, phone, email, dateOfBi
     phone,
     email,
     dateOfBirth,
-    active,
     gender,
+    active,
     compSwimmer,
   };
   const json = JSON.stringify(newMember);
@@ -66,7 +66,7 @@ async function deleteMember(id) {
   return response;
 }
 // UPDATE MEMBERS
-async function updateMember(firstName, lastName, address, phone, email, compSwimmer, active, gender, dateOfBirth) {
+async function updateMember(id, firstName, lastName, address, phone, email, compSwimmer, active, gender, dateOfBirth) {
   const memberToUpdate = {
     firstName,
     lastName,

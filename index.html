@@ -147,12 +147,55 @@
         <label for="compSwimmer">Hold:</label>
         <select id="compSwimmer" name="compSwimmer" required>
           <option value="true">Konkurrence</option>
-          <option value="false">Motonist</option></select
+          <option value="false">Motionist</option></select
         ><br />
         <input type="submit" value="Registrér nyt medlem" />
       </form>
     </dialog>
-
+    <dialog id="member-detail-view"></dialog>
+    <dialog id="dialog-delete-member">
+      <h2>Vil du slette dette medlem?</h2>
+      <form id="form-delete-member" method="dialog">
+        <p id="dialog-delete-member-name">Navn på medlem</p>
+        <button>Ja</button>
+        <button type="button" class="btn-cancel">Nej</button>
+      </form>
+    </dialog>
+    <dialog id="dialog-update-member">
+      <h2>Opdater medlemsoplysninger</h2>
+      <form id="form-update-member" method="dialog">
+        <label for="firstName-update">Fornavn: </label>
+        <input type="text" id="firstName-update" name="firstName" placeholder="Opdater fornavn" required /><br />
+        <label for="lastName-update">Efternavn: </label>
+        <input type="text" id="lastName-update" name="lastName" placeholder="Opdater efternavn" required /><br />
+        <label for="adress-update">Addresse: </label>
+        <input type="text" id="address-update" name="address" placeholder="Opdater addresse" required /><br />
+        <label for="phone-update">Telefon nr: </label>
+        <input type="text" id="phone-update" name="phone" placeholder="Opdater telefon nr." required /><br />
+        <label for="email-update">Email: </label>
+        <input type="email" id="email-update" name="email" placeholder="Opdater email" required /><br />
+        <label for="dateOfBirth-update">Fødselsdato: </label>
+        <input type="date" id="dateOfBirth-update" name="dateOfBirth" placeholder="Opdater fødselsdato" required /><br />
+        <label for="gender-update">Køn: </label>
+        <select id="gender-update" name="gender">
+          <option value="male">Mand</option>
+          <option value="female">Kvinde</option>
+          <option value="other">Andet</option></select
+        ><br />
+        <label for="active-update">Medlemsskab: </label>
+        <select id="active-update" name="active" required>
+          <option value="true">Aktiv</option>
+          <option value="false">Passiv</option></select
+        ><br />
+        <label for="compSwimmer-update">Hold: </label>
+        <select id="compSwimmer-update" name="compSwimmer" required>
+          <option value="true">Konkurrence</option>
+          <option value="false">Motionist</option></select
+        ><br />
+        <button>Opdater</button>
+        <button type="button" class="btn-cancel">Tilbage</button>
+      </form>
+    </dialog>
     <script src="JavaScript/script.js" type="module"></script>
     <script src="JavaScript/login.js" type="module"></script>
     <script src="JavaScript/kassér.js" type="module"></script>
