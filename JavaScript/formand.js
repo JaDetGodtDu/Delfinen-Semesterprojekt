@@ -9,8 +9,10 @@ function initApp() {
   updateMemberTable();
   document.querySelector("#form-delete-member").addEventListener("submit", deleteMemberClicked);
   document.querySelector("#form-delete-member .btn-cancel").addEventListener("click", deleteCancelClicked);
+  document.querySelector("#form-update-member").addEventListener("submit", updateMemberClicked);
 }
 async function updateMemberTable() {
+  console.log("updateMemberTable is running");
   let members = await getMembers();
   showMembers(members);
 }
@@ -55,6 +57,7 @@ function memberClicked(member) {
   document.querySelector("#member-detail-view").innerHTML = memberInfo;
   document.querySelector("#member-detail-view").showModal();
   document.querySelector("#delete-member-btn").addEventListener("click", () => deleteClicked(member));
+  document.querySelector("#update-member-btn").addEventListener("click", () => updateClicked(member));
 }
 function showCreateMemberDialog() {
   document.querySelector("#create-member-dialog").showModal();
@@ -92,7 +95,7 @@ function updateClicked(memberObject) {
   updateForm.setAttribute("data-id", memberObject.id);
   document.querySelector("#dialog-update-member").showModal();
 }
-function updateMemberClicked(event) {
+async function updateMemberClicked(event) {
   const form = event.target;
   const firstName = form.firstName.value;
   const lastName = form.lastName.value;
@@ -104,7 +107,12 @@ function updateMemberClicked(event) {
   const active = form.active.value;
   const compSwimmer = form.compSwimmer.value;
   const id = form.getAttribute("data-id");
-  updateMember(id, firstName, lastName, address, phone, email, dateOfBirth, gender, active, compSwimmer);
+  const response = await updateMember(id, firstName, lastName, address, phone, email, dateOfBirth, gender, active, compSwimmer);
+  document.querySelector("#member-detail-view").close();
+  if (response.ok) {
+    console.log(response);
+    updateMemberTable();
+  }
 }
 async function prepareNewMemberData() {
   const firstName = document.querySelector("#firstName").value;

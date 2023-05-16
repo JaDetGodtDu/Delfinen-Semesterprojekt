@@ -66,7 +66,7 @@ async function deleteMember(id) {
   return response;
 }
 // UPDATE MEMBERS
-async function updateMember(firstName, lastName, address, phone, email, compSwimmer, active, gender, dateOfBirth) {
+async function updateMember(id, firstName, lastName, address, phone, email, compSwimmer, active, gender, dateOfBirth) {
   const memberToUpdate = {
     firstName,
     lastName,
