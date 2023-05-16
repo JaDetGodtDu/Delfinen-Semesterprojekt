@@ -66,4 +66,15 @@ function subscriptionType(member) {
   }
   return HTML;
 }
-export { prepareMemberData, prepareResultData, ageCalculator, memberAgeGroup, compSwimmer, subscriptionType };
+function memberGender(member) {
+  let HTML = "";
+  if (member.gender === "male") {
+    HTML = /*html*/ `Mand`;
+  } else if (member.gender === "female") {
+    HTML = /*html*/ `Kvinde`;
+  } else {
+    HTML = /*html*/ `Andet`;
+  }
+  return HTML;
+}
+export { prepareMemberData, prepareResultData, ageCalculator, memberAgeGroup, compSwimmer, subscriptionType, memberGender };

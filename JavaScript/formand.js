@@ -1,6 +1,6 @@
 "use strict";
 
-import { memberAgeGroup, compSwimmer, subscriptionType } from "./helpers.js";
+import { memberAgeGroup, compSwimmer, subscriptionType, memberGender } from "./helpers.js";
 import { getMembers, createMember, deleteMember, updateMember } from "./rest-service.js";
 
 window.addEventListener("load", initApp);
@@ -43,14 +43,14 @@ function showTable(member) {
 function memberClicked(member) {
   let memberInfo = /*html*/ `
   <h3>${member.firstName} ${member.lastName}</h3><br>
-  <p>${member.email}</p>
-  <p>${member.phone}</p>
-  <p>${member.address}</p>
-  <p>${member.dateOfBirth}</p>
-  <p>${memberAgeGroup(member)}</p>
-  <p>${member.gender}</p>
-  <p>${subscriptionType(member)}</p>
-  <p>${compSwimmer(member)}</p>
+  <p>Email: ${member.email}</p>
+  <p>Telefon nr: ${member.phone}</p>
+  <p>Addresse: ${member.address}</p>
+  <p>Fødselsdato: ${member.dateOfBirth}</p>
+  <p>Aldersgruppe: ${memberAgeGroup(member)}</p>
+  <p>Køn: ${memberGender(member)}</p>
+  <p>Medlemsskab: ${subscriptionType(member)}</p>
+  <p>Hold: ${compSwimmer(member)}</p>
   <input type="button" value="Opdater medlem" button id="update-member-btn">
   <input type="button" value="Slet medlem" button id="delete-member-btn">
   <input type="button" value="Tilbage" button id="member-clicked-cancel-btn">
@@ -117,7 +117,8 @@ async function updateMemberClicked(event) {
   const active = form.active.value;
   const compSwimmer = form.compSwimmer.value;
   const id = form.getAttribute("data-id");
-  const response = await updateMember(id, firstName, lastName, address, phone, email, dateOfBirth, gender, active, compSwimmer);
+
+  const response = await updateMember(id, firstName, lastName, address, phone, email, compSwimmer, active, gender, dateOfBirth);
   document.querySelector("#member-detail-view").close();
   if (response.ok) {
     console.log(response);
