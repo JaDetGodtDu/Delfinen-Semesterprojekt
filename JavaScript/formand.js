@@ -5,6 +5,7 @@ import {
   compSwimmer,
   subscriptionType,
   memberGender,
+  ageCalculator,
 } from "./helpers.js";
 import {
   getMembers,
@@ -29,6 +30,9 @@ function initApp() {
   document
     .querySelector("#form-update-member .btn-cancel")
     .addEventListener("click", updateCancelClicked);
+  document
+    .querySelector("#select-filter-by")
+    .addEventListener("change", filterByChanged);
 }
 async function updateMemberTable() {
   console.log("updateMemberTable is running");
@@ -194,6 +198,29 @@ async function prepareNewMemberData() {
     document.querySelector("#create-member-form").reset();
   }
 }
+
+async function filterByChanged() {
+  const filterValue = document.querySelector("#select-filter-by").value;
+  console.log("filterByChanged is running");
+  const members = await getMembers();
+  console.log(members);
+
+  let results = [];
+  if (filterValue === "junior") {
+    results = members.filter((member) => ageCalculator(member) < 18);
+  } else if (filterValue === "senior") {
+    results = members.filter((member) => ageCalculator(member) >= 18);
+  } else if (filterValue.startsWith("!")) {
+    results = members.filter(
+      (member) => member[filterValue.substring(1)] === "false"
+    );
+  } else {
+    results = members.filter((member) => member[filterValue] === "true");
+  }
+  console.log(results);
+  showMembers(results);
+}
+
 function searchMembersFormand() {
   let searchInput = document.getElementById("input-search-formand");
   let table = document.getElementById("formand-table-body");
