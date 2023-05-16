@@ -1,5 +1,5 @@
 "use strict";
-import { memberAgegroup, compSwimmer, subscriptionType } from "./helpers.js";
+import { memberAgeGroup, compSwimmer, subscriptionType } from "./helpers.js";
 import { getMembers, createMember } from "./rest-service.js";
 
 async function updateKassérTable() {
@@ -18,12 +18,14 @@ function showKassérTable(member) {
             <td class="name">${member.firstName} ${member.lastName}</td>
             <td class="email">${member.email}</td>
             <td class="phone">${member.phone}</td>
-            <td class="age">${memberAgegroup(member)}</td>
+            <td class="age">${memberAgeGroup(member)}</td>
             <td class="member-status">${subscriptionType(member)}</td>
             <td class="payment"> kr</td>
           </tr>
     `;
-  document.querySelector("#kassér-table-body").insertAdjacentHTML("beforeend", kassérHTML);
+  document
+    .querySelector("#kassér-table-body")
+    .insertAdjacentHTML("beforeend", kassérHTML);
 }
 
 function searchMembersKassér() {

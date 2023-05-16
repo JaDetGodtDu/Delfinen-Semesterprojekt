@@ -30,10 +30,14 @@
             <button class="login-btn" id="login-kassér-btn">Kassér</button>
           </div>
           <div>
-            <button class="login-btn" id="login-senior-btn">Senior Træner</button>
+            <button class="login-btn" id="login-senior-btn">
+              Senior Træner
+            </button>
           </div>
           <div>
-            <button class="login-btn" id="login-junior-btn">Junior Træner</button>
+            <button class="login-btn" id="login-junior-btn">
+              Junior Træner
+            </button>
           </div>
         </article>
       </section>
@@ -53,29 +57,32 @@
           </label>
           <div>
             <label for="input-search">Search:</label>
-            <input type="search" id="input-search" placeholder="Sortér via emne" />
+            <input
+              type="search"
+              id="input-search"
+              placeholder="Sortér via emne"
+            />
           </div>
         </section>
-        <article>
-          <table id="formand-table">
-            <thead>
-              <th class="clickable">Medlem</th>
-              <th class="clickable">Aldersgruppe</th>
-              <th class="clickable">Hold</th>
-              <th class="clickable">Email</th>
-              <th class="clickable">Tlf.</th>
-              <th class="clickable">Medlemskab</th>
-            </thead>
-            <tbody id="formand-table-body"></tbody>
-          </table>
-        </article>
+
+        <table id="formand-table">
+          <thead>
+            <th class="clickable">Medlem</th>
+            <th class="clickable">Aldersgruppe</th>
+            <th class="clickable">Hold</th>
+            <th class="clickable">Email</th>
+            <th class="clickable">Tlf.</th>
+            <th class="clickable">Medlemskab</th>
+          </thead>
+          <tbody id="formand-table-body"></tbody>
+        </table>
       </section>
       <section id="kassér-view" class="hidden">
         <h2>Kassérens view</h2>
         <div class="grid-container">
           <div class="box container">
             <div class="box">Årlig kontigent indtjening</div>
-            <div id="yearly-earnings"class="box"></div>
+            <div id="yearly-earnings" class="box"></div>
           </div>
         </div>
         <section id="kassér-tools">
@@ -94,7 +101,11 @@
 
           <div>
             <label for="input-search">Search:</label>
-            <input type="search" id="input-search-kassér" placeholder="Search" />
+            <input
+              type="search"
+              id="input-search-kassér"
+              placeholder="Search"
+            />
           </div>
         </section>
 
@@ -165,17 +176,53 @@
       <h2>Opdater medlemsoplysninger</h2>
       <form id="form-update-member" method="dialog">
         <label for="firstName-update">Fornavn: </label>
-        <input type="text" id="firstName-update" name="firstName" placeholder="Opdater fornavn" required /><br />
+        <input
+          type="text"
+          id="firstName-update"
+          name="firstName"
+          placeholder="Opdater fornavn"
+          required
+        /><br />
         <label for="lastName-update">Efternavn: </label>
-        <input type="text" id="lastName-update" name="lastName" placeholder="Opdater efternavn" required /><br />
+        <input
+          type="text"
+          id="lastName-update"
+          name="lastName"
+          placeholder="Opdater efternavn"
+          required
+        /><br />
         <label for="adress-update">Addresse: </label>
-        <input type="text" id="address-update" name="address" placeholder="Opdater addresse" required /><br />
+        <input
+          type="text"
+          id="address-update"
+          name="address"
+          placeholder="Opdater addresse"
+          required
+        /><br />
         <label for="phone-update">Telefon nr: </label>
-        <input type="text" id="phone-update" name="phone" placeholder="Opdater telefon nr." required /><br />
+        <input
+          type="text"
+          id="phone-update"
+          name="phone"
+          placeholder="Opdater telefon nr."
+          required
+        /><br />
         <label for="email-update">Email: </label>
-        <input type="email" id="email-update" name="email" placeholder="Opdater email" required /><br />
+        <input
+          type="email"
+          id="email-update"
+          name="email"
+          placeholder="Opdater email"
+          required
+        /><br />
         <label for="dateOfBirth-update">Fødselsdato: </label>
-        <input type="date" id="dateOfBirth-update" name="dateOfBirth" placeholder="Opdater fødselsdato" required /><br />
+        <input
+          type="date"
+          id="dateOfBirth-update"
+          name="dateOfBirth"
+          placeholder="Opdater fødselsdato"
+          required
+        /><br />
         <label for="gender-update">Køn: </label>
         <select id="gender-update" name="gender">
           <option value="male">Mand</option>
