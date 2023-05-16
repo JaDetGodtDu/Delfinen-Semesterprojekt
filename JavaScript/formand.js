@@ -60,7 +60,7 @@ function showCreateMemberDialog() {
   document.querySelector("#create-member-form").addEventListener("submit", prepareNewMemberData);
 }
 function deleteClicked(memberObject) {
-  document.querySelector("#dialog-delete-member-name").textContent = memberObject.firstName;
+  document.querySelector("#dialog-delete-member-name").textContent = memberObject.firstName + " " + memberObject.lastName;
   document.querySelector("#form-delete-member").setAttribute("data-id", memberObject.id);
   document.querySelector("#dialog-delete-member").showModal();
 }
@@ -76,7 +76,6 @@ async function deleteMemberClicked(event) {
 }
 function deleteCancelClicked() {
   document.querySelector("#dialog-delete-member").close();
-  
 }
 
 async function prepareNewMemberData() {
