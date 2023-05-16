@@ -66,11 +66,4 @@ function subscriptionType(member) {
   }
   return HTML;
 }
-export {
-  prepareMemberData,
-  prepareResultData,
-  ageCalculator,
-  memberAgegroup,
-  compSwimmer,
-  subscriptionType,
-};
+export { prepareMemberData, prepareResultData, ageCalculator, memberAgegroup, compSwimmer, subscriptionType };
