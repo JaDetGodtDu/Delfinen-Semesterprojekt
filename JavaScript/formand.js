@@ -1,8 +1,14 @@
 "use strict";
 
 import { memberAgeGroup, compSwimmer, subscriptionType } from "./helpers.js";
-import { getMembers, createMember } from "./rest-service.js";
+import { getMembers, createMember, deleteMember } from "./rest-service.js";
 
+window.addEventListener("load", initApp);
+
+function initApp() {
+  document.querySelector("#form-delete-member").addEventListener("submit", deleteMemberClicked);
+  document.querySelector("#form-delete-member .btn-cancel").addEventListener("click", deleteCancelClicked);
+}
 async function updateMemberTable() {
   let members = await getMembers();
   showMembers(members);
@@ -41,14 +47,36 @@ function memberClicked(member) {
   <p>${member.gender}</p>
   <p>${subscriptionType(member)}</p>
   <p>${compSwimmer(member)}</p>
+  <input type="button" value="Opdater medlem" button id="update-member-btn">
+  <input type="button" value="Slet medlem" button id="delete-member-btn">
   `;
   console.log("memberclicked");
   document.querySelector("#member-detail-view").innerHTML = memberInfo;
   document.querySelector("#member-detail-view").showModal();
+  document.querySelector("#delete-member-btn").addEventListener("click", () => deleteClicked(member));
 }
 function showCreateMemberDialog() {
   document.querySelector("#create-member-dialog").showModal();
   document.querySelector("#create-member-form").addEventListener("submit", prepareNewMemberData);
+}
+function deleteClicked(memberObject) {
+  document.querySelector("#dialog-delete-member-name").textContent = memberObject.firstName;
+  document.querySelector("#form-delete-member").setAttribute("data-id", memberObject.id);
+  document.querySelector("#dialog-delete-member").showModal();
+}
+async function deleteMemberClicked(event) {
+  console.log("delete member clicked");
+  const id = event.target.getAttribute("data-id");
+  const response = await deleteMember(id);
+  document.querySelector("#dialog-delete-member").close();
+  document.querySelector("#member-detail-view").close();
+  if (response.ok) {
+    updateMemberTable();
+  }
+}
+function deleteCancelClicked() {
+  document.querySelector("#dialog-delete-member").close();
+  
 }
 
 async function prepareNewMemberData() {
