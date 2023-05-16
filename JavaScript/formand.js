@@ -10,6 +10,7 @@ function initApp() {
   document.querySelector("#form-delete-member").addEventListener("submit", deleteMemberClicked);
   document.querySelector("#form-delete-member .btn-cancel").addEventListener("click", deleteCancelClicked);
   document.querySelector("#form-update-member").addEventListener("submit", updateMemberClicked);
+  document.querySelector("#form-update-member .btn-cancel").addEventListener("click", updateCancelClicked);
 }
 async function updateMemberTable() {
   console.log("updateMemberTable is running");
@@ -52,12 +53,18 @@ function memberClicked(member) {
   <p>${compSwimmer(member)}</p>
   <input type="button" value="Opdater medlem" button id="update-member-btn">
   <input type="button" value="Slet medlem" button id="delete-member-btn">
+  <input type="button" value="Tilbage" button id="member-clicked-cancel-btn">
+ 
   `;
   console.log("memberclicked");
   document.querySelector("#member-detail-view").innerHTML = memberInfo;
   document.querySelector("#member-detail-view").showModal();
   document.querySelector("#delete-member-btn").addEventListener("click", () => deleteClicked(member));
   document.querySelector("#update-member-btn").addEventListener("click", () => updateClicked(member));
+  document.querySelector("#member-clicked-cancel-btn").addEventListener("click", memberClickedCancel);
+}
+function memberClickedCancel() {
+  document.querySelector("#member-detail-view").close();
 }
 function showCreateMemberDialog() {
   document.querySelector("#create-member-dialog").showModal();
@@ -80,6 +87,9 @@ async function deleteMemberClicked(event) {
 }
 function deleteCancelClicked() {
   document.querySelector("#dialog-delete-member").close();
+}
+function updateCancelClicked() {
+  document.querySelector("#dialog-update-member").close();
 }
 function updateClicked(memberObject) {
   const updateForm = document.querySelector("#form-update-member");
