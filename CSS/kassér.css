@@ -1,16 +1,26 @@
-#kassér {
+#kassér-view {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
+#kassér-tools {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  background-color: #333;
+  margin: 20px 0 50px 0;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  color: white;
+}
 .grid-container {
   display: grid;
   place-items: center;
 }
-
-.container {
+*/ .container {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 10px;
@@ -34,5 +44,3 @@ table th {
 table td {
   border: 2px solid black;
 }
-
-

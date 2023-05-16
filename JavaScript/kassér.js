@@ -1,67 +1,63 @@
 "use strict";
+import { memberAgegroup, compSwimmer, subscriptionType } from "./helpers.js";
+import { getMembers, createMember } from "./rest-service.js";
 
-window.addEventListener("load", initApp);
-
-function initApp() {
-  const hjalte = { firstName: "Hjalte", lastName: "Hansen", email: "hjalte3480@gmail.com", phone: 51924833 };
-
-  html(hjalte);
+async function updateKassérTable() {
+  let members = await getMembers();
+  kassérShowMembers(members);
 }
-
-function html(member) {
+function kassérShowMembers(members) {
+  document.querySelector("#kassér-table-body").innerHTML = "";
+  for (const member of members) {
+    showKassérTable(member);
+  }
+}
+function showKassérTable(member) {
   const kassérHTML = /*html*/ `
-    <section id="kassér">
-      <h2>Kassérens view</h2>
-      <div class="grid-container">
-        <div class="box container">
-          <div class="box">Årlig kontigent indtjening</div>
-          <div class="box">1.000.000,00kr</div>
-        </div>
-      </div>
-      <section class="tools-grid">
-        <label for="select-filter-by"
-          >filter by:
-          <select id="select-filter-by">
-            <option value="" selected>Intet emne</option>
-            <option value="aktiv">Aktiv</option>
-            <option value="inaktiv">Inaktiv</option>
-            <option value="konkurance">konkurance</option>
-            <option value="motionist">Motionist</option>
-            <option value="junior">Junior</option>
-            <option value="senior">Senior</option>
-          </select>
-        </label>
-
-        <div>
-          <label for="input-search">Search:</label>
-          <input type="search" id="input-search" placeholder="Search" />
-        </div>
-      </section>
-
-      <br />
-      <table id="member-table">
-        <thead>
-          <tr>
-            <th class="clickable">Navn</th>
-            <th class="clickable">Email</th>
-            <th class="clickable">Tlf</th>
-            <th class="clickable">Aldersgruppe</th>
-            <th class="clickable">Medlemskab</th>
-            <th class="clickable">Restance</th>
-          </tr>
-        </thead>
-        <tbody>
           <tr>
             <td class="name">${member.firstName} ${member.lastName}</td>
             <td class="email">${member.email}</td>
             <td class="phone">${member.phone}</td>
-            <td class="age">l</td>
-            <td class="member-status">Aktiv</td>
+            <td class="age">${memberAgegroup(member)}</td>
+            <td class="member-status">${subscriptionType(member)}</td>
             <td class="payment"> kr</td>
           </tr>
-        </tbody>
-      </table>
-    </section>
     `;
-  document.querySelector("#kassér-view").insertAdjacentHTML("beforeend", kassérHTML);
+  document.querySelector("#kassér-table-body").insertAdjacentHTML("beforeend", kassérHTML);
 }
+
+function searchMembersKassér() {
+  let searchInput = document.getElementById("input-search-kassér");
+  let table = document.getElementById("kassér-table-body");
+
+  // Add an event listener to the input field
+  searchInput.addEventListener("input", function () {
+    let filter = searchInput.value.toUpperCase();
+    let rows = table.getElementsByTagName("tr");
+
+    // Loop through the table rows and hide those that don't match the filter
+    for (let i = 0; i < rows.length; i++) {
+      let cells = rows[i].getElementsByTagName("td");
+      let shouldHide = true;
+
+      // Loop through the cells of each row
+      for (let j = 0; j < cells.length; j++) {
+        let cell = cells[j];
+        if (cell) {
+          let cellText = cell.textContent || cell.innerText;
+          if (cellText.toUpperCase().indexOf(filter) > -1) {
+            shouldHide = false;
+            break;
+          }
+        }
+      }
+
+      // Toggle the display property based on the filter condition
+      rows[i].style.display = shouldHide ? "none" : "";
+    }
+  });
+}
+
+// Attach the search function to the search button
+
+export { kassérShowMembers, searchMembersKassér };
