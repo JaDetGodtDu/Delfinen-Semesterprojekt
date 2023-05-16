@@ -2,22 +2,15 @@
 
 import { showMembers } from "./formand.js";
 import { getMembers } from "./rest-service.js";
+import { kassérShowMembers } from "./kassér.js";
 
 window.addEventListener("load", initListeners);
 
 function initListeners() {
-  document
-    .querySelector("#login-formand-btn")
-    .addEventListener("click", showFormandView);
-  document
-    .querySelector("#login-kassér-btn")
-    .addEventListener("click", showKassérView);
-  document
-    .querySelector("#login-senior-btn")
-    .addEventListener("click", showSeniorView);
-  document
-    .querySelector("#login-junior-btn")
-    .addEventListener("click", showJuniorView);
+  document.querySelector("#login-formand-btn").addEventListener("click", showFormandView);
+  document.querySelector("#login-kassér-btn").addEventListener("click", showKassérView);
+  document.querySelector("#login-senior-btn").addEventListener("click", showSeniorView);
+  document.querySelector("#login-junior-btn").addEventListener("click", showJuniorView);
 }
 async function showFormandView() {
   console.log("show formand view");
@@ -26,10 +19,12 @@ async function showFormandView() {
   let members = await getMembers();
   showMembers(members);
 }
-function showKassérView() {
+async function showKassérView() {
   console.log("show kassér view");
   document.querySelector("#login-view").classList.add("hidden");
   document.querySelector("#kassér-view").classList.remove("hidden");
+  let members = await getMembers();
+  kassérShowMembers(members);
 }
 function showSeniorView() {
   console.log("show senior view");

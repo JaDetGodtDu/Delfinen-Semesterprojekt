@@ -7,7 +7,7 @@
 
 #kassér-tools {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 10px;
   background-color: #333;
   margin: 20px 0 50px 0;
