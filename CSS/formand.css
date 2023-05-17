@@ -1,46 +1,11 @@
-/* #formand-view {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-#formand-tools {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  background-color: #333;
-  margin: 20px 0 50px 0;
-  padding: 10px;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  color: white;
-}
-#formand-table table {
-  border-collapse: collapse;
-  width: 100%;
-}
-
-#formand-table table th {
-  border: 2px solid black;
-  background-color: #333;
-  color: #fff;
-  padding: 10px;
-  text-align: left;
-}
-
-#formand-table table td {
-  border: 2px solid black;
-  padding: 10px;
-}
-#formand-table table td:hover {
-  cursor: pointer;
-} */
 #formand-view {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+#formand-view button {
+  cursor: pointer;
 }
 #formand-tools {
   display: grid;
@@ -78,5 +43,6 @@
   border: 2px solid black;
 }
 #formand-view table td {
+  cursor: pointer;
   border: 2px solid black;
 }
