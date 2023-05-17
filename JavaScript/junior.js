@@ -1,11 +1,13 @@
 "use strict";
 import { getMembers, getResults } from "./rest-service.js";
+import { memberAgeGroup, compSwimmer, ageCalculator } from "./helpers.js";
 window.addEventListener("load", initApp);
 
+let members = [];
 function initApp() {
   updateJuniorTable();
+  document.querySelector("#junior-select-filter-by").addEventListener("change", filterByChanged);
 }
-let members = [];
 
 async function updateJuniorTable() {
   members = await getMembers();
@@ -22,13 +24,13 @@ function juniorShowMembers(results) {
 
 function showJuniorTable(result) {
   const member = members.find((member) => member.id == result.memberId);
-
+  console.log(member.firstName);
   const juniorHTML = /*html*/ `
           <tr>
-            <td class="name">${member?.firstName}</td>
-            <td class="disciplin">${result.discipline}</td>
-            <td class="traningTime">${result.time}</td>
-            <td class="competisiontime">${result.discipline}</td>
+            <td class="name">${member?.firstName} ${member.lastName}</td>
+            <td class="discipline">${result.discipline}</td>
+            <td class="trainTime">${result.time}</td>
+            <td class="comp Time">${result.discipline}</td>
           </tr>
     `;
   document.querySelector("#junior-table-body").insertAdjacentHTML("beforeend", juniorHTML);
@@ -64,5 +66,22 @@ function searchMembersJunior() {
       rows[i].style.display = shouldHide ? "none" : "";
     }
   });
+}
+
+async function filterByChanged() {
+  const filterValue = document.querySelector("#junior-select-filter-by").value;
+  const members = await getMembers();
+  console.log(members);
+
+  let results = [];
+  if (filterValue.startsWith("!")) {
+    results = members.filter((member) => member[filterValue.substring(1)] === "false");
+  } else if (filterValue === "showAll") {
+    results = members;
+  } else {
+    results = members.filter((member) => member[filterValue] === "true");
+  }
+  console.log(results);
+  juniorShowMembers(results);
 }
 export { juniorShowMembers, searchMembersJunior };
