@@ -1,11 +1,12 @@
 "use strict";
-import { memberAgeGroup, compSwimmer, subscriptionType } from "./helpers.js";
-import { getMembers, createMember } from "./rest-service.js";
+import { memberAgeGroup, subscriptionType, ageCalculator } from "./helpers.js";
+import { getMembers } from "./rest-service.js";
 
 window.addEventListener("load", initApp);
 
 function initApp() {
   updateKassérTable();
+  document.querySelector("#kassér-select-filter-by").addEventListener("change", filterByChanged);
 }
 
 async function updateKassérTable() {
@@ -63,7 +64,22 @@ function searchMembersKassér() {
     }
   });
 }
+async function filterByChanged() {
+  const filterValue = document.querySelector("#kassér-select-filter-by").value;
+  const members = await getMembers();
 
-// Attach the search function to the search button
-
+  let results = [];
+  if (filterValue === "junior") {
+    results = members.filter((member) => ageCalculator(member) < 18);
+  } else if (filterValue === "senior") {
+    results = members.filter((member) => ageCalculator(member) >= 18);
+  } else if (filterValue.startsWith("!")) {
+    results = members.filter((member) => member[filterValue.substring(1)] === "false");
+  } else if (filterValue === "showAll") {
+    results = members;
+  } else {
+    results = members.filter((member) => member[filterValue] === "true");
+  }
+  kassérShowMembers(results);
+}
 export { kassérShowMembers, searchMembersKassér };
