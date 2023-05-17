@@ -40,7 +40,8 @@
       <section id="formand-view" class="hidden">
         <section id="formand-tools" class="formand-tools">
           <button id="create-new-member-btn">Opret medlem</button>
-          <label for="select-filter-by">
+          <label for="select-filter-by"
+            >Filtrer:
             <select id="select-filter-by">
               <option value="showAll" selected>Vis alle</option>
               <option value="active">Aktiv</option>
@@ -52,7 +53,7 @@
             </select>
           </label>
           <div>
-            <label for="input-search-formand">Search:</label>
+            <label for="input-search-formand">Søg:</label>
             <input type="search" id="input-search-formand" placeholder="Sortér via emne" />
           </div>
         </section>
@@ -79,20 +80,20 @@
         </div>
         <section id="kassér-tools">
           <label for="select-filter-by"
-            >filter by:
+            >Filtrer:
             <select id="select-filter-by">
-              <option value="" selected>Intet emne</option>
-              <option value="aktiv">Aktiv</option>
-              <option value="inaktiv">Inaktiv</option>
-              <option value="konkurance">konkurance</option>
-              <option value="motionist">Motionist</option>
+              <option value="showAll" selected>Vis alle</option>
+              <option value="active">Aktiv</option>
+              <option value="!active">Passiv</option>
+              <option value="compSwimmer">Konkurrence</option>
+              <option value="!compSwimmer">Motionist</option>
               <option value="junior">Junior</option>
               <option value="senior">Senior</option>
             </select>
           </label>
 
           <div>
-            <label for="input-search">Search:</label>
+            <label for="input-search">Søg:</label>
             <input type="search" id="input-search-kassér" placeholder="Search" />
           </div>
         </section>
@@ -117,20 +118,20 @@
         <h2>SeniorTræner view</h2>
         <section id="senior-tools">
           <label for="select-filter-by"
-            >filter by:
+            >Filtrer:
             <select id="select-filter-by">
-              <option value="" selected>Intet emne</option>
-              <option value="aktiv">Aktiv</option>
-              <option value="inaktiv">Inaktiv</option>
-              <option value="konkurance">konkurance</option>
-              <option value="motionist">Motionist</option>
+              <option value="showAll" selected>Vis alle</option>
+              <option value="active">Aktiv</option>
+              <option value="!active">Passiv</option>
+              <option value="compSwimmer">Konkurrence</option>
+              <option value="!compSwimmer">Motionist</option>
               <option value="junior">Junior</option>
               <option value="senior">Senior</option>
             </select>
           </label>
 
           <div>
-            <label for="input-search">Search:</label>
+            <label for="input-search">Søg:</label>
             <input type="search" id="input-search-kassér" placeholder="Search" />
           </div>
         </section>
@@ -141,8 +142,8 @@
             <tr>
               <th class="clickable">Navn</th>
               <th class="clickable">Disciplin</th>
-              <th class="clickable">Bedste TræningsTid</th>
-              <th class="clickable">Sidste KonkuranceTid</th>
+              <th class="clickable">Bedste Træningstid</th>
+              <th class="clickable">Sidste Konkurrencetid</th>
             </tr>
           </thead>
           <tbody id="senior-table-body"></tbody>
@@ -152,32 +153,32 @@
         <h2>SeniorTræner view</h2>
         <section id="junior-tools">
           <label for="select-filter-by"
-            >filter by:
+            >Filtrer:
             <select id="select-filter-by">
-              <option value="" selected>Intet emne</option>
-              <option value="aktiv">Aktiv</option>
-              <option value="inaktiv">Inaktiv</option>
-              <option value="konkurance">konkurance</option>
-              <option value="motionist">Motionist</option>
+              <option value="showAll" selected>Vis alle</option>
+              <option value="active">Aktiv</option>
+              <option value="!active">Passiv</option>
+              <option value="compSwimmer">Konkurrence</option>
+              <option value="!compSwimmer">Motionist</option>
               <option value="junior">Junior</option>
               <option value="senior">Senior</option>
             </select>
           </label>
 
           <div>
-            <label for="input-search">Search:</label>
+            <label for="input-search">Søg:</label>
             <input type="search" id="input-search-kassér" placeholder="Search" />
           </div>
         </section>
 
         <br />
-        <table id="juniorr-table">
+        <table id="junior-table">
           <thead>
             <tr>
               <th class="clickable">Navn</th>
               <th class="clickable">Disciplin</th>
-              <th class="clickable">Bedste TræningsTid</th>
-              <th class="clickable">Sidste KonkuranceTid</th>
+              <th class="clickable">Bedste Træningstid</th>
+              <th class="clickable">Sidste Konkurrencetid</th>
             </tr>
           </thead>
           <tbody id="junior-table-body"></tbody>
