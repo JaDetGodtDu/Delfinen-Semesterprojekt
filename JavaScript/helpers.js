@@ -77,4 +77,48 @@ function memberGender(member) {
   }
   return HTML;
 }
-export { prepareMemberData, prepareResultData, ageCalculator, memberAgeGroup, compSwimmer, subscriptionType, memberGender };
+function memberPrice(member) {
+  let HTML = "";
+  if (
+    ageCalculator(member) >= 18 &&
+    ageCalculator(member) < 60 &&
+    member.active === "true"
+  ) {
+    HTML = /*html*/ `1600`;
+  } else if (ageCalculator(member) >= 60 && member.active === "true") {
+    HTML = /*html*/ `1200`;
+  } else if (ageCalculator(member) < 18 && member.active === "true") {
+    HTML = /*html*/ `1000`;
+  } else {
+    HTML = /*html*/ `500`;
+  }
+  return HTML;
+}
+function memberHasPayed(member, memberId) {
+  if (member.hasPayed === "true") {
+    document.querySelector(`#${memberId}`).classList.add("hasPayedTrue");
+  } else if (member.hasPayed === "false") {
+    document.querySelector(`#${memberId}`).classList.add("hasPayedFalse");
+  }
+}
+function yearlyIncome(members) {
+  let totalIncome = 0;
+  for (const member of members) {
+    const price = parseFloat(memberPrice(member));
+    totalIncome += price;
+  }
+  return totalIncome;
+}
+
+export {
+  prepareMemberData,
+  prepareResultData,
+  ageCalculator,
+  memberAgeGroup,
+  compSwimmer,
+  subscriptionType,
+  memberGender,
+  memberPrice,
+  memberHasPayed,
+  yearlyIncome,
+};
