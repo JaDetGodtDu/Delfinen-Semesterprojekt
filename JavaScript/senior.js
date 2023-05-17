@@ -25,9 +25,7 @@ function showSeniorTable(result) {
 
   const seniorHTML = /*html*/ `
           <tr>
-            <td class="name">${member?.firstName}</td>
-            <td class="disciplin">${result.discipline}</td>
-            <td class="disciplin">${result.time}</td>
+            <td class="name">${member.firstName + " " + member.lastName}</td>
             <td class="disciplin">${result.discipline}</td>
           </tr>
     `;
