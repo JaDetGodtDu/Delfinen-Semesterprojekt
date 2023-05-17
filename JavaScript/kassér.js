@@ -5,6 +5,7 @@ import {
   subscriptionType,
   memberPrice,
   memberHasPayed,
+  yearlyIncome,
 } from "./helpers.js";
 import { getMembers, createMember } from "./rest-service.js";
 
@@ -14,6 +15,9 @@ async function updateKassérTable() {
 }
 function kassérShowMembers(members) {
   document.querySelector("#kassér-table-body").innerHTML = "";
+  document.querySelector("#yearly-earnings").innerHTML = `${yearlyIncome(
+    members
+  )}kr`;
   for (const member of members) {
     showKassérTable(member);
     memberHasPayed(member, `member-${member.id}`);
@@ -28,7 +32,7 @@ function showKassérTable(member) {
             <td class="phone">${member.phone}</td>
             <td class="age">${memberAgeGroup(member)}</td>
             <td class="member-status">${subscriptionType(member)}</td>
-            <td id="${memberId}"class="payment"> ${memberPrice(member)}kr</td>
+            <td id="${memberId}" class="payment"> ${memberPrice(member)}kr</td>
           </tr>
     `;
   document

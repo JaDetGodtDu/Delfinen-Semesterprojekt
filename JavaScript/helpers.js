@@ -79,7 +79,11 @@ function memberGender(member) {
 }
 function memberPrice(member) {
   let HTML = "";
-  if (ageCalculator(member) >= 18 && member.active === "true") {
+  if (
+    ageCalculator(member) >= 18 &&
+    ageCalculator(member) < 60 &&
+    member.active === "true"
+  ) {
     HTML = /*html*/ `1600`;
   } else if (ageCalculator(member) >= 60 && member.active === "true") {
     HTML = /*html*/ `1200`;
@@ -97,6 +101,14 @@ function memberHasPayed(member, memberId) {
     document.querySelector(`#${memberId}`).classList.add("hasPayedFalse");
   }
 }
+function yearlyIncome(members) {
+  let totalIncome = 0;
+  for (const member of members) {
+    const price = parseFloat(memberPrice(member));
+    totalIncome += price;
+  }
+  return totalIncome;
+}
 
 export {
   prepareMemberData,
@@ -108,4 +120,5 @@ export {
   memberGender,
   memberPrice,
   memberHasPayed,
+  yearlyIncome,
 };
