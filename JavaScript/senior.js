@@ -1,25 +1,24 @@
 "use strict";
 import { getMembers } from "./rest-service.js";
 
-async function updateMemberTable() {
+async function updateSeniorTable() {
   let members = await getMembers();
-  showMembers(members);
+  seniorShowMembers(members);
 }
-
-function showMembers(members) {
+function seniorShowMembers(members) {
   document.querySelector("#senior-table-body").innerHTML = "";
   for (const member of members) {
-    showTable(member);
+    showSeniorTable(member);
   }
 }
-function showTable(member, time) {
-  const html = /*html*/ `
-    <tr>
-      <td>${member.firstName} ${member.lastName}</td>
-      <td>${bestTraningTime(time)}</td>
-      <td>${lastCompetisionTime(time)}</td>
-    </tr>
+
+function showSeniorTable(member) {
+  const seniorHTML = /*html*/ `
+          <tr>
+            <td class="name">${member.firstName} ${member.lastName}</td>
+
+          </tr>
     `;
-  document.querySelector("#senior-table-body").insertAdjacentHTML("beforeend", html); // append html to the DOM - section#posts
+  document.querySelector("#senior-table-body").insertAdjacentHTML("beforeend", seniorHTML);
 }
-export { showMembers, updateMemberTable };
+export { seniorShowMembers };

@@ -3,6 +3,7 @@
 import { showMembers } from "./formand.js";
 import { getMembers } from "./rest-service.js";
 import { kassérShowMembers } from "./kassér.js";
+import { seniorShowMembers } from "./senior.js";
 
 window.addEventListener("load", initListeners);
 
@@ -26,10 +27,12 @@ async function showKassérView() {
   let members = await getMembers();
   kassérShowMembers(members);
 }
-function showSeniorView() {
+async function showSeniorView() {
   console.log("show senior view");
   document.querySelector("#login-view").classList.add("hidden");
   document.querySelector("#senior-view").classList.remove("hidden");
+  let members = await getMembers();
+  seniorShowMembers(members);
 }
 function showJuniorView() {
   console.log("show junior view");
