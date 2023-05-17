@@ -1,5 +1,11 @@
 "use strict";
-import { memberAgeGroup, compSwimmer, subscriptionType } from "./helpers.js";
+import {
+  memberAgeGroup,
+  compSwimmer,
+  subscriptionType,
+  memberPrice,
+  memberHasPayed,
+} from "./helpers.js";
 import { getMembers, createMember } from "./rest-service.js";
 
 async function updateKassérTable() {
@@ -10,9 +16,11 @@ function kassérShowMembers(members) {
   document.querySelector("#kassér-table-body").innerHTML = "";
   for (const member of members) {
     showKassérTable(member);
+    memberHasPayed(member, `member-${member.id}`);
   }
 }
 function showKassérTable(member) {
+  const memberId = `member-${member.id}`;
   const kassérHTML = /*html*/ `
           <tr>
             <td class="name">${member.firstName} ${member.lastName}</td>
@@ -20,7 +28,7 @@ function showKassérTable(member) {
             <td class="phone">${member.phone}</td>
             <td class="age">${memberAgeGroup(member)}</td>
             <td class="member-status">${subscriptionType(member)}</td>
-            <td class="payment"> kr</td>
+            <td id="${memberId}"class="payment"> ${memberPrice(member)}kr</td>
           </tr>
     `;
   document
@@ -59,7 +67,5 @@ function searchMembersKassér() {
     }
   });
 }
-
 // Attach the search function to the search button
-
 export { kassérShowMembers, searchMembersKassér };

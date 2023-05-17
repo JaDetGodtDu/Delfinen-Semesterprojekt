@@ -6,3 +6,9 @@
 #junior-view.hidden {
   display: none;
 }
+.hasPayedTrue {
+  background-color: rgb(1, 192, 1);
+}
+.hasPayedFalse {
+  background-color: red;
+}
