@@ -46,6 +46,3 @@
   cursor: pointer;
   border: 2px solid black;
 }
-#formand-view table td:hover {
-  cursor: pointer;
-}
