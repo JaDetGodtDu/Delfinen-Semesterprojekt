@@ -35,11 +35,9 @@ function initApp() {
     .addEventListener("change", filterByChanged);
 }
 async function updateMemberTable() {
-  console.log("updateMemberTable is running");
   let members = await getMembers();
   showMembers(members);
 }
-
 function showMembers(members) {
   document.querySelector("#formand-table-body").innerHTML = "";
   for (const member of members) {
@@ -80,7 +78,6 @@ function memberClicked(member) {
   <input type="button" value="Tilbage" button id="member-clicked-cancel-btn">
  
   `;
-  console.log("memberclicked");
   document.querySelector("#member-detail-view").innerHTML = memberInfo;
   document.querySelector("#member-detail-view").showModal();
   document
@@ -167,7 +164,6 @@ async function updateMemberClicked(event) {
   );
   document.querySelector("#member-detail-view").close();
   if (response.ok) {
-    console.log(response);
     updateMemberTable();
   }
 }
@@ -198,12 +194,9 @@ async function prepareNewMemberData() {
     document.querySelector("#create-member-form").reset();
   }
 }
-
 async function filterByChanged() {
   const filterValue = document.querySelector("#select-filter-by").value;
-  console.log("filterByChanged is running");
   const members = await getMembers();
-  console.log(members);
 
   let results = [];
   if (filterValue === "junior") {
@@ -219,10 +212,8 @@ async function filterByChanged() {
   } else {
     results = members.filter((member) => member[filterValue] === "true");
   }
-  console.log(results);
   showMembers(results);
 }
-
 function searchMembersFormand() {
   let searchInput = document.getElementById("input-search-formand");
   let table = document.getElementById("formand-table-body");
@@ -248,7 +239,6 @@ function searchMembersFormand() {
           }
         }
       }
-
       // Toggle the display property based on the filter condition
       rows[i].style.display = shouldHide ? "none" : "";
     }
