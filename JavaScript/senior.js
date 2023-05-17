@@ -1,22 +1,33 @@
 "use strict";
-import { getMembers } from "./rest-service.js";
+import { getMembers, getResults } from "./rest-service.js";
+updateSeniorTable();
+
+let members = [];
 
 async function updateSeniorTable() {
-  let members = await getMembers();
-  seniorShowMembers(members);
+  members = await getMembers();
+  let results = await getResults();
+  seniorShowMembers(results);
 }
-function seniorShowMembers(members) {
+function seniorShowMembers(results) {
   document.querySelector("#senior-table-body").innerHTML = "";
-  for (const member of members) {
-    showSeniorTable(member);
+
+  for (const result of results) {
+    showSeniorTable(result);
+    console.log(result);
   }
 }
 
-function showSeniorTable(member) {
+function showSeniorTable(result) {
+  const member = members.find((member) => member.id == result.memberId);
+  console.log(result);
+
   const seniorHTML = /*html*/ `
           <tr>
-            <td class="name">${member.firstName} ${member.lastName}</td>
-
+            <td class="name">${member?.firstName}</td>
+            <td class="disciplin">${result.discipline}</td>
+            <td class="disciplin">${result.discipline}</td>
+            <td class="disciplin">${result.discipline}</td>
           </tr>
     `;
   document.querySelector("#senior-table-body").insertAdjacentHTML("beforeend", seniorHTML);
