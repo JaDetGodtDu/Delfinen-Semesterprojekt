@@ -2,6 +2,12 @@
 import { memberAgeGroup, compSwimmer, subscriptionType } from "./helpers.js";
 import { getMembers, createMember } from "./rest-service.js";
 
+window.addEventListener("load", initApp);
+
+function initApp() {
+  updateKassérTable();
+}
+
 async function updateKassérTable() {
   let members = await getMembers();
   kassérShowMembers(members);
@@ -23,9 +29,7 @@ function showKassérTable(member) {
             <td class="payment"> kr</td>
           </tr>
     `;
-  document
-    .querySelector("#kassér-table-body")
-    .insertAdjacentHTML("beforeend", kassérHTML);
+  document.querySelector("#kassér-table-body").insertAdjacentHTML("beforeend", kassérHTML);
 }
 
 function searchMembersKassér() {

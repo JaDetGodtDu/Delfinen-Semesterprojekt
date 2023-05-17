@@ -17,22 +17,16 @@ async function showFormandView() {
   console.log("show formand view");
   document.querySelector("#login-view").classList.add("hidden");
   document.querySelector("#formand-view").classList.remove("hidden");
-  let members = await getMembers();
-  showMembers(members);
 }
 async function showKassérView() {
   console.log("show kassér view");
   document.querySelector("#login-view").classList.add("hidden");
   document.querySelector("#kassér-view").classList.remove("hidden");
-  let members = await getMembers();
-  kassérShowMembers(members);
 }
 async function showSeniorView() {
   console.log("show senior view");
   document.querySelector("#login-view").classList.add("hidden");
   document.querySelector("#senior-view").classList.remove("hidden");
-  let results = await getResults();
-  seniorShowMembers(results);
 }
 function showJuniorView() {
   console.log("show junior view");

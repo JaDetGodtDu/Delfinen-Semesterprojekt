@@ -1,7 +1,10 @@
 "use strict";
 import { getMembers, getResults } from "./rest-service.js";
-updateSeniorTable();
+window.addEventListener("load", initApp);
 
+function initApp() {
+  updateSeniorTable();
+}
 let members = [];
 
 async function updateSeniorTable() {
@@ -26,7 +29,7 @@ function showSeniorTable(result) {
           <tr>
             <td class="name">${member?.firstName}</td>
             <td class="disciplin">${result.discipline}</td>
-            <td class="disciplin">${result.discipline}</td>
+            <td class="disciplin">${result.time}</td>
             <td class="disciplin">${result.discipline}</td>
           </tr>
     `;
