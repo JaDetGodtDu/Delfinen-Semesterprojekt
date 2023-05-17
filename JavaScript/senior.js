@@ -22,14 +22,22 @@ function seniorShowMembers(results) {
 
 function showSeniorTable(result) {
   const member = members.find((member) => member.id == result.memberId);
-
   const seniorHTML = /*html*/ `
-          <tr>
-            <td class="name">${member.firstName + " " + member.lastName}</td>
-            <td class="disciplin">${result.discipline}</td>
-          </tr>
-    `;
+    <tr>
+      <td class="name">${member.firstName} ${member.lastName}</td>
+      <td class="discipline">${result.discipline}</td>
+      <td class="trainTime">${result.type === "Træning" ? convertTime(result.time) : ""}</td>
+      <td class="compTime">${result.type === "Konkurrence" ? convertTime(result.time) : ""}</td>
+    </tr>
+  `;
   document.querySelector("#senior-table-body").insertAdjacentHTML("beforeend", seniorHTML);
+}
+
+function convertTime(timeInMillis) {
+  const minutes = Math.floor(timeInMillis / 60000);
+  const seconds = Math.floor((timeInMillis % 60000) / 1000);
+  const milliseconds = timeInMillis % 1000;
+  return `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}:${milliseconds.toString().padStart(3, "0")}`;
 }
 
 function searchMembersSenior() {
