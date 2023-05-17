@@ -6,6 +6,7 @@ import {
   memberPrice,
   memberHasPayed,
   yearlyIncome,
+  ageCalculator,
 } from "./helpers.js";
 import { getMembers, createMember } from "./rest-service.js";
 
