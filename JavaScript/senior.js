@@ -1,9 +1,11 @@
 "use strict";
 import { getMembers, getResults } from "./rest-service.js";
+import { ageCalculator } from "./helpers.js";
 window.addEventListener("load", initApp);
 
 function initApp() {
   updateSeniorTable();
+  document.querySelector("#senior-select-filter-by").addEventListener("change", filterByChanged);
 }
 let members = [];
 
@@ -70,5 +72,23 @@ function searchMembersSenior() {
       rows[i].style.display = shouldHide ? "none" : "";
     }
   });
+}
+async function filterByChanged() {
+  const filterValue = document.querySelector("#senior-select-filter-by").value;
+  const members = await getMembers();
+
+  let results = [];
+  if (filterValue === "junior") {
+    results = members.filter((member) => ageCalculator(member) < 18);
+  } else if (filterValue === "senior") {
+    results = members.filter((member) => ageCalculator(member) >= 18);
+  } else if (filterValue.startsWith("!")) {
+    results = members.filter((member) => member[filterValue.substring(1)] === "false");
+  } else if (filterValue === "showAll") {
+    results = members;
+  } else {
+    results = members.filter((member) => member[filterValue] === "true");
+  }
+  seniorShowMembers(results);
 }
 export { seniorShowMembers, searchMembersSenior };
