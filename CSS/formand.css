@@ -80,3 +80,6 @@
 #formand-view table td {
   border: 2px solid black;
 }
+#formand-view table td:hover {
+  cursor: pointer;
+}
