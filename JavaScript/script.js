@@ -8,8 +8,6 @@ window.addEventListener("load", initApp);
 
 function initApp() {
   getMembers();
-  console.log(getMembers());
-  console.log(getResults());
   document.querySelector("#input-search-kassér").addEventListener("keydown", searchMembersKassér);
   document.querySelector("#input-search-formand").addEventListener("keydown", searchMembersFormand);
   document.querySelector("#input-search-senior").addEventListener("keydown", searchMembersSenior);

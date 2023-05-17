@@ -17,13 +17,11 @@ function seniorShowMembers(results) {
 
   for (const result of results) {
     showSeniorTable(result);
-    console.log(result);
   }
 }
 
 function showSeniorTable(result) {
   const member = members.find((member) => member.id == result.memberId);
-  console.log(result);
 
   const seniorHTML = /*html*/ `
           <tr>

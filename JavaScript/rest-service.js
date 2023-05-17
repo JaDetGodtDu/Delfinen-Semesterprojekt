@@ -18,7 +18,6 @@ async function getResults() {
   const data = await response.json();
   const results = prepareResultData(data);
   prepareResultData(data);
-  console.log(results);
   return results;
 }
 // CREATE NEW MEMBERS
