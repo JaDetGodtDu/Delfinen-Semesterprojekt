@@ -59,10 +59,43 @@ function showSeniorTable(result) {
 
 function showCreateResultDialog() {
   document.querySelector("#create-result-dialog").showModal();
+  const swimmerSelect = document.querySelector("#swimmer-name");
+  members.forEach((member, index) => {
+    let age = ageCalculator(member);
+    if (age >= 18) {
+      const option = document.createElement("option");
+      option.value = `swimmer-name${index + 1}`;
+      option.textContent = `${member.firstName} ${member.lastName}`;
+      swimmerSelect.appendChild(option);
+    }
+  });
 
   document
     .querySelector("#create-member-form")
     .addEventListener("submit", prepareNewResultData);
+}
+async function prepareNewResultData() {
+  const swimmerName = document.querySelector("#swimmerName").value;
+  const discipline = document.querySelector("#discipline").value;
+  const time = document.querySelector("#time").value;
+  const date = document.querySelector("#date").value;
+  const type = document.querySelector("#type").value;
+  const competitionName = document.querySelector("#competitionName").value;
+  const placement = document.querySelector("#placement").value;
+  const response = await createResult(
+    swimmerName,
+    discipline,
+    time,
+    date,
+    type,
+    competitionName,
+    placement
+  );
+  if (response.ok) {
+    updateSeniorTable();
+    document.querySelector("#create-result-dialog").close();
+    document.querySelector("#create-result-form").reset();
+  }
 }
 
 function searchMembersSenior() {
