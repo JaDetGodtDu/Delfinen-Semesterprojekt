@@ -1,7 +1,12 @@
 "use strict";
 import { getMembers, getResults, createResult } from "./rest-service.js";
-import { ageCalculator } from "./helpers.js";
+import {
+  ageCalculator,
+  competitionTypeChange,
+  filterMembersByAge,
+} from "./helpers.js";
 window.addEventListener("load", initApp);
+let members = [];
 
 function initApp() {
   updateSeniorTable();
@@ -11,8 +16,10 @@ function initApp() {
   document
     .querySelector("#create-new-time-btn")
     .addEventListener("click", showCreateResultDialog);
+  document
+    .querySelector("#type")
+    .addEventListener("change", (event) => competitionTypeChange(event));
 }
-let members = [];
 
 async function updateSeniorTable() {
   members = await getMembers();
@@ -27,9 +34,11 @@ function seniorShowMembers(results) {
   }
 }
 
-function showSeniorTable(result) {
+async function showSeniorTable(result) {
   const member = members.find((member) => member.id == result.memberId);
-  const seniorHTML = /*html*/ `
+  let age = ageCalculator(member);
+  if (age >= 18) {
+    const seniorHTML = /*html*/ `
     <tr>
       <td class="name">${member.firstName} ${member.lastName}</td>
       <td class="discipline">${result.discipline}</td>
@@ -41,9 +50,11 @@ function showSeniorTable(result) {
       }</td>
     </tr>
   `;
-  document
-    .querySelector("#senior-table-body")
-    .insertAdjacentHTML("beforeend", seniorHTML);
+
+    document
+      .querySelector("#senior-table-body")
+      .insertAdjacentHTML("beforeend", seniorHTML);
+  }
 }
 
 function convertTime(timeInMillis) {
