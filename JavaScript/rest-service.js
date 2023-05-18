@@ -1,4 +1,5 @@
-const endpoint = "https://delfinen-8e9fa-default-rtdb.europe-west1.firebasedatabase.app/";
+const endpoint =
+  "https://delfinen-8e9fa-default-rtdb.europe-west1.firebasedatabase.app/";
 
 import { prepareMemberData, prepareResultData } from "./helpers.js";
 
@@ -21,7 +22,17 @@ async function getResults() {
   return results;
 }
 // CREATE NEW MEMBERS
-async function createMember(firstName, lastName, address, phone, email, dateOfBirth, gender, active, compSwimmer) {
+async function createMember(
+  firstName,
+  lastName,
+  address,
+  phone,
+  email,
+  dateOfBirth,
+  gender,
+  active,
+  compSwimmer
+) {
   const newMember = {
     firstName,
     lastName,
@@ -41,15 +52,23 @@ async function createMember(firstName, lastName, address, phone, email, dateOfBi
   return response;
 }
 // CREATE NEW RESULTS
-async function createResult(discipline, memberId, placement, time, competition, type, date) {
+async function createResult(
+  memberId,
+  discipline,
+  time,
+  date,
+  type,
+  competitionName,
+  placement
+) {
   const newResult = {
-    discipline,
     memberId,
-    placement,
+    discipline,
     time,
-    competition,
-    type,
     date,
+    type,
+    competitionName,
+    placement,
   };
   const json = JSON.stringify(newResult);
   const response = await fetch(`${endpoint}/results.json`, {
@@ -66,7 +85,18 @@ async function deleteMember(id) {
   return response;
 }
 // UPDATE MEMBERS
-async function updateMember(id, firstName, lastName, address, phone, email, compSwimmer, active, gender, dateOfBirth) {
+async function updateMember(
+  id,
+  firstName,
+  lastName,
+  address,
+  phone,
+  email,
+  compSwimmer,
+  active,
+  gender,
+  dateOfBirth
+) {
   const memberToUpdate = {
     firstName,
     lastName,
@@ -86,7 +116,15 @@ async function updateMember(id, firstName, lastName, address, phone, email, comp
   return response;
 }
 // UPDATE RESULTS
-async function updateResult(discipline, memberId, placement, time, competition, type, date) {
+async function updateResult(
+  discipline,
+  memberId,
+  placement,
+  time,
+  competition,
+  type,
+  date
+) {
   const resultToUpdate = {
     discipline,
     memberId,
@@ -103,4 +141,13 @@ async function updateResult(discipline, memberId, placement, time, competition, 
   });
   return response;
 }
-export { members, getMembers, getResults, createMember, createResult, deleteMember, updateMember, updateResult };
+export {
+  members,
+  getMembers,
+  getResults,
+  createMember,
+  createResult,
+  deleteMember,
+  updateMember,
+  updateResult,
+};
