@@ -56,12 +56,10 @@ function convertTime(timeInMillis) {
 }
 function showCreateResultDialog() {
   document.querySelector("#create-result-dialog").showModal();
-  let newResultHtml =
-    /*html*/
 
-    document
-      .querySelector("#create-member-form")
-      .addEventListener("submit", prepareNewResultData);
+  document
+    .querySelector("#create-member-form")
+    .addEventListener("submit", prepareNewResultData);
 }
 
 function searchMembersSenior() {

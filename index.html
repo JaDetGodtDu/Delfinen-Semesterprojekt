@@ -334,6 +334,64 @@
         <button type="button" class="btn-cancel">Tilbage</button>
       </form>
     </dialog>
+    <dialog id="create-result-dialog">
+      <form method="dialog">
+        <label for="swimmer-name">Svømmer: </label>
+        <select id="swimmer-name" name="swimmer-name">
+          <option value="swimmer-name1">Jørgen Leth</option>
+          <option value="swimmer-name2">Mike Tyson</option>
+          <option value="swimmer-name3">Janet Jackson</option>
+        </select>
+        <br />
+        <label for="discipline">Disciplin: </label>
+        <select id="discipline" name="discipline">
+          <option value="chest">Brystsvømning</option>
+          <option value="chest">Butterfly</option>
+          <option value="chest">Crawl</option>
+          <option value="chest">Rygsvømning</option></select
+        ><br />
+        <label for="time">Tid: </label>
+        <input
+          type="text"
+          name="time"
+          pattern="[0-5][0-9]:[0-5][0-9]:[0-9]{3}"
+          required
+        />
+        <br />
+        <label for="date">Dato:</label>
+        <input type="date" id="date" name="date" /> <br />
+        <label for type="type">Type:</label>
+        <select id="type" name="type">
+          <option value="training">Træning</option>
+          <option value="competition">Konkurrence</option>
+        </select>
+        <br />
+        <label for="competition-name" id="competition-name-label" hidden
+          >Stævne:
+        </label>
+        <input
+          type="text"
+          id="competition-name"
+          name="competition-name"
+          hidden
+        />
+        <br />
+        <label for="placement" id="placement-label" hidden>Placering: </label>
+        <select id="placement" name="placement" hidden>
+          <option value="1">1.</option>
+          <option value="2">2.</option>
+          <option value="3">3.</option>
+          <option value="4">4.</option>
+          <option value="5">5.</option>
+          <option value="6">6.</option>
+          <option value="7">7.</option>
+          <option value="8">8.</option>
+          <option value="9">9.</option>
+          <option value="10">10.</option></select
+        ><br />
+        <input type="submit" value="Registrér ny tid" />
+      </form>
+    </dialog>
 
     <script src="JavaScript/script.js" type="module"></script>
     <script src="JavaScript/login.js" type="module"></script>
