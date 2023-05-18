@@ -1,11 +1,16 @@
 "use strict";
-import { getMembers, getResults } from "./rest-service.js";
+import { getMembers, getResults, createResult } from "./rest-service.js";
 import { ageCalculator } from "./helpers.js";
 window.addEventListener("load", initApp);
 
 function initApp() {
   updateSeniorTable();
-  document.querySelector("#senior-select-filter-by").addEventListener("change", filterByChanged);
+  document
+    .querySelector("#senior-select-filter-by")
+    .addEventListener("change", filterByChanged);
+  document
+    .querySelector("#create-new-time-btn")
+    .addEventListener("click", showCreateResultDialog);
 }
 let members = [];
 
@@ -28,18 +33,35 @@ function showSeniorTable(result) {
     <tr>
       <td class="name">${member.firstName} ${member.lastName}</td>
       <td class="discipline">${result.discipline}</td>
-      <td class="trainTime">${result.type === "Træning" ? convertTime(result.time) : ""}</td>
-      <td class="compTime">${result.type === "Konkurrence" ? convertTime(result.time) : ""}</td>
+      <td class="trainTime">${
+        result.type === "Træning" ? convertTime(result.time) : ""
+      }</td>
+      <td class="compTime">${
+        result.type === "Konkurrence" ? convertTime(result.time) : ""
+      }</td>
     </tr>
   `;
-  document.querySelector("#senior-table-body").insertAdjacentHTML("beforeend", seniorHTML);
+  document
+    .querySelector("#senior-table-body")
+    .insertAdjacentHTML("beforeend", seniorHTML);
 }
 
 function convertTime(timeInMillis) {
   const minutes = Math.floor(timeInMillis / 60000);
   const seconds = Math.floor((timeInMillis % 60000) / 1000);
   const milliseconds = timeInMillis % 1000;
-  return `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}:${milliseconds.toString().padStart(3, "0")}`;
+  return `${minutes.toString().padStart(2, "0")}:${seconds
+    .toString()
+    .padStart(2, "0")}:${milliseconds.toString().padStart(3, "0")}`;
+}
+function showCreateResultDialog() {
+  document.querySelector("#create-result-dialog").showModal();
+  let newResultHtml =
+    /*html*/
+
+    document
+      .querySelector("#create-member-form")
+      .addEventListener("submit", prepareNewResultData);
 }
 
 function searchMembersSenior() {
@@ -83,7 +105,9 @@ async function filterByChanged() {
   } else if (filterValue === "senior") {
     results = members.filter((member) => ageCalculator(member) >= 18);
   } else if (filterValue.startsWith("!")) {
-    results = members.filter((member) => member[filterValue.substring(1)] === "false");
+    results = members.filter(
+      (member) => member[filterValue.substring(1)] === "false"
+    );
   } else if (filterValue === "showAll") {
     results = members;
   } else {
