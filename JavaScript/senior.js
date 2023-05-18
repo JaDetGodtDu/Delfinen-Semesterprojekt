@@ -3,7 +3,7 @@ import { getMembers, getResults, createResult } from "./rest-service.js";
 import {
   ageCalculator,
   competitionTypeChange,
-  filterMembersByAge,
+  convertTime,
 } from "./helpers.js";
 window.addEventListener("load", initApp);
 let members = [];
@@ -34,7 +34,7 @@ function seniorShowMembers(results) {
   }
 }
 
-async function showSeniorTable(result) {
+function showSeniorTable(result) {
   const member = members.find((member) => member.id == result.memberId);
   let age = ageCalculator(member);
   if (age >= 18) {
@@ -57,14 +57,6 @@ async function showSeniorTable(result) {
   }
 }
 
-function convertTime(timeInMillis) {
-  const minutes = Math.floor(timeInMillis / 60000);
-  const seconds = Math.floor((timeInMillis % 60000) / 1000);
-  const milliseconds = timeInMillis % 1000;
-  return `${minutes.toString().padStart(2, "0")}:${seconds
-    .toString()
-    .padStart(2, "0")}:${milliseconds.toString().padStart(3, "0")}`;
-}
 function showCreateResultDialog() {
   document.querySelector("#create-result-dialog").showModal();
 

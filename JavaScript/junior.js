@@ -1,5 +1,6 @@
 "use strict";
 import { getMembers, getResults } from "./rest-service.js";
+import { convertTime, ageCalculator } from "./helpers.js";
 window.addEventListener("load", initApp);
 
 function initApp() {
@@ -22,16 +23,25 @@ function juniorShowMembers(results) {
 
 function showJuniorTable(result) {
   const member = members.find((member) => member.id == result.memberId);
+  let age = ageCalculator(member);
+  if (age < 18) {
+    const juniorHTML = /*html*/ `
+    <tr>
+      <td class="name">${member.firstName} ${member.lastName}</td>
+      <td class="discipline">${result.discipline}</td>
+      <td class="trainTime">${
+        result.type === "Træning" ? convertTime(result.time) : ""
+      }</td>
+      <td class="compTime">${
+        result.type === "Konkurrence" ? convertTime(result.time) : ""
+      }</td>
+    </tr>
+  `;
 
-  const juniorHTML = /*html*/ `
-          <tr>
-            <td class="name">${member?.firstName}</td>
-            <td class="disciplin">${result.discipline}</td>
-            <td class="traningTime">${result.time}</td>
-            <td class="competisiontime">${result.discipline}</td>
-          </tr>
-    `;
-  document.querySelector("#junior-table-body").insertAdjacentHTML("beforeend", juniorHTML);
+    document
+      .querySelector("#junior-table-body")
+      .insertAdjacentHTML("beforeend", juniorHTML);
+  }
 }
 
 function searchMembersJunior() {

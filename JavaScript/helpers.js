@@ -125,8 +125,17 @@ function competitionTypeChange(event) {
     document.querySelector("#placement").setAttribute("hidden", "true");
   }
 }
+function convertTime(timeInMillis) {
+  const minutes = Math.floor(timeInMillis / 60000);
+  const seconds = Math.floor((timeInMillis % 60000) / 1000);
+  const milliseconds = timeInMillis % 1000;
+  return `${minutes.toString().padStart(2, "0")}:${seconds
+    .toString()
+    .padStart(2, "0")}:${milliseconds.toString().padStart(3, "0")}`;
+}
 
 export {
+  convertTime,
   competitionTypeChange,
   prepareMemberData,
   prepareResultData,
