@@ -1,12 +1,22 @@
 "use strict";
-import { memberAgeGroup, subscriptionType, ageCalculator } from "./helpers.js";
-import { getMembers } from "./rest-service.js";
+import {
+  memberAgeGroup,
+  compSwimmer,
+  subscriptionType,
+  memberPrice,
+  memberHasPayed,
+  yearlyIncome,
+  ageCalculator,
+} from "./helpers.js";
+import { getMembers, createMember } from "./rest-service.js";
 
 window.addEventListener("load", initApp);
 
 function initApp() {
   updateKassérTable();
-  document.querySelector("#kassér-select-filter-by").addEventListener("change", filterByChanged);
+  document
+    .querySelector("#kassér-select-filter-by")
+    .addEventListener("change", filterByChanged);
 }
 
 async function updateKassérTable() {
@@ -15,11 +25,16 @@ async function updateKassérTable() {
 }
 function kassérShowMembers(members) {
   document.querySelector("#kassér-table-body").innerHTML = "";
+  document.querySelector("#yearly-earnings").innerHTML = `${yearlyIncome(
+    members
+  )}kr`;
   for (const member of members) {
     showKassérTable(member);
+    memberHasPayed(member, `member-${member.id}`);
   }
 }
 function showKassérTable(member) {
+  const memberId = `member-${member.id}`;
   const kassérHTML = /*html*/ `
           <tr>
             <td class="name">${member.firstName} ${member.lastName}</td>
@@ -27,10 +42,12 @@ function showKassérTable(member) {
             <td class="phone">${member.phone}</td>
             <td class="age">${memberAgeGroup(member)}</td>
             <td class="member-status">${subscriptionType(member)}</td>
-            <td class="payment"> kr</td>
+            <td id="${memberId}" class="payment"> ${memberPrice(member)}kr</td>
           </tr>
     `;
-  document.querySelector("#kassér-table-body").insertAdjacentHTML("beforeend", kassérHTML);
+  document
+    .querySelector("#kassér-table-body")
+    .insertAdjacentHTML("beforeend", kassérHTML);
 }
 
 function searchMembersKassér() {
@@ -74,7 +91,9 @@ async function filterByChanged() {
   } else if (filterValue === "senior") {
     results = members.filter((member) => ageCalculator(member) >= 18);
   } else if (filterValue.startsWith("!")) {
-    results = members.filter((member) => member[filterValue.substring(1)] === "false");
+    results = members.filter(
+      (member) => member[filterValue.substring(1)] === "false"
+    );
   } else if (filterValue === "showAll") {
     results = members;
   } else {

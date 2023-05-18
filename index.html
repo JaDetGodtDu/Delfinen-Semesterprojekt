@@ -30,14 +30,24 @@
             <button class="login-btn" id="login-kassér-btn">Kassér</button>
           </div>
           <div>
-            <button class="login-btn" id="login-senior-btn">Seniortræner</button>
+            <button class="login-btn" id="login-senior-btn">
+              Seniortræner
+            </button>
           </div>
           <div>
-            <button class="login-btn" id="login-junior-btn">Juniortræner</button>
+            <button class="login-btn" id="login-junior-btn">
+              Juniortræner
+            </button>
           </div>
         </article>
       </section>
+
       <section id="formand-view" class="hidden">
+        <nav>
+          <a href="#formand-view">PLACEHOLDER TEXT</a>
+          <a href="#kontakt-information">Kontakt Information</a>
+          <a href="#login-view" class="button" id="logout-user-btn">Log Ud</a>
+        </nav>
         <section id="formand-tools" class="formand-tools">
           <button id="create-new-member-btn">Opret medlem</button>
           <label for="select-filter-by"
@@ -54,10 +64,13 @@
           </label>
           <div>
             <label for="input-search-formand">Søg:</label>
-            <input type="search" id="input-search-formand" />
+            <input
+              type="search"
+              id="input-search-formand"
+              placeholder="Hvad søger du?"
+            />
           </div>
         </section>
-
         <table id="formand-table">
           <thead>
             <th class="clickable">Medlem</th>
@@ -70,7 +83,13 @@
           <tbody id="formand-table-body"></tbody>
         </table>
       </section>
+
       <section id="kassér-view" class="hidden">
+        <nav>
+          <a href="#kass%C3%A9r-view">PLACEHOLDER TEXT</a>
+          <a href="#kontakt-information">Kontakt Information</a>
+          <a href="#login-view" class="button" id="logout-user-btn">Log Ud</a>
+        </nav>
         <h2>Kassérens view</h2>
         <div class="grid-container">
           <div class="box container">
@@ -89,14 +108,15 @@
               <option value="senior">Senior</option>
             </select>
           </label>
-
           <div>
             <label for="input-search">Søg:</label>
-            <input type="search" id="input-search-kassér" />
+            <input
+              type="search"
+              id="input-search-kassér"
+              placeholder="Hvad søger du?"
+            />
           </div>
         </section>
-
-        <br />
         <table id="kassér-table">
           <thead>
             <tr>
@@ -105,7 +125,7 @@
               <th class="clickable">Tlf</th>
               <th class="clickable">Aldersgruppe</th>
               <th class="clickable">Medlemskab</th>
-              <th class="clickable">Restance</th>
+              <th class="clickable">Pris</th>
             </tr>
           </thead>
           <tbody id="kassér-table-body"></tbody>
@@ -113,6 +133,11 @@
       </section>
 
       <section id="senior-view" class="hidden">
+        <nav>
+          <a href="#senior-view">Senior Holdskema</a>
+          <a href="#kontakt-information">Kontakt Information</a>
+          <a href="#login-view" class="button" id="logout-user-btn">Log Ud</a>
+        </nav>
         <h2>Seniortræner view</h2>
         <section id="senior-tools">
           <button id="create-new-time-btn">Opret ny tid</button>
@@ -128,14 +153,11 @@
               <option value="senior">Senior</option>
             </select>
           </label>
-
           <div>
             <label for="input-search">Søg:</label>
             <input type="search" id="input-search-senior" />
           </div>
         </section>
-
-        <br />
         <table id="senior-table">
           <thead>
             <tr>
@@ -148,7 +170,13 @@
           <tbody id="senior-table-body"></tbody>
         </table>
       </section>
+
       <section id="junior-view" class="hidden">
+        <nav>
+          <a href="#junior-view">Junior Holdskema</a>
+          <a href="#kontakt-information">Kontakt Information</a>
+          <a href="#login-view" class="button" id="logout-user-btn">Log Ud</a>
+        </nav>
         <h2>Juniortræner view</h2>
         <section id="junior-tools">
           <label for="select-filter-by"
@@ -163,14 +191,11 @@
               <option value="senior">Senior</option>
             </select>
           </label>
-
           <div>
             <label for="input-search">Søg:</label>
             <input type="search" id="input-search-junior" />
           </div>
         </section>
-
-        <br />
         <table id="junior-table">
           <thead>
             <tr>
@@ -183,7 +208,16 @@
           <tbody id="junior-table-body"></tbody>
         </table>
       </section>
+
+      <section id="kontakt-information" class="hidden">
+        <nav>
+          <a href="#previous-view">Tilbage</a>
+          <a href="#kontakt-information">Kontakt Information</a>
+          <a href="#login-view" class="button" id="logout-user-btn">Log Ud</a>
+        </nav>
+      </section>
     </main>
+
     <footer>FOOTER</footer>
 
     <dialog id="create-member-dialog">
@@ -233,17 +267,53 @@
       <h2>Opdater medlemsoplysninger</h2>
       <form id="form-update-member" method="dialog">
         <label for="firstName-update">Fornavn: </label>
-        <input type="text" id="firstName-update" name="firstName" placeholder="Opdater fornavn" required /><br />
+        <input
+          type="text"
+          id="firstName-update"
+          name="firstName"
+          placeholder="Opdater fornavn"
+          required
+        /><br />
         <label for="lastName-update">Efternavn: </label>
-        <input type="text" id="lastName-update" name="lastName" placeholder="Opdater efternavn" required /><br />
+        <input
+          type="text"
+          id="lastName-update"
+          name="lastName"
+          placeholder="Opdater efternavn"
+          required
+        /><br />
         <label for="adress-update">Addresse: </label>
-        <input type="text" id="address-update" name="address" placeholder="Opdater addresse" required /><br />
+        <input
+          type="text"
+          id="address-update"
+          name="address"
+          placeholder="Opdater addresse"
+          required
+        /><br />
         <label for="phone-update">Telefon nr: </label>
-        <input type="text" id="phone-update" name="phone" placeholder="Opdater telefon nr." required /><br />
+        <input
+          type="text"
+          id="phone-update"
+          name="phone"
+          placeholder="Opdater telefon nr."
+          required
+        /><br />
         <label for="email-update">Email: </label>
-        <input type="email" id="email-update" name="email" placeholder="Opdater email" required /><br />
+        <input
+          type="email"
+          id="email-update"
+          name="email"
+          placeholder="Opdater email"
+          required
+        /><br />
         <label for="dateOfBirth-update">Fødselsdato: </label>
-        <input type="date" id="dateOfBirth-update" name="dateOfBirth" placeholder="Opdater fødselsdato" required /><br />
+        <input
+          type="date"
+          id="dateOfBirth-update"
+          name="dateOfBirth"
+          placeholder="Opdater fødselsdato"
+          required
+        /><br />
         <label for="gender-update">Køn: </label>
         <select id="gender-update" name="gender">
           <option value="male">Mand</option>
@@ -264,6 +334,7 @@
         <button type="button" class="btn-cancel">Tilbage</button>
       </form>
     </dialog>
+
     <script src="JavaScript/script.js" type="module"></script>
     <script src="JavaScript/login.js" type="module"></script>
     <script src="JavaScript/kassér.js" type="module"></script>
