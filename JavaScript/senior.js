@@ -81,12 +81,12 @@ function formCreateResultCancelClicked() {
   document.querySelector("#senior-create-result-dialog").close();
 }
 async function prepareNewResultData() {
-  const swimmerName = document.querySelector("#swimmerName").value;
+  const swimmerName = document.querySelector("#senior-swimmer-name").value;
   const discipline = document.querySelector("#discipline").value;
   const time = document.querySelector("#time").value;
   const date = document.querySelector("#date").value;
   const type = document.querySelector("#type").value;
-  const competitionName = document.querySelector("#competitionName").value;
+  const competitionName = document.querySelector("#competition-name").value;
   const placement = document.querySelector("#placement").value;
   const response = await createResult(
     swimmerName,

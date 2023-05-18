@@ -1,11 +1,13 @@
 "use strict";
-import { getMembers, getResults } from "./rest-service.js";
+import { getMembers, getResults, createResult } from "./rest-service.js";
 import {
   convertTime,
   ageCalculator,
   competitionTypeChange,
 } from "./helpers.js";
 window.addEventListener("load", initApp);
+let members = [];
+let swimmerSelect;
 
 function initApp() {
   updateJuniorTable();
@@ -19,7 +21,6 @@ function initApp() {
     .querySelector("#junior-create-result-dialog .btn-cancel")
     .addEventListener("click", formCreateResultCancelClicked);
 }
-let members = [];
 
 async function updateJuniorTable() {
   members = await getMembers();
@@ -71,21 +72,27 @@ function juniorShowCreateResultDialog() {
   swimmerSelect.innerHTML = optionsHTML;
   document
     .querySelector("#junior-create-result-dialog")
-    .addEventListener("submit", prepareNewResultData);
+    .addEventListener("submit", (event) =>
+      prepareNewResultData(event, swimmerSelect)
+    );
 }
 function formCreateResultCancelClicked() {
   document.querySelector("#junior-create-result-dialog").close();
 }
-async function prepareNewResultData() {
-  const swimmerName = document.querySelector("#swimmerName").value;
+async function prepareNewResultData(event, swimmerSelect) {
+  event.preventDefault();
+  const selectedSwimmerId = swimmerSelect.value;
+  const swimmerId = selectedSwimmerId.match(/\d+/)[0];
+  const selectedMember = members[swimmerId - 1];
+  const memberId = selectedMember.id;
   const discipline = document.querySelector("#discipline").value;
   const time = document.querySelector("#time").value;
   const date = document.querySelector("#date").value;
   const type = document.querySelector("#type").value;
-  const competitionName = document.querySelector("#competitionName").value;
+  const competitionName = document.querySelector("#competition-name").value;
   const placement = document.querySelector("#placement").value;
   const response = await createResult(
-    swimmerName,
+    memberId,
     discipline,
     time,
     date,
@@ -94,9 +101,9 @@ async function prepareNewResultData() {
     placement
   );
   if (response.ok) {
-    updateSeniorTable();
-    document.querySelector("#create-result-dialog").close();
-    document.querySelector("#create-result-form").reset();
+    updateJuniorTable();
+    document.querySelector("#junior-create-result-dialog").close();
+    document.querySelector("#junior-create-result-form").reset();
   }
 }
 
