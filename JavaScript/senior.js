@@ -19,6 +19,9 @@ function initApp() {
   document
     .querySelector("#type")
     .addEventListener("change", (event) => competitionTypeChange(event));
+  document
+    .querySelector("#create-result-dialog .btn-cancel")
+    .addEventListener("click", formCreateResultCancelClicked);
 }
 
 async function updateSeniorTable() {
@@ -60,19 +63,22 @@ function showSeniorTable(result) {
 function showCreateResultDialog() {
   document.querySelector("#create-result-dialog").showModal();
   const swimmerSelect = document.querySelector("#swimmer-name");
+  let optionsHTML = "";
   members.forEach((member, index) => {
     let age = ageCalculator(member);
     if (age >= 18) {
-      const option = document.createElement("option");
-      option.value = `swimmer-name${index + 1}`;
-      option.textContent = `${member.firstName} ${member.lastName}`;
-      swimmerSelect.appendChild(option);
+      optionsHTML += `<option value="swimmer-name${index + 1}">${
+        member.firstName
+      } ${member.lastName}</option>`;
     }
   });
-
+  swimmerSelect.innerHTML = optionsHTML;
   document
     .querySelector("#create-member-form")
     .addEventListener("submit", prepareNewResultData);
+}
+function formCreateResultCancelClicked() {
+  document.querySelector("#create-result-dialog").close();
 }
 async function prepareNewResultData() {
   const swimmerName = document.querySelector("#swimmerName").value;
