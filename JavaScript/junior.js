@@ -1,10 +1,23 @@
 "use strict";
 import { getMembers, getResults } from "./rest-service.js";
-import { convertTime, ageCalculator } from "./helpers.js";
+import {
+  convertTime,
+  ageCalculator,
+  competitionTypeChange,
+} from "./helpers.js";
 window.addEventListener("load", initApp);
 
 function initApp() {
   updateJuniorTable();
+  document
+    .querySelector("#junior-create-new-time-btn")
+    .addEventListener("click", juniorShowCreateResultDialog);
+  document
+    .querySelector("#type")
+    .addEventListener("change", (event) => competitionTypeChange(event));
+  document
+    .querySelector("#junior-create-result-dialog .btn-cancel")
+    .addEventListener("click", formCreateResultCancelClicked);
 }
 let members = [];
 
@@ -41,6 +54,49 @@ function showJuniorTable(result) {
     document
       .querySelector("#junior-table-body")
       .insertAdjacentHTML("beforeend", juniorHTML);
+  }
+}
+function juniorShowCreateResultDialog() {
+  document.querySelector("#junior-create-result-dialog").showModal();
+  const swimmerSelect = document.querySelector("#junior-swimmer-name");
+  let optionsHTML = "";
+  members.forEach((member, index) => {
+    let age = ageCalculator(member);
+    if (age < 18) {
+      optionsHTML += `<option value="junior-swimmer-name${index + 1}">${
+        member.firstName
+      } ${member.lastName}</option>`;
+    }
+  });
+  swimmerSelect.innerHTML = optionsHTML;
+  document
+    .querySelector("#junior-create-result-dialog")
+    .addEventListener("submit", prepareNewResultData);
+}
+function formCreateResultCancelClicked() {
+  document.querySelector("#junior-create-result-dialog").close();
+}
+async function prepareNewResultData() {
+  const swimmerName = document.querySelector("#swimmerName").value;
+  const discipline = document.querySelector("#discipline").value;
+  const time = document.querySelector("#time").value;
+  const date = document.querySelector("#date").value;
+  const type = document.querySelector("#type").value;
+  const competitionName = document.querySelector("#competitionName").value;
+  const placement = document.querySelector("#placement").value;
+  const response = await createResult(
+    swimmerName,
+    discipline,
+    time,
+    date,
+    type,
+    competitionName,
+    placement
+  );
+  if (response.ok) {
+    updateSeniorTable();
+    document.querySelector("#create-result-dialog").close();
+    document.querySelector("#create-result-form").reset();
   }
 }
 

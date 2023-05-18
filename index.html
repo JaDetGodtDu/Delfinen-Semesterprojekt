@@ -140,7 +140,7 @@
         </nav>
         <h2>Seniortræner view</h2>
         <section id="senior-tools">
-          <button id="create-new-time-btn">Opret ny tid</button>
+          <button id="senior-create-new-time-btn">Opret ny tid</button>
           <label for="select-filter-by"
             >Filtrer:
             <select id="senior-select-filter-by">
@@ -179,7 +179,7 @@
         </nav>
         <h2>Juniortræner view</h2>
         <section id="junior-tools">
-          <button id="create-new-time-btn">Opret ny tid</button>
+          <button id="junior-create-new-time-btn">Opret ny tid</button>
           <label for="select-filter-by"
             >Filtrer:
             <select id="junior-select-filter-by">
@@ -335,10 +335,65 @@
         <button type="button" class="btn-cancel">Tilbage</button>
       </form>
     </dialog>
-    <dialog id="create-result-dialog">
+    <dialog id="senior-create-result-dialog">
       <form method="dialog">
         <label for="swimmer-name">Svømmer: </label>
-        <select id="swimmer-name" name="swimmer-name"></select>
+        <select id="senior-swimmer-name" name="swimmer-name"></select>
+        <br />
+        <label for="discipline">Disciplin: </label>
+        <select id="discipline" name="discipline">
+          <option value="chest">Brystsvømning</option>
+          <option value="chest">Butterfly</option>
+          <option value="chest">Crawl</option>
+          <option value="chest">Rygsvømning</option></select
+        ><br />
+        <label for="time">Tid: </label>
+        <input
+          type="text"
+          name="time"
+          pattern="[0-5][0-9]:[0-5][0-9]:[0-9]{3}"
+          required
+        />
+        <br />
+        <label for="date">Dato:</label>
+        <input type="date" id="date" name="date" /> <br />
+        <label for type="type">Type:</label>
+        <select id="type" name="type">
+          <option value="training">Træning</option>
+          <option value="competition">Konkurrence</option>
+        </select>
+        <br />
+        <label for="competition-name" id="competition-name-label" hidden
+          >Stævne:
+        </label>
+        <input
+          type="text"
+          id="competition-name"
+          name="competition-name"
+          hidden
+        />
+        <br />
+        <label for="placement" id="placement-label" hidden>Placering: </label>
+        <select id="placement" name="placement" hidden>
+          <option value="1">1.</option>
+          <option value="2">2.</option>
+          <option value="3">3.</option>
+          <option value="4">4.</option>
+          <option value="5">5.</option>
+          <option value="6">6.</option>
+          <option value="7">7.</option>
+          <option value="8">8.</option>
+          <option value="9">9.</option>
+          <option value="10">10.</option></select
+        ><br />
+        <input type="submit" value="Registrér ny tid" />
+        <button type="button" class="btn-cancel">Tilbage</button>
+      </form>
+    </dialog>
+    <dialog id="junior-create-result-dialog">
+      <form method="dialog">
+        <label for="swimmer-name">Svømmer: </label>
+        <select id="junior-swimmer-name" name="swimmer-name"></select>
         <br />
         <label for="discipline">Disciplin: </label>
         <select id="discipline" name="discipline">

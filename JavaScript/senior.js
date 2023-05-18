@@ -14,13 +14,13 @@ function initApp() {
     .querySelector("#senior-select-filter-by")
     .addEventListener("change", filterByChanged);
   document
-    .querySelector("#create-new-time-btn")
-    .addEventListener("click", showCreateResultDialog);
+    .querySelector("#senior-create-new-time-btn")
+    .addEventListener("click", seniorShowCreateResultDialog);
   document
     .querySelector("#type")
     .addEventListener("change", (event) => competitionTypeChange(event));
   document
-    .querySelector("#create-result-dialog .btn-cancel")
+    .querySelector("#senior-create-result-dialog .btn-cancel")
     .addEventListener("click", formCreateResultCancelClicked);
 }
 
@@ -60,25 +60,25 @@ function showSeniorTable(result) {
   }
 }
 
-function showCreateResultDialog() {
-  document.querySelector("#create-result-dialog").showModal();
-  const swimmerSelect = document.querySelector("#swimmer-name");
+function seniorShowCreateResultDialog() {
+  document.querySelector("#senior-create-result-dialog").showModal();
+  const swimmerSelect = document.querySelector("#senior-swimmer-name");
   let optionsHTML = "";
   members.forEach((member, index) => {
     let age = ageCalculator(member);
     if (age >= 18) {
-      optionsHTML += `<option value="swimmer-name${index + 1}">${
+      optionsHTML += `<option value="senior-swimmer-name${index + 1}">${
         member.firstName
       } ${member.lastName}</option>`;
     }
   });
   swimmerSelect.innerHTML = optionsHTML;
   document
-    .querySelector("#create-member-form")
+    .querySelector("#senior-create-result-dialog")
     .addEventListener("submit", prepareNewResultData);
 }
 function formCreateResultCancelClicked() {
-  document.querySelector("#create-result-dialog").close();
+  document.querySelector("#senior-create-result-dialog").close();
 }
 async function prepareNewResultData() {
   const swimmerName = document.querySelector("#swimmerName").value;
