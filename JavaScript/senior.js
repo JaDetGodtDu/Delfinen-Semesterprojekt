@@ -114,6 +114,7 @@ async function prepareNewResultData(event, swimmerSelect) {
     updateSeniorTable();
     document.querySelector("#senior-create-result-dialog").close();
     document.querySelector("#senior-create-result-form").reset();
+    location.reload();
   }
 }
 

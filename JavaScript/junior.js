@@ -113,6 +113,7 @@ async function prepareNewResultData(event, swimmerSelect) {
     updateJuniorTable();
     document.querySelector("#junior-create-result-dialog").close();
     document.querySelector("#junior-create-result-form").reset();
+    location.reload();
   }
 }
 
