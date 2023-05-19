@@ -109,8 +109,59 @@ function yearlyIncome(members) {
   }
   return totalIncome;
 }
+function seniorCompetitionTypeChange(event) {
+  const selectedTargetValue = event.target.value;
+  if (selectedTargetValue === "Konkurrence") {
+    document.querySelector("#competition-name").removeAttribute("hidden");
+    document.querySelector("#competition-name-label").removeAttribute("hidden");
+    document.querySelector("#placement-label").removeAttribute("hidden");
+    document.querySelector("#placement").removeAttribute("hidden");
+  } else {
+    document.querySelector("#competition-name").setAttribute("hidden", "true");
+    document
+      .querySelector("#competition-name-label")
+      .setAttribute("hidden", "true");
+    document.querySelector("#placement-label").setAttribute("hidden", "true");
+    document.querySelector("#placement").setAttribute("hidden", "true");
+  }
+}
+function juniorCompetitionTypeChange(event) {
+  const selectedTargetValue = event.target.value;
+  if (selectedTargetValue === "Konkurrence") {
+    document
+      .querySelector("#junior-competition-name")
+      .removeAttribute("hidden");
+    document
+      .querySelector("#junior-competition-name-label")
+      .removeAttribute("hidden");
+    document.querySelector("#junior-placement-label").removeAttribute("hidden");
+    document.querySelector("#junior-placement").removeAttribute("hidden");
+  } else {
+    document
+      .querySelector("#junior-competition-name")
+      .setAttribute("hidden", "true");
+    document
+      .querySelector("#junior-competition-name-label")
+      .setAttribute("hidden", "true");
+    document
+      .querySelector("#junior-placement-label")
+      .setAttribute("hidden", "true");
+    document.querySelector("#junior-placement").setAttribute("hidden", "true");
+  }
+}
+function convertTime(timeInMillis) {
+  const minutes = Math.floor(timeInMillis / 60000);
+  const seconds = Math.floor((timeInMillis % 60000) / 1000);
+  const milliseconds = timeInMillis % 1000;
+  return `${minutes.toString().padStart(2, "0")}:${seconds
+    .toString()
+    .padStart(2, "0")}:${milliseconds.toString().padStart(3, "0")}`;
+}
 
 export {
+  convertTime,
+  seniorCompetitionTypeChange,
+  juniorCompetitionTypeChange,
   prepareMemberData,
   prepareResultData,
   ageCalculator,
@@ -121,4 +172,5 @@ export {
   memberPrice,
   memberHasPayed,
   yearlyIncome,
+  filterMembersByAge,
 };

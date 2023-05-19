@@ -1,11 +1,26 @@
 "use strict";
-import { getMembers, getResults } from "./rest-service.js";
+import { getMembers, getResults, createResult } from "./rest-service.js";
+import {
+  convertTime,
+  ageCalculator,
+  juniorCompetitionTypeChange,
+} from "./helpers.js";
 window.addEventListener("load", initApp);
+let members = [];
+let swimmerSelect;
 
 function initApp() {
   updateJuniorTable();
+  document
+    .querySelector("#junior-create-new-time-btn")
+    .addEventListener("click", juniorShowCreateResultDialog);
+  document
+    .querySelector("#junior-type")
+    .addEventListener("change", (event) => juniorCompetitionTypeChange(event));
+  document
+    .querySelector("#junior-create-result-dialog .btn-cancel")
+    .addEventListener("click", formCreateResultCancelClicked);
 }
-let members = [];
 
 async function updateJuniorTable() {
   members = await getMembers();
@@ -22,16 +37,81 @@ function juniorShowMembers(results) {
 
 function showJuniorTable(result) {
   const member = members.find((member) => member.id == result.memberId);
+  let age = ageCalculator(member);
+  if (age < 18) {
+    const juniorHTML = /*html*/ `
+    <tr>
+      <td class="name">${member.firstName} ${member.lastName}</td>
+      <td class="discipline">${result.discipline}</td>
+      <td class="trainTime">${
+        result.type === "Træning" ? convertTime(result.time) : ""
+      }</td>
+      <td class="compTime">${
+        result.type === "Konkurrence" ? convertTime(result.time) : ""
+      }</td>
+    </tr>
+  `;
 
-  const juniorHTML = /*html*/ `
-          <tr>
-            <td class="name">${member?.firstName}</td>
-            <td class="disciplin">${result.discipline}</td>
-            <td class="traningTime">${result.time}</td>
-            <td class="competisiontime">${result.discipline}</td>
-          </tr>
-    `;
-  document.querySelector("#junior-table-body").insertAdjacentHTML("beforeend", juniorHTML);
+    document
+      .querySelector("#junior-table-body")
+      .insertAdjacentHTML("beforeend", juniorHTML);
+  }
+}
+function juniorShowCreateResultDialog() {
+  document.querySelector("#junior-create-result-dialog").showModal();
+  const swimmerSelect = document.querySelector("#junior-swimmer-name");
+  let optionsHTML = "";
+  members.forEach((member, index) => {
+    let age = ageCalculator(member);
+    if (age < 18) {
+      optionsHTML += `<option value="junior-swimmer-name${index + 1}">${
+        member.firstName
+      } ${member.lastName}</option>`;
+    }
+  });
+  swimmerSelect.innerHTML = optionsHTML;
+  document
+    .querySelector("#junior-create-result-dialog")
+    .addEventListener("submit", (event) =>
+      prepareNewResultData(event, swimmerSelect)
+    );
+}
+function formCreateResultCancelClicked() {
+  document.querySelector("#junior-create-result-dialog").close();
+}
+async function prepareNewResultData(event, swimmerSelect) {
+  event.preventDefault();
+  const selectedSwimmerId = swimmerSelect.value;
+  const swimmerId = selectedSwimmerId.match(/\d+/)[0];
+  const selectedMember = members[swimmerId - 1];
+  const memberId = selectedMember.id;
+  const discipline = document.querySelector("#discipline").value;
+  const timeString = document.querySelector("#junior-time").value;
+  const timeParts = timeString.split(":");
+  const minutes = parseInt(timeParts[0]);
+  const seconds = parseInt(timeParts[1]);
+  const milliseconds = parseInt(timeParts[2]);
+  const time = minutes * 60 * 1000 + seconds * 1000 + milliseconds;
+  const date = document.querySelector("#junior-date").value;
+  console.log(date);
+  const type = document.querySelector("#junior-type").value;
+  const competitionName = document.querySelector("#competition-name").value;
+  const placement =
+    type === "Konkurrence" ? document.querySelector("#placement").value : "";
+  const response = await createResult(
+    memberId,
+    discipline,
+    time,
+    date,
+    type,
+    competitionName,
+    placement
+  );
+  if (response.ok) {
+    updateJuniorTable();
+    document.querySelector("#junior-create-result-dialog").close();
+    document.querySelector("#junior-create-result-form").reset();
+  }
 }
 
 function searchMembersJunior() {
