@@ -86,11 +86,18 @@ async function prepareNewResultData(event, swimmerSelect) {
   const selectedMember = members[swimmerId - 1];
   const memberId = selectedMember.id;
   const discipline = document.querySelector("#discipline").value;
-  const time = document.querySelector("#time").value;
-  const date = document.querySelector("#date").value;
+  const timeString = document.querySelector("#junior-time").value;
+  const timeParts = timeString.split(":");
+  const minutes = parseInt(timeParts[0]);
+  const seconds = parseInt(timeParts[1]);
+  const milliseconds = parseInt(timeParts[2]);
+  const time = minutes * 60 * 1000 + seconds * 1000 + milliseconds;
+  const date = document.querySelector("#junior-date").value;
+  console.log(date);
   const type = document.querySelector("#type").value;
   const competitionName = document.querySelector("#competition-name").value;
-  const placement = document.querySelector("#placement").value;
+  const placement =
+    type === "Konkurrence" ? document.querySelector("#placement").value : "";
   const response = await createResult(
     memberId,
     discipline,
