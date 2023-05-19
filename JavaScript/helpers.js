@@ -109,7 +109,7 @@ function yearlyIncome(members) {
   }
   return totalIncome;
 }
-function competitionTypeChange(event) {
+function seniorCompetitionTypeChange(event) {
   const selectedTargetValue = event.target.value;
   if (selectedTargetValue === "competition") {
     document.querySelector("#competition-name").removeAttribute("hidden");
@@ -125,6 +125,30 @@ function competitionTypeChange(event) {
     document.querySelector("#placement").setAttribute("hidden", "true");
   }
 }
+function juniorCompetitionTypeChange(event) {
+  const selectedTargetValue = event.target.value;
+  if (selectedTargetValue === "junior-competition") {
+    document
+      .querySelector("#junior-competition-name")
+      .removeAttribute("hidden");
+    document
+      .querySelector("#junior-competition-name-label")
+      .removeAttribute("hidden");
+    document.querySelector("#junior-placement-label").removeAttribute("hidden");
+    document.querySelector("#junior-placement").removeAttribute("hidden");
+  } else {
+    document
+      .querySelector("#junior-competition-name")
+      .setAttribute("hidden", "true");
+    document
+      .querySelector("#junior-competition-name-label")
+      .setAttribute("hidden", "true");
+    document
+      .querySelector("#junior-placement-label")
+      .setAttribute("hidden", "true");
+    document.querySelector("#junior-placement").setAttribute("hidden", "true");
+  }
+}
 function convertTime(timeInMillis) {
   const minutes = Math.floor(timeInMillis / 60000);
   const seconds = Math.floor((timeInMillis % 60000) / 1000);
@@ -136,7 +160,8 @@ function convertTime(timeInMillis) {
 
 export {
   convertTime,
-  competitionTypeChange,
+  seniorCompetitionTypeChange,
+  juniorCompetitionTypeChange,
   prepareMemberData,
   prepareResultData,
   ageCalculator,

@@ -3,7 +3,7 @@ import { getMembers, getResults, createResult } from "./rest-service.js";
 import {
   convertTime,
   ageCalculator,
-  competitionTypeChange,
+  juniorCompetitionTypeChange,
 } from "./helpers.js";
 window.addEventListener("load", initApp);
 let members = [];
@@ -15,8 +15,8 @@ function initApp() {
     .querySelector("#junior-create-new-time-btn")
     .addEventListener("click", juniorShowCreateResultDialog);
   document
-    .querySelector("#type")
-    .addEventListener("change", (event) => competitionTypeChange(event));
+    .querySelector("#junior-type")
+    .addEventListener("change", (event) => juniorCompetitionTypeChange(event));
   document
     .querySelector("#junior-create-result-dialog .btn-cancel")
     .addEventListener("click", formCreateResultCancelClicked);

@@ -2,7 +2,7 @@
 import { getMembers, getResults, createResult } from "./rest-service.js";
 import {
   ageCalculator,
-  competitionTypeChange,
+  seniorCompetitionTypeChange,
   convertTime,
 } from "./helpers.js";
 window.addEventListener("load", initApp);
@@ -18,7 +18,7 @@ function initApp() {
     .addEventListener("click", seniorShowCreateResultDialog);
   document
     .querySelector("#type")
-    .addEventListener("change", (event) => competitionTypeChange(event));
+    .addEventListener("change", (event) => seniorCompetitionTypeChange(event));
   document
     .querySelector("#senior-create-result-dialog .btn-cancel")
     .addEventListener("click", formCreateResultCancelClicked);

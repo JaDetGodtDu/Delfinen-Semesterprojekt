@@ -399,9 +399,9 @@
         <label for="discipline">Disciplin: </label>
         <select id="discipline" name="discipline">
           <option value="chest">Brystsvømning</option>
-          <option value="chest">Butterfly</option>
-          <option value="chest">Crawl</option>
-          <option value="chest">Rygsvømning</option></select
+          <option value="butterfly">Butterfly</option>
+          <option value="crawl">Crawl</option>
+          <option value="back">Rygsvømning</option></select
         ><br />
         <label for="time">Tid: </label>
         <input
@@ -415,23 +415,25 @@
         <label for="date">Dato:</label>
         <input type="date" id="date" name="date" /> <br />
         <label for type="type">Type:</label>
-        <select id="type" name="type">
+        <select id="junior-type" name="type">
           <option value="training">Træning</option>
-          <option value="competition">Konkurrence</option>
+          <option value="junior-competition">Konkurrence</option>
         </select>
         <br />
-        <label for="competition-name" id="competition-name-label" hidden
+        <label for="competition-name" id="junior-competition-name-label" hidden
           >Stævne:
         </label>
         <input
           type="text"
-          id="competition-name"
+          id="junior-competition-name"
           name="competition-name"
           hidden
         />
         <br />
-        <label for="placement" id="placement-label" hidden>Placering: </label>
-        <select id="placement" name="placement" hidden>
+        <label for="placement" id="junior-placement-label" hidden
+          >Placering:
+        </label>
+        <select id="junior-placement" name="placement" hidden>
           <option value="1">1.</option>
           <option value="2">2.</option>
           <option value="3">3.</option>
