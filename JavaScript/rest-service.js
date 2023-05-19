@@ -80,11 +80,33 @@ async function createResult(
 }
 // DELETE MEMBERS
 async function deleteMember(id) {
-  const response = await fetch(`${endpoint}/members/${id}.json`, {
+  // Delete member
+  const deleteMemberResponse = await fetch(`${endpoint}/members/${id}.json`, {
     method: "DELETE",
   });
-  return response;
+
+  // Delete associated results
+  if (deleteMemberResponse.ok) {
+    // Fetch all results
+    const resultsResponse = await fetch(`${endpoint}/results.json`);
+    if (resultsResponse.ok) {
+      const resultsData = await resultsResponse.json();
+
+      // Find and delete results with matching memberId
+      for (const resultId in resultsData) {
+        const result = resultsData[resultId];
+        if (result.memberId === id) {
+          await fetch(`${endpoint}/results/${resultId}.json`, {
+            method: "DELETE",
+          });
+        }
+      }
+    }
+  }
+
+  return deleteMemberResponse;
 }
+
 // UPDATE MEMBERS
 async function updateMember(
   id,
