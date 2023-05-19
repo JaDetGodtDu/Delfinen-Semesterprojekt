@@ -17,7 +17,7 @@ function initApp() {
     .querySelector("#senior-create-new-time-btn")
     .addEventListener("click", seniorShowCreateResultDialog);
   document
-    .querySelector("#type")
+    .querySelector("#senior-type")
     .addEventListener("change", (event) => seniorCompetitionTypeChange(event));
   document
     .querySelector("#senior-create-result-dialog .btn-cancel")
@@ -75,21 +75,34 @@ function seniorShowCreateResultDialog() {
   swimmerSelect.innerHTML = optionsHTML;
   document
     .querySelector("#senior-create-result-dialog")
-    .addEventListener("submit", prepareNewResultData);
+    .addEventListener("submit", (event) =>
+      prepareNewResultData(event, swimmerSelect)
+    );
 }
 function formCreateResultCancelClicked() {
   document.querySelector("#senior-create-result-dialog").close();
 }
-async function prepareNewResultData() {
-  const swimmerName = document.querySelector("#senior-swimmer-name").value;
+async function prepareNewResultData(event, swimmerSelect) {
+  event.preventDefault();
+  const selectedSwimmerId = swimmerSelect.value;
+  const swimmerId = selectedSwimmerId.match(/\d+/)[0];
+  const selectedMember = members[swimmerId - 1];
+  const memberId = selectedMember.id;
   const discipline = document.querySelector("#discipline").value;
-  const time = document.querySelector("#time").value;
-  const date = document.querySelector("#date").value;
-  const type = document.querySelector("#type").value;
+  const timeString = document.querySelector("#senior-time").value;
+  const timeParts = timeString.split(":");
+  const minutes = parseInt(timeParts[0]);
+  const seconds = parseInt(timeParts[1]);
+  const milliseconds = parseInt(timeParts[2]);
+  const time = minutes * 60 * 1000 + seconds * 1000 + milliseconds;
+  const date = document.querySelector("#senior-date").value;
+  console.log(date);
+  const type = document.querySelector("#senior-type").value;
   const competitionName = document.querySelector("#competition-name").value;
-  const placement = document.querySelector("#placement").value;
+  const placement =
+    type === "Konkurrence" ? document.querySelector("#placement").value : "";
   const response = await createResult(
-    swimmerName,
+    memberId,
     discipline,
     time,
     date,
@@ -99,8 +112,8 @@ async function prepareNewResultData() {
   );
   if (response.ok) {
     updateSeniorTable();
-    document.querySelector("#create-result-dialog").close();
-    document.querySelector("#create-result-form").reset();
+    document.querySelector("#senior-create-result-dialog").close();
+    document.querySelector("#senior-create-result-form").reset();
   }
 }
 

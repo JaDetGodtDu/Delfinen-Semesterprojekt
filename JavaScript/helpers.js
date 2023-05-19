@@ -111,7 +111,7 @@ function yearlyIncome(members) {
 }
 function seniorCompetitionTypeChange(event) {
   const selectedTargetValue = event.target.value;
-  if (selectedTargetValue === "competition") {
+  if (selectedTargetValue === "Konkurrence") {
     document.querySelector("#competition-name").removeAttribute("hidden");
     document.querySelector("#competition-name-label").removeAttribute("hidden");
     document.querySelector("#placement-label").removeAttribute("hidden");

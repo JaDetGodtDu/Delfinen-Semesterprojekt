@@ -94,7 +94,7 @@ async function prepareNewResultData(event, swimmerSelect) {
   const time = minutes * 60 * 1000 + seconds * 1000 + milliseconds;
   const date = document.querySelector("#junior-date").value;
   console.log(date);
-  const type = document.querySelector("#type").value;
+  const type = document.querySelector("#junior-type").value;
   const competitionName = document.querySelector("#competition-name").value;
   const placement =
     type === "Konkurrence" ? document.querySelector("#placement").value : "";
