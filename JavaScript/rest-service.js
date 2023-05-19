@@ -103,7 +103,7 @@ async function deleteMember(id) {
       }
     }
   }
-
+  location.reload();
   return deleteMemberResponse;
 }
 
