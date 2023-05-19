@@ -127,7 +127,7 @@ function seniorCompetitionTypeChange(event) {
 }
 function juniorCompetitionTypeChange(event) {
   const selectedTargetValue = event.target.value;
-  if (selectedTargetValue === "junior-competition") {
+  if (selectedTargetValue === "Konkurrence") {
     document
       .querySelector("#junior-competition-name")
       .removeAttribute("hidden");
