@@ -95,7 +95,9 @@ async function prepareNewResultData(event, swimmerSelect) {
   const date = document.querySelector("#junior-date").value;
   console.log(date);
   const type = document.querySelector("#junior-type").value;
-  const competitionName = document.querySelector("#competition-name").value;
+  const competitionName = document.querySelector(
+    "#junior-competition-name"
+  ).value;
   const placement =
     type === "Konkurrence" ? document.querySelector("#placement").value : "";
   const response = await createResult(
