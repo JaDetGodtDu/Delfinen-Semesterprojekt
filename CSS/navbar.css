@@ -3,14 +3,15 @@ nav {
     grid-template-columns: 1fr 1fr 1fr;
     width: 100%;
     text-align: center;
+    justify-content: space-evenly;
 }
 a {
     padding: 10px 20px;
-    border: 2px solid black;
+    border: 1px solid black;
     font-weight: bold;
 }
 a:hover {
     transition: background-color 0.3s ease;
-    background-color: aliceblue;
+    background-color: rgba(0, 0, 255, 0.123);
 }
 
