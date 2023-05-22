@@ -50,7 +50,7 @@ function showMembers(members) {
 function showTable(member) {
   const html = /*html*/ `
     <tr>
-      <td style="color:blue"><u>${member.firstName} ${member.lastName}</u></td>
+      <td style="color:blue" class="name"><u>${member.firstName} ${member.lastName}</u></td>
       <td>${memberAgeGroup(member)}</td>
       <td>${compSwimmer(member)}</td>
       <td>${member.email}</td>

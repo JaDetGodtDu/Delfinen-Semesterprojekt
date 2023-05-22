@@ -7,6 +7,9 @@
 #formand-view button {
   cursor: pointer;
 }
+#formand-view .name {
+  cursor: pointer;
+}
 #formand-tools {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -43,6 +46,5 @@
   border: 2px solid black;
 }
 #formand-view table td {
-  cursor: pointer;
   border: 2px solid black;
 }

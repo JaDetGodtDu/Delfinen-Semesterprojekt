@@ -37,7 +37,7 @@ function showKassérTable(member) {
   const memberId = `member-${member.id}`;
   const kassérHTML = /*html*/ `
           <tr>
-            <td class="name">${member.firstName} ${member.lastName}</td>
+            <td style="color:blue" class="name"><u>${member.firstName} ${member.lastName}</u></td>
             <td class="email">${member.email}</td>
             <td class="phone">${member.phone}</td>
             <td class="age">${memberAgeGroup(member)}</td>
@@ -113,14 +113,22 @@ function kassérDetailView(member) {
   <p>Aldersgruppe: ${memberAgeGroup(member)}</p>
   <p>Medlemsskab: ${subscriptionType(member)}</p>
   <p>Årligt kontingent: ${memberPrice(member)}kr</p>
-  <label for="hasPayed">Har betalt: </label><input name="hasPayed" type="radio" value="true"><input name="hasPayed" type="radio" value="false"><br>
-  <p></p>
-  <input type="button" value="Opdater medlem" button id="kassér-detail-view-update-btn">
-  <input type="button" value="Tilbage" button id="kassér-detail-view-cancel-btn">
+  <label for="hasPayed">Har betalt: </label>
+  <input name="hasPayed" type="radio" value="true">
+  <input name="hasPayed" type="radio" value="false">
+  <br>
+  <br>
+  <input type="button" button value="Opdater status" id="kassér-detail-view-update-btn">
+  <input type="button" value="Tilbage"button id="kassér-detail-view-cancel-btn">
   `;
 
   document.querySelector("#kassér-detail-view").innerHTML = kassérDetailHTML;
   document.querySelector("#kassér-detail-view").showModal();
+
+  document.querySelector("#kassér-detail-view-cancel-btn").addEventListener("click", kassérViewCancel)
+}
+function kassérViewCancel (){
+  document.querySelector("#kassér-detail-view").close();
 }
 
 export { kassérShowMembers, searchMembersKassér };
