@@ -3,6 +3,7 @@ import { getMembers, getResults, createResult } from "./rest-service.js";
 import { ageCalculator, seniorCompetitionTypeChange, convertTime } from "./helpers.js";
 window.addEventListener("load", initApp);
 let members = [];
+let results = [];
 
 function initApp() {
   updateSeniorTable();
@@ -14,7 +15,14 @@ function initApp() {
 
 async function updateSeniorTable() {
   members = await getMembers();
-  let results = await getResults();
+  results = await getResults();
+  for (const result of results) {
+    const member = members.find((member) => member.id == result.memberId);
+    result.member = member;
+
+    console.log(result);
+  }
+  console.log(results);
   seniorShowMembers(results);
 }
 function seniorShowMembers(results) {
@@ -26,12 +34,12 @@ function seniorShowMembers(results) {
 }
 
 function showSeniorTable(result) {
-  const member = members.find((member) => member.id == result.memberId);
-  let age = ageCalculator(member);
+  // const member = members.find((member) => member.id == result.memberId);
+  let age = ageCalculator(result.member);
   if (age >= 18) {
     const seniorHTML = /*html*/ `
     <tr>
-      <td class="name">${member.firstName} ${member.lastName}</td>
+      <td class="name">${result.member.firstName} ${result.member.lastName}</td>
       <td class="discipline">${result.discipline}</td>
       <td class="trainTime">${result.type === "Træning" ? convertTime(result.time) : ""}</td>
       <td class="compTime">${result.type === "Konkurrence" ? convertTime(result.time) : ""}</td>
@@ -116,23 +124,38 @@ function searchMembersSenior() {
     }
   });
 }
+// async function filterByChanged() {
+//   const filterValue = document.querySelector("#senior-select-filter-by").value;
+
+//   let filterResults = [];
+//   if (filterValue === "crawl") {
+//     filterResults = results.fillter((results) => results[filterValue]);
+//   } else if (filterValue === "rygsvømning") {
+//   } else if (filterValue === "butterfly") {
+//   } else if (filterValue === "brystsvømning") {
+//   } else if (filterValue === "showAll") {
+//     filterResults = members;
+//   } else seniorShowMembers(filterResults);
+// }
+
 async function filterByChanged() {
   const filterValue = document.querySelector("#senior-select-filter-by").value;
-  const members = await getMembers();
 
-  let results = [];
-  if (filterValue === "junior") {
-    results = members.filter((member) => ageCalculator(member) < 18);
-  } else if (filterValue === "senior") {
-    results = members.filter((member) => ageCalculator(member) >= 18);
-  } else if (filterValue.startsWith("!")) {
-    results = members.filter((member) => member[filterValue.substring(1)] === "false");
+  let filterResults = [];
+  if (filterValue === "crawl") {
+    // filterResults = results.filter((result) => result === "crawl");
+    filterResults = results.filter((result) => result.swimmingStyle === filterValue);
+  } else if (filterValue === "rygsvømning") {
+    filterResults = results.filter((result) => result === "rygsvømning");
+  } else if (filterValue === "butterfly") {
+    filterResults = results.filter((result) => result === "butterfly");
+  } else if (filterValue === "brystsvømning") {
+    filterResults = results.filter((result) => result === "brystsvømning");
   } else if (filterValue === "showAll") {
-    results = members;
-  } else {
-    results = members.filter((member) => member[filterValue] === "true");
+    filterResults = results;
   }
-  seniorShowMembers(results);
+
+  seniorShowMembers(filterResults);
 }
 
 function showTop5Senior(result) {
