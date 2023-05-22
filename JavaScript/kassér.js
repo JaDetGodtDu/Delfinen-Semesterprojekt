@@ -48,6 +48,9 @@ function showKassérTable(member) {
   document
     .querySelector("#kassér-table-body")
     .insertAdjacentHTML("beforeend", kassérHTML);
+  const rows = document.querySelectorAll("#kassér-table-body tr");
+  const lastRow = rows[rows.length - 1];
+  lastRow.addEventListener("click", () => kassérDetailView(member));
 }
 
 function searchMembersKassér() {
@@ -101,4 +104,23 @@ async function filterByChanged() {
   }
   kassérShowMembers(results);
 }
+function kassérDetailView(member) {
+  const kassérDetailHTML = /*html*/ `
+  <h3>${member.firstName} ${member.lastName}</h3><br>
+  <p>Email: ${member.email}</p>
+  <p>Telefon nr: ${member.phone}</p>
+  <p>Addresse: ${member.address}</p>
+  <p>Aldersgruppe: ${memberAgeGroup(member)}</p>
+  <p>Medlemsskab: ${subscriptionType(member)}</p>
+  <p>Årligt kontingent: ${memberPrice(member)}kr</p>
+  <label for="hasPayed">Har betalt: </label><input name="hasPayed" type="radio" value="true"><input name="hasPayed" type="radio" value="false"><br>
+  <p></p>
+  <input type="button" value="Opdater medlem" button id="kassér-detail-view-update-btn">
+  <input type="button" value="Tilbage" button id="kassér-detail-view-cancel-btn">
+  `;
+
+  document.querySelector("#kassér-detail-view").innerHTML = kassérDetailHTML;
+  document.querySelector("#kassér-detail-view").showModal();
+}
+
 export { kassérShowMembers, searchMembersKassér };
