@@ -143,14 +143,13 @@ async function filterByChanged() {
 
   let filterResults = [];
   if (filterValue === "crawl") {
-    filterResults = results.filter((result) => result === "crawl");
-    // filterResults = results.filter((result) => result.swimmingStyle === filterValue);
+    filterResults = results.filter((result) => result.discipline === filterValue);
   } else if (filterValue === "rygsvømning") {
-    filterResults = results.filter((result) => result === "rygsvømning");
+    filterResults = results.filter((result) => result.discipline === filterValue);
   } else if (filterValue === "butterfly") {
-    filterResults = results.filter((result) => result === "butterfly");
+    filterResults = results.filter((result) => result.discipline === filterValue);
   } else if (filterValue === "brystsvømning") {
-    filterResults = results.filter((result) => result === "brystsvømning");
+    filterResults = results.filter((result) => result.discipline === filterValue);
   } else if (filterValue === "showAll") {
     filterResults = results;
   }
