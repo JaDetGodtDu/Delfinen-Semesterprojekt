@@ -143,8 +143,8 @@ async function filterByChanged() {
 
   let filterResults = [];
   if (filterValue === "crawl") {
-    // filterResults = results.filter((result) => result === "crawl");
-    filterResults = results.filter((result) => result.swimmingStyle === filterValue);
+    filterResults = results.filter((result) => result === "crawl");
+    // filterResults = results.filter((result) => result.swimmingStyle === filterValue);
   } else if (filterValue === "rygsvømning") {
     filterResults = results.filter((result) => result === "rygsvømning");
   } else if (filterValue === "butterfly") {
