@@ -36,6 +36,9 @@ function initApp() {
   document
     .querySelector("#create-new-member-btn")
     .addEventListener("click", showCreateMemberDialog);
+  document
+    .querySelector("#create-member-form .btn-cancel")
+    .addEventListener("click", createMemberCancel);
 }
 async function updateMemberTable() {
   let members = await getMembers();
@@ -92,6 +95,9 @@ function memberClicked(member) {
   document
     .querySelector("#member-clicked-cancel-btn")
     .addEventListener("click", memberClickedCancel);
+}
+function createMemberCancel() {
+  document.querySelector("#create-member-dialog").close();
 }
 function memberClickedCancel() {
   document.querySelector("#member-detail-view").close();
