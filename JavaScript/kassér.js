@@ -8,6 +8,7 @@ import {
   yearlyIncome,
   ageCalculator,
 } from "./helpers.js";
+import { updateMember } from "./rest-service.js";
 import { getMembers, createMember, endpoint } from "./rest-service.js";
 
 window.addEventListener("load", initApp);
@@ -120,7 +121,7 @@ function kassérDetailView(member) {
   <p>Betalingsstatus: </p>
   <label class="slider">
     <input type="checkbox" id="toggle" ${member.hasPayed ? "checked" : ""}>
-    <div class="oval">
+    <div class="oval ${member.hasPayed ? "checked" : ""}">
       <div class="circle"></div>
     </div>
   </label>
@@ -148,21 +149,27 @@ function kassérDetailView(member) {
     }
   }
 }
+/* async function handleUpdate(member) {
+  const response = await updateMember();
+
+  if (response.ok) {
+    kassérViewCancel();
+    return response;
+  } else {
+    console.log("An error occured!");
+  }
+} */
+
 async function handleUpdate(member) {
   const toggle = document.getElementById("toggle");
-  const memberId = member.id;
   const newPaymentStatus = toggle.checked ? "true" : "false";
-  const updatedMember = { member, hasPayed: newPaymentStatus };
+  member.hasPayed = newPaymentStatus;
 
   console.log(member);
 
-  const response = await fetch(`${endpoint}/members/${memberId}.json`, {
-    method: "PATCH",
-    body: JSON.stringify(updatedMember),
-  });
+  const response = await updateMember();
   if (response.ok) {
     kassérViewCancel();
-    location.reload();
     return response;
   } else {
     console.log("An error occured!");
@@ -170,6 +177,7 @@ async function handleUpdate(member) {
 }
 
 function kassérViewCancel() {
+  location.reload();
   document.querySelector("#kassér-detail-view").close();
 }
 

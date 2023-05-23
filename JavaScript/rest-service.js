@@ -117,7 +117,8 @@ async function updateMember(
   compSwimmer,
   active,
   gender,
-  dateOfBirth
+  dateOfBirth,
+  hasPayed
 ) {
   const memberToUpdate = {
     firstName,
@@ -129,6 +130,7 @@ async function updateMember(
     active,
     gender,
     dateOfBirth,
+    hasPayed,
   };
   const json = JSON.stringify(memberToUpdate);
   const response = await fetch(`${endpoint}/members/${id}.json`, {
