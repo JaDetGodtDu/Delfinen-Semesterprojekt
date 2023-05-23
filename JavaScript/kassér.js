@@ -136,10 +136,34 @@ function kassérDetailView(member) {
   document
     .querySelector("#kassér-detail-view-cancel-btn")
     .addEventListener("click", kassérViewCancel);
-  document
-    .getElementById("kassér-detail-view-update-btn")
-    .addEventListener("click", () => handleUpdate(member));
+  document.getElementById("kassér-detail-view-update-btn");
   document.getElementById("toggle").addEventListener("change", handleToggle);
+  document
+    .querySelector("#kassér-detail-view-update-btn")
+    .addEventListener("click", async () => {
+      const toggle = document.querySelector("#toggle");
+      const hasPayed = toggle.checked;
+      member.hasPayed = hasPayed ? "true" : "false";
+      const response = await updateMember(
+        member.id,
+        member.firstName,
+        member.lastName,
+        member.address,
+        member.phone,
+        member.email,
+        member.compSwimmer,
+        member.active,
+        member.gender,
+        member.dateOfBirth,
+        member.hasPayed
+      );
+      if (response.ok) {
+        console.log("Paymentstatus succesfully updated!");
+        kassérViewCancel();
+      } else {
+        console.log("And error has occured!");
+      }
+    });
 
   function handleToggle() {
     if (toggle.checked) {
@@ -149,33 +173,6 @@ function kassérDetailView(member) {
     }
   }
 }
-/* async function handleUpdate(member) {
-  const response = await updateMember();
-
-  if (response.ok) {
-    kassérViewCancel();
-    return response;
-  } else {
-    console.log("An error occured!");
-  }
-} */
-
-async function handleUpdate(member) {
-  const toggle = document.getElementById("toggle");
-  const newPaymentStatus = toggle.checked ? "true" : "false";
-  member.hasPayed = newPaymentStatus;
-
-  console.log(member);
-
-  const response = await updateMember();
-  if (response.ok) {
-    kassérViewCancel();
-    return response;
-  } else {
-    console.log("An error occured!");
-  }
-}
-
 function kassérViewCancel() {
   location.reload();
   document.querySelector("#kassér-detail-view").close();
