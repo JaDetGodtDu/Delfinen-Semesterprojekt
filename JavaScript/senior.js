@@ -71,7 +71,7 @@ function resultClicked(result) {
   <p>Tid: ${convertTime(result.time)}</p>
   <p>Disciplin: ${result.discipline}</p>
   <p>Stævne: ${result.competitionName}</p>
-  <p>Placering: ${result.placement}</p>
+  <p>Placering: ${result.placement}. plads</p>
 `;
     document.querySelector("#senior-result-detail-view").innerHTML = memberInfo;
     document.querySelector("#senior-result-detail-view").showModal();

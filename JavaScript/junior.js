@@ -1,5 +1,5 @@
 "use strict";
-import { getMembers, getResults, createResult } from "./rest-service.js";
+import { getMembers, getResults, createResult, deleteResult } from "./rest-service.js";
 import { ageCalculator, juniorCompetitionTypeChange, convertTime } from "./helpers.js";
 window.addEventListener("load", initApp);
 let members = [];
@@ -11,6 +11,8 @@ function initApp() {
   document.querySelector("#junior-type").addEventListener("change", (event) => juniorCompetitionTypeChange(event));
   document.querySelector("#junior-create-result-dialog .btn-cancel").addEventListener("click", formCreateResultCancelClicked);
   document.querySelector("#junior-select-filter-by").addEventListener("change", () => filterByChanged(results));
+  document.querySelector("#form-delete-result").addEventListener("submit", deleteResultClicked);
+  document.querySelector("#form-delete-result .btn-cancel").addEventListener("click", deleteResultCancelClicked);
 }
 
 async function updateJuniorTable() {
@@ -57,6 +59,8 @@ function resultClicked(result) {
   <p>Dato: ${result.date}</p>
   <p>Tid: ${convertTime(result.time)}</p>
   <p>Disciplin: ${result.discipline}</p>
+  <button type="button" class ="btn-delete">Slet resultat</button>
+  <button type="button" class ="btn-cancel">Tilbage</button>
 `;
     document.querySelector("#junior-result-detail-view").innerHTML = memberInfo;
     document.querySelector("#junior-result-detail-view").showModal();
@@ -67,11 +71,35 @@ function resultClicked(result) {
   <p>Tid: ${convertTime(result.time)}</p>
   <p>Disciplin: ${result.discipline}</p>
   <p>Stævne: ${result.competitionName}</p>
-  <p>Placering: ${result.placement}</p>
+  <p>Placering: ${result.placement}. plads</p>
+  <button type="button" class="btn-delete">Slet resultat</button>
+  <button type="button" class="btn-cancel">Tilbage</button>
 `;
     document.querySelector("#junior-result-detail-view").innerHTML = memberInfo;
     document.querySelector("#junior-result-detail-view").showModal();
   }
+  document.querySelector("#junior-result-detail-view").setAttribute("data-id", result.id);
+  document.querySelector("#junior-result-detail-view .btn-cancel").addEventListener("click", resultDetailViewCancelClicked);
+  document.querySelector("#junior-result-detail-view .btn-delete").addEventListener("click", () => deleteClicked(result));
+}
+function deleteClicked(resultObject) {
+  document.querySelector("#form-delete-result").setAttribute("data-id", resultObject.id);
+  document.querySelector("#dialog-delete-result").showModal();
+}
+async function deleteResultClicked(event) {
+  const id = event.target.getAttribute("data-id");
+  const response = await deleteResult(id);
+  document.querySelector("#dialog-delete-result").close();
+  document.querySelector("#junior-result-detail-view").close();
+  if (response.ok) {
+    updateJuniorTable();
+  }
+}
+function deleteResultCancelClicked() {
+  document.querySelector("#dialog-delete-result").close();
+}
+function resultDetailViewCancelClicked() {
+  document.querySelector("#junior-result-detail-view").close();
 }
 function juniorShowCreateResultDialog() {
   document.querySelector("#junior-create-result-dialog").showModal();
