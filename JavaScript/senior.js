@@ -1,27 +1,15 @@
 "use strict";
 import { getMembers, getResults, createResult } from "./rest-service.js";
-import {
-  ageCalculator,
-  seniorCompetitionTypeChange,
-  convertTime,
-} from "./helpers.js";
+import { ageCalculator, seniorCompetitionTypeChange, convertTime } from "./helpers.js";
 window.addEventListener("load", initApp);
 let members = [];
 
 function initApp() {
   updateSeniorTable();
-  document
-    .querySelector("#senior-select-filter-by")
-    .addEventListener("change", filterByChanged);
-  document
-    .querySelector("#senior-create-new-time-btn")
-    .addEventListener("click", seniorShowCreateResultDialog);
-  document
-    .querySelector("#senior-type")
-    .addEventListener("change", (event) => seniorCompetitionTypeChange(event));
-  document
-    .querySelector("#senior-create-result-dialog .btn-cancel")
-    .addEventListener("click", formCreateResultCancelClicked);
+  document.querySelector("#senior-select-filter-by").addEventListener("change", filterByChanged);
+  document.querySelector("#senior-create-new-time-btn").addEventListener("click", seniorShowCreateResultDialog);
+  document.querySelector("#senior-type").addEventListener("change", (event) => seniorCompetitionTypeChange(event));
+  document.querySelector("#senior-create-result-dialog .btn-cancel").addEventListener("click", formCreateResultCancelClicked);
 }
 
 async function updateSeniorTable() {
@@ -43,21 +31,33 @@ function showSeniorTable(result) {
   if (age >= 18) {
     const seniorHTML = /*html*/ `
     <tr>
-      <td class="name">${member.firstName} ${member.lastName}</td>
+<td style="color: blue; cursor: pointer;" class="name">
+  <u>${member.firstName} ${member.lastName}</u>
+</td>
+
       <td class="discipline">${result.discipline}</td>
-      <td class="trainTime">${
-        result.type === "Træning" ? convertTime(result.time) : ""
-      }</td>
-      <td class="compTime">${
-        result.type === "Konkurrence" ? convertTime(result.time) : ""
-      }</td>
+      <td class="trainTime">${result.type === "Træning" ? convertTime(result.time) : ""}</td>
+      <td class="compTime">${result.type === "Konkurrence" ? convertTime(result.time) : ""}</td>
     </tr>
   `;
 
-    document
-      .querySelector("#senior-table-body")
-      .insertAdjacentHTML("beforeend", seniorHTML);
+    document.querySelector("#senior-table-body").insertAdjacentHTML("beforeend", seniorHTML);
+    const rows = document.querySelectorAll("#senior-table-body tr");
+    const lastRow = rows[rows.length - 1];
+    lastRow.addEventListener("click", () => memberClicked(member));
   }
+}
+function memberClicked(member) {
+  let memberInfo = /*html*/ `
+  <h3>${member.firstName} ${member.lastName}</h3><br>
+  <p>Email: ${member.email}</p>
+  <p>Telefon nr: ${member.phone}</p>
+  <p>Køn: ${member.gender}</p>
+  <p>Addresse: ${member.address}</p>
+  <p>Fødselsdato: ${member.dateOfBirth}</p>
+`;
+  document.querySelector("#member-detail-view").innerHTML = memberInfo;
+  document.querySelector("#member-detail-view").showModal();
 }
 
 function seniorShowCreateResultDialog() {
@@ -67,17 +67,11 @@ function seniorShowCreateResultDialog() {
   members.forEach((member, index) => {
     let age = ageCalculator(member);
     if (age >= 18) {
-      optionsHTML += `<option value="senior-swimmer-name${index + 1}">${
-        member.firstName
-      } ${member.lastName}</option>`;
+      optionsHTML += `<option value="senior-swimmer-name${index + 1}">${member.firstName} ${member.lastName}</option>`;
     }
   });
   swimmerSelect.innerHTML = optionsHTML;
-  document
-    .querySelector("#senior-create-result-dialog")
-    .addEventListener("submit", (event) =>
-      prepareNewResultData(event, swimmerSelect)
-    );
+  document.querySelector("#senior-create-result-dialog").addEventListener("submit", (event) => prepareNewResultData(event, swimmerSelect));
 }
 function formCreateResultCancelClicked() {
   document.querySelector("#senior-create-result-dialog").close();
@@ -99,17 +93,8 @@ async function prepareNewResultData(event, swimmerSelect) {
   console.log(date);
   const type = document.querySelector("#senior-type").value;
   const competitionName = document.querySelector("#competition-name").value;
-  const placement =
-    type === "Konkurrence" ? document.querySelector("#placement").value : "";
-  const response = await createResult(
-    memberId,
-    discipline,
-    time,
-    date,
-    type,
-    competitionName,
-    placement
-  );
+  const placement = type === "Konkurrence" ? document.querySelector("#placement").value : "";
+  const response = await createResult(memberId, discipline, time, date, type, competitionName, placement);
   if (response.ok) {
     updateSeniorTable();
     document.querySelector("#senior-create-result-dialog").close();
@@ -159,9 +144,7 @@ async function filterByChanged() {
   } else if (filterValue === "senior") {
     results = members.filter((member) => ageCalculator(member) >= 18);
   } else if (filterValue.startsWith("!")) {
-    results = members.filter(
-      (member) => member[filterValue.substring(1)] === "false"
-    );
+    results = members.filter((member) => member[filterValue.substring(1)] === "false");
   } else if (filterValue === "showAll") {
     results = members;
   } else {
