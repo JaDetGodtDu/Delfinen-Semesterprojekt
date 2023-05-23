@@ -120,8 +120,8 @@ function kassérDetailView(member) {
   <p>Årligt kontingent: ${memberPrice(member)}kr</p>
   <p>Betalingsstatus: </p>
   <label class="slider">
-    <input type="checkbox" id="toggle" ${member.hasPayed ? "checked" : ""}>
-    <div class="oval ${member.hasPayed ? "checked" : ""}">
+    <input type="checkbox" id="toggle">
+    <div class="oval">
       <div class="circle"></div>
     </div>
   </label>
@@ -133,6 +133,10 @@ function kassérDetailView(member) {
   `;
   document.querySelector("#kassér-detail-view").innerHTML = kassérDetailHTML;
   document.querySelector("#kassér-detail-view").showModal();
+
+  const toggle = document.querySelector("#toggle");
+  toggle.checked = member.hasPayed === "true";
+
   document
     .querySelector("#kassér-detail-view-cancel-btn")
     .addEventListener("click", kassérViewCancel);
@@ -142,8 +146,8 @@ function kassérDetailView(member) {
     .querySelector("#kassér-detail-view-update-btn")
     .addEventListener("click", async () => {
       const toggle = document.querySelector("#toggle");
-      const hasPayed = toggle.checked;
-      member.hasPayed = hasPayed ? "true" : "false";
+      const hasPayed = toggle.checked ? "true" : "false";
+      member.hasPayed = hasPayed;
       const response = await updateMember(
         member.id,
         member.firstName,
