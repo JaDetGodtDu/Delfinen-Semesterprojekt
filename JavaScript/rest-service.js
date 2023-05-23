@@ -1,5 +1,4 @@
-const endpoint =
-  "https://delfinen-8e9fa-default-rtdb.europe-west1.firebasedatabase.app/";
+const endpoint = "https://delfinen-8e9fa-default-rtdb.europe-west1.firebasedatabase.app/";
 
 import { prepareMemberData, prepareResultData } from "./helpers.js";
 
@@ -22,17 +21,7 @@ async function getResults() {
   return results;
 }
 // CREATE NEW MEMBERS
-async function createMember(
-  firstName,
-  lastName,
-  address,
-  phone,
-  email,
-  dateOfBirth,
-  gender,
-  active,
-  compSwimmer
-) {
+async function createMember(firstName, lastName, address, phone, email, dateOfBirth, gender, active, compSwimmer) {
   const newMember = {
     firstName,
     lastName,
@@ -52,15 +41,7 @@ async function createMember(
   return response;
 }
 // CREATE NEW RESULTS
-async function createResult(
-  memberId,
-  discipline,
-  time,
-  date,
-  type,
-  competitionName,
-  placement
-) {
+async function createResult(memberId, discipline, time, date, type, competitionName, placement) {
   const newResult = {
     memberId,
     discipline,
@@ -106,6 +87,13 @@ async function deleteMember(id) {
   location.reload();
   return deleteMemberResponse;
 }
+async function deleteResult(id) {
+  const deleteResultResponse = await fetch(`${endpoint}/results/${id}.json`, {
+    method: "DELETE",
+  });
+  location.reload();
+  return deleteResultResponse;
+}
 // UPDATE MEMBERS
 async function updateMember(
   id,
@@ -139,55 +127,5 @@ async function updateMember(
   });
   return response;
 }
-// UPDATE RESULTS
-async function updateResult(
-  discipline,
-  memberId,
-  placement,
-  time,
-  competition,
-  type,
-  date
-) {
-  const resultToUpdate = {
-    discipline,
-    memberId,
-    placement,
-    time,
-    competition,
-    type,
-    date,
-  };
-  const json = JSON.stringify(resultToUpdate);
-  const response = await fetch(`${endpoint}/results/${id}.json`, {
-    method: "PUT",
-    body: json,
-  });
-  return response;
-}
-// UPDATE PAYMENT STATUS
-async function updatePaymentStatus(id, hasPayed) {
-  const response = await fetch(`${endpoint}/members/${id}.json`);
-  const member = await response.json();
 
-  member[hasPayed] = newValue;
-
-  const json = JSON.stringify(member);
-  const updateResponse = await fetch(`${endpoint}/members/${id}.json`, {
-    method: "PUT",
-    body: json,
-  });
-
-  return updateResponse;
-}
-export {
-  members,
-  getMembers,
-  getResults,
-  createMember,
-  createResult,
-  deleteMember,
-  updateMember,
-  updateResult,
-  endpoint,
-};
+export { members, getMembers, getResults, createMember, createResult, deleteMember, updateMember, deleteResult };

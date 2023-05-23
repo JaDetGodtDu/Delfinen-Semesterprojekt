@@ -1,5 +1,5 @@
 "use strict";
-import { getMembers, getResults, createResult } from "./rest-service.js";
+import { getMembers, getResults, createResult, deleteResult } from "./rest-service.js";
 import { ageCalculator, seniorCompetitionTypeChange, convertTime } from "./helpers.js";
 
 window.addEventListener("load", initApp);
@@ -12,6 +12,8 @@ function initApp() {
   document.querySelector("#senior-type").addEventListener("change", (event) => seniorCompetitionTypeChange(event));
   document.querySelector("#senior-create-result-dialog .btn-cancel").addEventListener("click", formCreateResultCancelClicked);
   document.querySelector("#senior-select-filter-by").addEventListener("change", () => filterByChanged(results));
+  document.querySelector("#form-delete-result").addEventListener("submit", deleteResultClicked);
+  document.querySelector("#form-delete-result .btn-cancel").addEventListener("click", deleteResultCancelClicked);
 }
 
 async function updateSeniorTable() {
@@ -50,24 +52,58 @@ function showSeniorTable(result) {
     document.querySelector("#senior-table-body").insertAdjacentHTML("beforeend", seniorHTML);
     const rows = document.querySelectorAll("#senior-table-body tr");
     const lastRow = rows[rows.length - 1];
-    lastRow.addEventListener("click", () => memberClicked(result));
+    lastRow.addEventListener("click", () => resultClicked(result));
   }
 }
-function memberClicked(result) {
+function resultClicked(result) {
   const member = members.find((member) => member.id == result.memberId);
-  let memberInfo = /*html*/ `
+  if (result.type === "Træning") {
+    let memberInfo = /*html*/ `
   <h3>${member.firstName} ${member.lastName}</h3><br>
-  <h4>Træninger</h4>
   <p>Dato: ${result.date}</p>
-  <p>Tid: ${result.type === "Træning" ? convertTime(result.time) : ""}</p>
+  <p>Tid: ${convertTime(result.time)}</p>
   <p>Disciplin: ${result.discipline}</p>
-  <h4>Konkurrencer</h4>
-  <p>Dato: ${result.date}</p>
-  <p>Tid: ${result.type === "Konkurrence" ? convertTime(result.time) : ""}</p>
-  <p>Disciplin: ${result.discipline}</p>
+  <button type="button" class="btn-delete">Slet resultat</button>
+  <button type="button" class="btn-cancel">Tilbage</button>
 `;
-  document.querySelector("#member-detail-view").innerHTML = memberInfo;
-  document.querySelector("#member-detail-view").showModal();
+    document.querySelector("#senior-result-detail-view").innerHTML = memberInfo;
+    document.querySelector("#senior-result-detail-view").showModal();
+  } else {
+    let memberInfo = /*html*/ `
+  <h3>${member.firstName} ${member.lastName}</h3><br>
+  <p>Dato: ${result.date}</p>
+  <p>Tid: ${convertTime(result.time)}</p>
+  <p>Disciplin: ${result.discipline}</p>
+  <p>Stævne: ${result.competitionName}</p>
+  <p>Placering: ${result.placement}. plads</p>
+  <button type="button" class="btn-delete">Slet resultat</button>
+  <button type="button" class="btn-cancel">Tilbage</button>
+`;
+    document.querySelector("#senior-result-detail-view").innerHTML = memberInfo;
+    document.querySelector("#senior-result-detail-view").showModal();
+  }
+  document.querySelector("#senior-result-detail-view").setAttribute("data-id", result.id);
+  document.querySelector("#senior-result-detail-view .btn-cancel").addEventListener("click", resultDetailViewCancelClicked);
+  document.querySelector("#senior-result-detail-view .btn-delete").addEventListener("click", () => deleteClicked(result));
+}
+function deleteClicked(resultObject) {
+  document.querySelector("#form-delete-result").setAttribute("data-id", resultObject.id);
+  document.querySelector("#dialog-delete-result").showModal();
+}
+async function deleteResultClicked(event) {
+  const id = event.target.getAttribute("data-id");
+  const response = await deleteResult(id);
+  document.querySelector("#dialog-delete-result").close();
+  document.querySelector("#senior-result-detail-view").close();
+  if (response.ok) {
+    updateSeniorTable();
+  }
+}
+function deleteResultCancelClicked() {
+  document.querySelector("#dialog-delete-result").close();
+}
+function resultDetailViewCancelClicked() {
+  document.querySelector("#senior-result-detail-view").close();
 }
 
 function seniorShowCreateResultDialog() {

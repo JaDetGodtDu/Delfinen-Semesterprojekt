@@ -95,7 +95,6 @@ function deleteClicked(memberObject) {
   document.querySelector("#dialog-delete-member").showModal();
 }
 async function deleteMemberClicked(event) {
-  console.log("delete member clicked");
   const id = event.target.getAttribute("data-id");
   const response = await deleteMember(id);
   document.querySelector("#dialog-delete-member").close();
