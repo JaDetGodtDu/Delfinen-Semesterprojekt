@@ -141,13 +141,15 @@ function searchMembersJunior() {
 
 function filterByChanged(results) {
   const filterValue = document.querySelector("#junior-select-filter-by").value;
-  let filterResults = [];
+  let topFiveResults = [];
   if (filterValue === "showAll") {
-    filterResults = results.filter((result) => ageCalculator(result.member) < 18);
+    topFiveResults = results.filter((result) => ageCalculator(result.member) < 18);
   } else {
-    filterResults = results.filter((result) => result.discipline === filterValue && ageCalculator(result.member) < 18);
+    const filterResults = results.filter((result) => result.discipline === filterValue && ageCalculator(result.member) < 18);
+    const sortedResults = filterResults.sort((a, b) => a.time - b.time);
+    topFiveResults = sortedResults.slice(0, 5);
   }
-  juniorShowMembers(filterResults);
+  juniorShowMembers(topFiveResults);
 }
 
 export { juniorShowMembers, searchMembersJunior };
