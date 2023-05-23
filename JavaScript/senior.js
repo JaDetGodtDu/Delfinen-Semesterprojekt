@@ -139,32 +139,4 @@ function filterByChanged(results) {
   seniorShowMembers(filterResults);
 }
 
-function showTop5Senior(result) {
-  {
-    const member = members.find((member) => member.id == result.memberId);
-    let age = ageCalculator(member);
-    if (age >= 18) {
-      const top5SeniorHTML = /*html*/ `
-         <table>
-            <tbody id="top-5-senior-body">
-            <thead>
-            <tr>
-              <th class="clickable">Navn</th>
-              <th class="clickable">Disciplin</th>
-              <th class="clickable">Konkurrencetid</th>
-            </tr>
-          </thead>
-    <tr>
-      <td class="name">${member.firstName} ${member.lastName}</td>
-      <td class="discipline">${result.discipline}</td>
-      <td class="compTime">${result.type === "Konkurrence" ? convertTime(result.time) : ""}</td>
-    </tr>
-    </tbody>
-          </table>
-  `;
-      document.querySelector("#top-5-senior").insertAdjacentHTML("beforeend", top5SeniorHTML);
-    }
-  }
-}
-
 export { seniorShowMembers, searchMembersSenior, showTop5Senior };
