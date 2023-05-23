@@ -35,12 +35,12 @@ function showSeniorTable(result) {
   if (age >= 18) {
     const seniorHTML = /*html*/ `
     <tr>
-      <td class="name">${result.member.firstName} ${result.member.lastName}</td>
-      <td class="discipline">${result.discipline}</td>
-      <td class="trainTime">${result.type === "Træning" ? convertTime(result.time) : ""}</td>
-      <td class="compTime">${result.type === "Konkurrence" ? convertTime(result.time) : ""}</td>
+    <td class="name">${result.member.firstName} ${result.member.lastName}</td>
+    <td class="discipline">${result.discipline}</td>
+    <td class="trainTime">${result.type === "Træning" ? convertTime(result.time) : ""}</td>
+    <td class="compTime">${result.type === "Konkurrence" ? convertTime(result.time) : ""}</td>
     </tr>
-  `;
+    `;
 
     document.querySelector("#senior-table-body").insertAdjacentHTML("beforeend", seniorHTML);
   }
@@ -126,13 +126,12 @@ function filterByChanged(results) {
   const filterValue = document.querySelector("#senior-select-filter-by").value;
   let topFiveResults = [];
   if (filterValue === "showAll") {
-    topFiveResults = results;
+    topFiveResults = results.filter((result) => ageCalculator(result.member) >= 18);
   } else {
-    const filterResults = results.filter((result) => result.discipline === filterValue);
+    const filterResults = results.filter((result) => result.discipline === filterValue && ageCalculator(result.member) >= 18);
     const sortedResults = filterResults.sort((a, b) => a.time - b.time);
     topFiveResults = sortedResults.slice(0, 5);
   }
-  console.log(topFiveResults);
   seniorShowMembers(topFiveResults);
 }
 
