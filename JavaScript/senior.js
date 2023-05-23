@@ -7,7 +7,7 @@ let results = [];
 
 function initApp() {
   updateSeniorTable();
-  document.querySelector("#senior-select-filter-by").addEventListener("change", filterByChanged);
+  document.querySelector("#senior-select-filter-by").addEventListener("change", () => filterByChanged(results));
   document.querySelector("#senior-create-new-time-btn").addEventListener("click", seniorShowCreateResultDialog);
   document.querySelector("#senior-type").addEventListener("change", (event) => seniorCompetitionTypeChange(event));
   document.querySelector("#senior-create-result-dialog .btn-cancel").addEventListener("click", formCreateResultCancelClicked);
@@ -124,36 +124,18 @@ function searchMembersSenior() {
     }
   });
 }
-// async function filterByChanged() {
-//   const filterValue = document.querySelector("#senior-select-filter-by").value;
 
-//   let filterResults = [];
-//   if (filterValue === "crawl") {
-//     filterResults = results.fillter((results) => results[filterValue]);
-//   } else if (filterValue === "rygsvømning") {
-//   } else if (filterValue === "butterfly") {
-//   } else if (filterValue === "brystsvømning") {
-//   } else if (filterValue === "showAll") {
-//     filterResults = members;
-//   } else seniorShowMembers(filterResults);
-// }
-
-async function filterByChanged() {
+function filterByChanged(results) {
   const filterValue = document.querySelector("#senior-select-filter-by").value;
-
+  console.log(results);
   let filterResults = [];
-  if (filterValue === "crawl") {
-    filterResults = results.filter((result) => result.discipline === filterValue);
-  } else if (filterValue === "rygsvømning") {
-    filterResults = results.filter((result) => result.discipline === filterValue);
-  } else if (filterValue === "butterfly") {
-    filterResults = results.filter((result) => result.discipline === filterValue);
-  } else if (filterValue === "brystsvømning") {
-    filterResults = results.filter((result) => result.discipline === filterValue);
-  } else if (filterValue === "showAll") {
+  if (filterValue === "showAll") {
     filterResults = results;
+  } else {
+    filterResults = results.filter((result) => result.discipline === filterValue);
   }
-
+  console.log(filterValue);
+  console.log(filterResults);
   seniorShowMembers(filterResults);
 }
 
