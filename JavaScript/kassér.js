@@ -9,7 +9,7 @@ import {
   ageCalculator,
 } from "./helpers.js";
 import { updateMember } from "./rest-service.js";
-import { getMembers, createMember, endpoint } from "./rest-service.js";
+import { getMembers, createMember } from "./rest-service.js";
 
 window.addEventListener("load", initApp);
 
@@ -51,27 +51,21 @@ function showKassérTable(member) {
   document
     .querySelector("#kassér-table-body")
     .insertAdjacentHTML("beforeend", kassérHTML);
-
   const rows = document.querySelectorAll("#kassér-table-body tr");
   const lastRow = rows[rows.length - 1];
-
   lastRow.addEventListener("click", () => kassérDetailView(member));
 }
-
 function searchMembersKassér() {
   let searchInput = document.getElementById("input-search-kassér");
   let table = document.getElementById("kassér-table-body");
-
   // Add an event listener to the input field
   searchInput.addEventListener("input", function () {
     let filter = searchInput.value.toUpperCase();
     let rows = table.getElementsByTagName("tr");
-
     // Loop through the table rows and hide those that don't match the filter
     for (let i = 0; i < rows.length; i++) {
       let cells = rows[i].getElementsByTagName("td");
       let shouldHide = true;
-
       // Loop through the cells of each row
       for (let j = 0; j < cells.length; j++) {
         let cell = cells[j];
@@ -83,7 +77,6 @@ function searchMembersKassér() {
           }
         }
       }
-
       // Toggle the display property based on the filter condition
       rows[i].style.display = shouldHide ? "none" : "";
     }
@@ -92,7 +85,6 @@ function searchMembersKassér() {
 async function filterByChanged() {
   const filterValue = document.querySelector("#kassér-select-filter-by").value;
   const members = await getMembers();
-
   let results = [];
   if (filterValue === "junior") {
     results = members.filter((member) => ageCalculator(member) < 18);
@@ -133,10 +125,8 @@ function kassérDetailView(member) {
   `;
   document.querySelector("#kassér-detail-view").innerHTML = kassérDetailHTML;
   document.querySelector("#kassér-detail-view").showModal();
-
   const toggle = document.querySelector("#toggle");
   toggle.checked = member.hasPayed === "true";
-
   document
     .querySelector("#kassér-detail-view-cancel-btn")
     .addEventListener("click", kassérViewCancel);
@@ -168,7 +158,6 @@ function kassérDetailView(member) {
         console.log("And error has occured!");
       }
     });
-
   function handleToggle() {
     if (toggle.checked) {
       console.log("Knappen er aktiveret");
@@ -181,5 +170,4 @@ function kassérViewCancel() {
   location.reload();
   document.querySelector("#kassér-detail-view").close();
 }
-
 export { kassérShowMembers, searchMembersKassér };
