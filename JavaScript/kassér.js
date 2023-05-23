@@ -37,7 +37,9 @@ function showKassérTable(member) {
   const memberId = `member-${member.id}`;
   const kassérHTML = /*html*/ `
           <tr>
-            <td style="color:blue" class="name"><u>${member.firstName} ${member.lastName}</u></td>
+            <td style="color:blue" class="name">
+              <u>${member.firstName} ${member.lastName}</u>
+            </td>
             <td class="email">${member.email}</td>
             <td class="phone">${member.phone}</td>
             <td class="age">${memberAgeGroup(member)}</td>
@@ -48,8 +50,10 @@ function showKassérTable(member) {
   document
     .querySelector("#kassér-table-body")
     .insertAdjacentHTML("beforeend", kassérHTML);
+
   const rows = document.querySelectorAll("#kassér-table-body tr");
   const lastRow = rows[rows.length - 1];
+
   lastRow.addEventListener("click", () => kassérDetailView(member));
 }
 
@@ -125,9 +129,11 @@ function kassérDetailView(member) {
   document.querySelector("#kassér-detail-view").innerHTML = kassérDetailHTML;
   document.querySelector("#kassér-detail-view").showModal();
 
-  document.querySelector("#kassér-detail-view-cancel-btn").addEventListener("click", kassérViewCancel)
+  document
+    .querySelector("#kassér-detail-view-cancel-btn")
+    .addEventListener("click", kassérViewCancel);
 }
-function kassérViewCancel (){
+function kassérViewCancel() {
   document.querySelector("#kassér-detail-view").close();
 }
 
