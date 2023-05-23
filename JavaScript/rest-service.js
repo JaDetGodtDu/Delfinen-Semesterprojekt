@@ -106,7 +106,6 @@ async function deleteMember(id) {
   location.reload();
   return deleteMemberResponse;
 }
-
 // UPDATE MEMBERS
 async function updateMember(
   id,
@@ -163,6 +162,21 @@ async function updateResult(
     body: json,
   });
   return response;
+}
+// UPDATE PAYMENT STATUS
+async function updatePaymentStatus(id, hasPayed) {
+  const response = await fetch(`${endpoint}/members/${id}.json`);
+  const member = await response.json();
+
+  member[hasPayed] = newValue;
+
+  const json = JSON.stringify(member);
+  const updateResponse = await fetch(`${endpoint}/members/${id}.json`, {
+    method: "PUT",
+    body: json,
+  });
+
+  return updateResponse;
 }
 export {
   members,

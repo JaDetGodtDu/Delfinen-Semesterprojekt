@@ -117,21 +117,35 @@ function kassérDetailView(member) {
   <p>Aldersgruppe: ${memberAgeGroup(member)}</p>
   <p>Medlemsskab: ${subscriptionType(member)}</p>
   <p>Årligt kontingent: ${memberPrice(member)}kr</p>
-  <label for="hasPayed">Har betalt: </label>
-  <input name="hasPayed" type="radio" value="true">
-  <input name="hasPayed" type="radio" value="false">
+  <p>Betalingsstatus: </p>
+  <label class="slider">
+    <input type="checkbox" id="toggle">
+    <div class="oval">
+      <div class="circle"></div>
+    </div>
+  </label>
+  <br>
   <br>
   <br>
   <input type="button" button value="Opdater status" id="kassér-detail-view-update-btn">
   <input type="button" value="Tilbage"button id="kassér-detail-view-cancel-btn">
   `;
-
   document.querySelector("#kassér-detail-view").innerHTML = kassérDetailHTML;
   document.querySelector("#kassér-detail-view").showModal();
-
   document
     .querySelector("#kassér-detail-view-cancel-btn")
     .addEventListener("click", kassérViewCancel);
+  document.getElementById("toggle").addEventListener("change", handleToggle);
+
+  function handleToggle() {
+    if (toggle.checked) {
+      // Kode, der skal udføres, når knappen er aktiveret (tilstand: sand)
+      console.log("Knappen er aktiveret");
+    } else {
+      // Kode, der skal udføres, når knappen er deaktiveret (tilstand: falsk)
+      console.log("Knappen er deaktiveret");
+    }
+  }
 }
 function kassérViewCancel() {
   document.querySelector("#kassér-detail-view").close();
