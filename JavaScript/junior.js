@@ -1,30 +1,25 @@
 "use strict";
 import { getMembers, getResults, createResult } from "./rest-service.js";
-import {
-  convertTime,
-  ageCalculator,
-  juniorCompetitionTypeChange,
-} from "./helpers.js";
+import { ageCalculator, juniorCompetitionTypeChange, convertTime } from "./helpers.js";
 window.addEventListener("load", initApp);
 let members = [];
-let swimmerSelect;
+let results = [];
 
 function initApp() {
   updateJuniorTable();
-  document
-    .querySelector("#junior-create-new-time-btn")
-    .addEventListener("click", juniorShowCreateResultDialog);
-  document
-    .querySelector("#junior-type")
-    .addEventListener("change", (event) => juniorCompetitionTypeChange(event));
-  document
-    .querySelector("#junior-create-result-dialog .btn-cancel")
-    .addEventListener("click", formCreateResultCancelClicked);
+  document.querySelector("#junior-create-new-time-btn").addEventListener("click", juniorShowCreateResultDialog);
+  document.querySelector("#junior-type").addEventListener("change", (event) => juniorCompetitionTypeChange(event));
+  document.querySelector("#junior-create-result-dialog .btn-cancel").addEventListener("click", formCreateResultCancelClicked);
+  document.querySelector("#junior-select-filter-by").addEventListener("change", () => filterByChanged(results));
 }
 
 async function updateJuniorTable() {
   members = await getMembers();
-  let results = await getResults();
+  results = await getResults();
+  for (const result of results) {
+    const member = members.find((member) => member.id == result.memberId);
+    result.member = member;
+  }
   juniorShowMembers(results);
 }
 function juniorShowMembers(results) {
@@ -36,27 +31,21 @@ function juniorShowMembers(results) {
 }
 
 function showJuniorTable(result) {
-  const member = members.find((member) => member.id == result.memberId);
-  let age = ageCalculator(member);
+  let age = ageCalculator(result.member);
   if (age < 18) {
     const juniorHTML = /*html*/ `
     <tr>
-      <td class="name">${member.firstName} ${member.lastName}</td>
+      <td class="name">${result.member.firstName} ${result.member.lastName}</td>
       <td class="discipline">${result.discipline}</td>
-      <td class="trainTime">${
-        result.type === "Træning" ? convertTime(result.time) : ""
-      }</td>
-      <td class="compTime">${
-        result.type === "Konkurrence" ? convertTime(result.time) : ""
-      }</td>
+      <td class="trainTime">${result.type === "Træning" ? convertTime(result.time) : ""}</td>
+      <td class="compTime">${result.type === "Konkurrence" ? convertTime(result.time) : ""}</td>
     </tr>
   `;
 
-    document
-      .querySelector("#junior-table-body")
-      .insertAdjacentHTML("beforeend", juniorHTML);
+    document.querySelector("#junior-table-body").insertAdjacentHTML("beforeend", juniorHTML);
   }
 }
+
 function juniorShowCreateResultDialog() {
   document.querySelector("#junior-create-result-dialog").showModal();
   const swimmerSelect = document.querySelector("#junior-swimmer-name");
@@ -64,17 +53,11 @@ function juniorShowCreateResultDialog() {
   members.forEach((member, index) => {
     let age = ageCalculator(member);
     if (age < 18) {
-      optionsHTML += `<option value="junior-swimmer-name${index + 1}">${
-        member.firstName
-      } ${member.lastName}</option>`;
+      optionsHTML += `<option value="junior-swimmer-name${index + 1}">${member.firstName} ${member.lastName}</option>`;
     }
   });
   swimmerSelect.innerHTML = optionsHTML;
-  document
-    .querySelector("#junior-create-result-dialog")
-    .addEventListener("submit", (event) =>
-      prepareNewResultData(event, swimmerSelect)
-    );
+  document.querySelector("#junior-create-result-dialog").addEventListener("submit", (event) => prepareNewResultData(event, swimmerSelect));
 }
 function formCreateResultCancelClicked() {
   document.querySelector("#junior-create-result-dialog").close();
@@ -85,7 +68,7 @@ async function prepareNewResultData(event, swimmerSelect) {
   const swimmerId = selectedSwimmerId.match(/\d+/)[0];
   const selectedMember = members[swimmerId - 1];
   const memberId = selectedMember.id;
-  const discipline = document.querySelector("#discipline").value;
+  const discipline = document.querySelector("#junior-discipline").value;
   const timeString = document.querySelector("#junior-time").value;
   const timeParts = timeString.split(":");
   const minutes = parseInt(timeParts[0]);
@@ -95,20 +78,9 @@ async function prepareNewResultData(event, swimmerSelect) {
   const date = document.querySelector("#junior-date").value;
   console.log(date);
   const type = document.querySelector("#junior-type").value;
-  const competitionName = document.querySelector(
-    "#junior-competition-name"
-  ).value;
-  const placement =
-    type === "Konkurrence" ? document.querySelector("#placement").value : "";
-  const response = await createResult(
-    memberId,
-    discipline,
-    time,
-    date,
-    type,
-    competitionName,
-    placement
-  );
+  const competitionName = document.querySelector("#competition-name").value;
+  const placement = type === "Konkurrence" ? document.querySelector("#placement").value : "";
+  const response = await createResult(memberId, discipline, time, date, type, competitionName, placement);
   if (response.ok) {
     updateJuniorTable();
     document.querySelector("#junior-create-result-dialog").close();
@@ -148,4 +120,16 @@ function searchMembersJunior() {
     }
   });
 }
+
+function filterByChanged(results) {
+  const filterValue = document.querySelector("#junior-select-filter-by").value;
+  let filterResults = [];
+  if (filterValue === "showAll") {
+    filterResults = results.filter((result) => ageCalculator(result.member) < 18);
+  } else {
+    filterResults = results.filter((result) => result.discipline === filterValue && ageCalculator(result.member) < 18);
+  }
+  juniorShowMembers(filterResults);
+}
+
 export { juniorShowMembers, searchMembersJunior };

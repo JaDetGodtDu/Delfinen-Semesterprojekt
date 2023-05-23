@@ -1,32 +1,25 @@
 "use strict";
 import { getMembers, getResults, createResult } from "./rest-service.js";
-import {
-  ageCalculator,
-  seniorCompetitionTypeChange,
-  convertTime,
-} from "./helpers.js";
+import { ageCalculator, seniorCompetitionTypeChange, convertTime } from "./helpers.js";
 window.addEventListener("load", initApp);
 let members = [];
+let results = [];
 
 function initApp() {
   updateSeniorTable();
-  document
-    .querySelector("#senior-select-filter-by")
-    .addEventListener("change", filterByChanged);
-  document
-    .querySelector("#senior-create-new-time-btn")
-    .addEventListener("click", seniorShowCreateResultDialog);
-  document
-    .querySelector("#senior-type")
-    .addEventListener("change", (event) => seniorCompetitionTypeChange(event));
-  document
-    .querySelector("#senior-create-result-dialog .btn-cancel")
-    .addEventListener("click", formCreateResultCancelClicked);
+  document.querySelector("#senior-create-new-time-btn").addEventListener("click", seniorShowCreateResultDialog);
+  document.querySelector("#senior-type").addEventListener("change", (event) => seniorCompetitionTypeChange(event));
+  document.querySelector("#senior-create-result-dialog .btn-cancel").addEventListener("click", formCreateResultCancelClicked);
+  document.querySelector("#senior-select-filter-by").addEventListener("change", () => filterByChanged(results));
 }
 
 async function updateSeniorTable() {
   members = await getMembers();
-  let results = await getResults();
+  results = await getResults();
+  for (const result of results) {
+    const member = members.find((member) => member.id == result.memberId);
+    result.member = member;
+  }
   seniorShowMembers(results);
 }
 function seniorShowMembers(results) {
@@ -38,25 +31,18 @@ function seniorShowMembers(results) {
 }
 
 function showSeniorTable(result) {
-  const member = members.find((member) => member.id == result.memberId);
-  let age = ageCalculator(member);
+  let age = ageCalculator(result.member);
   if (age >= 18) {
     const seniorHTML = /*html*/ `
     <tr>
-      <td class="name">${member.firstName} ${member.lastName}</td>
-      <td class="discipline">${result.discipline}</td>
-      <td class="trainTime">${
-        result.type === "Træning" ? convertTime(result.time) : ""
-      }</td>
-      <td class="compTime">${
-        result.type === "Konkurrence" ? convertTime(result.time) : ""
-      }</td>
+    <td class="name">${result.member.firstName} ${result.member.lastName}</td>
+    <td class="discipline">${result.discipline}</td>
+    <td class="trainTime">${result.type === "Træning" ? convertTime(result.time) : ""}</td>
+    <td class="compTime">${result.type === "Konkurrence" ? convertTime(result.time) : ""}</td>
     </tr>
-  `;
+    `;
 
-    document
-      .querySelector("#senior-table-body")
-      .insertAdjacentHTML("beforeend", seniorHTML);
+    document.querySelector("#senior-table-body").insertAdjacentHTML("beforeend", seniorHTML);
   }
 }
 
@@ -67,17 +53,11 @@ function seniorShowCreateResultDialog() {
   members.forEach((member, index) => {
     let age = ageCalculator(member);
     if (age >= 18) {
-      optionsHTML += `<option value="senior-swimmer-name${index + 1}">${
-        member.firstName
-      } ${member.lastName}</option>`;
+      optionsHTML += `<option value="senior-swimmer-name${index + 1}">${member.firstName} ${member.lastName}</option>`;
     }
   });
   swimmerSelect.innerHTML = optionsHTML;
-  document
-    .querySelector("#senior-create-result-dialog")
-    .addEventListener("submit", (event) =>
-      prepareNewResultData(event, swimmerSelect)
-    );
+  document.querySelector("#senior-create-result-dialog").addEventListener("submit", (event) => prepareNewResultData(event, swimmerSelect));
 }
 function formCreateResultCancelClicked() {
   document.querySelector("#senior-create-result-dialog").close();
@@ -99,17 +79,8 @@ async function prepareNewResultData(event, swimmerSelect) {
   console.log(date);
   const type = document.querySelector("#senior-type").value;
   const competitionName = document.querySelector("#competition-name").value;
-  const placement =
-    type === "Konkurrence" ? document.querySelector("#placement").value : "";
-  const response = await createResult(
-    memberId,
-    discipline,
-    time,
-    date,
-    type,
-    competitionName,
-    placement
-  );
+  const placement = type === "Konkurrence" ? document.querySelector("#placement").value : "";
+  const response = await createResult(memberId, discipline, time, date, type, competitionName, placement);
   if (response.ok) {
     updateSeniorTable();
     document.querySelector("#senior-create-result-dialog").close();
@@ -149,24 +120,20 @@ function searchMembersSenior() {
     }
   });
 }
-async function filterByChanged() {
-  const filterValue = document.querySelector("#senior-select-filter-by").value;
-  const members = await getMembers();
 
-  let results = [];
-  if (filterValue === "junior") {
-    results = members.filter((member) => ageCalculator(member) < 18);
-  } else if (filterValue === "senior") {
-    results = members.filter((member) => ageCalculator(member) >= 18);
-  } else if (filterValue.startsWith("!")) {
-    results = members.filter(
-      (member) => member[filterValue.substring(1)] === "false"
-    );
-  } else if (filterValue === "showAll") {
-    results = members;
+function filterByChanged(results) {
+  console.log(results);
+  const filterValue = document.querySelector("#senior-select-filter-by").value;
+  let topFiveResults = [];
+  if (filterValue === "showAll") {
+    topFiveResults = results.filter((result) => ageCalculator(result.member) >= 18);
   } else {
-    results = members.filter((member) => member[filterValue] === "true");
+    const filterResults = results.filter((result) => result.discipline === filterValue && ageCalculator(result.member) >= 18);
+    const sortedResults = filterResults.sort((a, b) => a.time - b.time);
+    topFiveResults = sortedResults.slice(0, 5);
   }
-  seniorShowMembers(results);
+  seniorShowMembers(topFiveResults);
 }
+
+
 export { seniorShowMembers, searchMembersSenior };
