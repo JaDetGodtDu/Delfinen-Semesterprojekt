@@ -1,6 +1,7 @@
 "use strict";
 import { getMembers, getResults, createResult } from "./rest-service.js";
 import { ageCalculator, seniorCompetitionTypeChange, convertTime } from "./helpers.js";
+import { ageCalculator, seniorCompetitionTypeChange, convertTime } from "./helpers.js";
 window.addEventListener("load", initApp);
 let members = [];
 let results = [];
@@ -35,15 +36,37 @@ function showSeniorTable(result) {
   if (age >= 18) {
     const seniorHTML = /*html*/ `
     <tr>
-    <td class="name">${result.member.firstName} ${result.member.lastName}</td>
-    <td class="discipline">${result.discipline}</td>
-    <td class="trainTime">${result.type === "Træning" ? convertTime(result.time) : ""}</td>
-    <td class="compTime">${result.type === "Konkurrence" ? convertTime(result.time) : ""}</td>
+<td style="color: blue; cursor: pointer;" class="name">
+  <u>${member.firstName} ${member.lastName}</u>
+</td>
+
+      <td class="discipline">${result.discipline}</td>
+      <td class="trainTime">${result.type === "Træning" ? convertTime(result.time) : ""}</td>
+      <td class="compTime">${result.type === "Konkurrence" ? convertTime(result.time) : ""}</td>
     </tr>
     `;
 
     document.querySelector("#senior-table-body").insertAdjacentHTML("beforeend", seniorHTML);
+    const rows = document.querySelectorAll("#senior-table-body tr");
+    const lastRow = rows[rows.length - 1];
+    lastRow.addEventListener("click", () => memberClicked(result));
   }
+}
+function memberClicked(result) {
+  const member = members.find((member) => member.id == result.memberId);
+  let memberInfo = /*html*/ `
+  <h3>${member.firstName} ${member.lastName}</h3><br>
+  <h4>Træninger</h4>
+  <p>Dato: ${result.date}</p>
+  <p>Tid: ${result.type === "Træning" ? convertTime(result.time) : ""}</p>
+  <p>Disciplin: ${result.discipline}</p>
+  <h4>Konkurrencer</h4>
+  <p>Dato: ${result.date}</p>
+  <p>Tid: ${result.type === "Konkurrence" ? convertTime(result.time) : ""}</p>
+  <p>Disciplin: ${result.discipline}</p>
+`;
+  document.querySelector("#member-detail-view").innerHTML = memberInfo;
+  document.querySelector("#member-detail-view").showModal();
 }
 
 function seniorShowCreateResultDialog() {
@@ -54,9 +77,11 @@ function seniorShowCreateResultDialog() {
     let age = ageCalculator(member);
     if (age >= 18) {
       optionsHTML += `<option value="senior-swimmer-name${index + 1}">${member.firstName} ${member.lastName}</option>`;
+      optionsHTML += `<option value="senior-swimmer-name${index + 1}">${member.firstName} ${member.lastName}</option>`;
     }
   });
   swimmerSelect.innerHTML = optionsHTML;
+  document.querySelector("#senior-create-result-dialog").addEventListener("submit", (event) => prepareNewResultData(event, swimmerSelect));
   document.querySelector("#senior-create-result-dialog").addEventListener("submit", (event) => prepareNewResultData(event, swimmerSelect));
 }
 function formCreateResultCancelClicked() {
