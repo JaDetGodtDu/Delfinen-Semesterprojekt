@@ -7,10 +7,10 @@ let results = [];
 
 function initApp() {
   updateSeniorTable();
-  document.querySelector("#senior-select-filter-by").addEventListener("change", () => filterByChanged(results));
   document.querySelector("#senior-create-new-time-btn").addEventListener("click", seniorShowCreateResultDialog);
   document.querySelector("#senior-type").addEventListener("change", (event) => seniorCompetitionTypeChange(event));
   document.querySelector("#senior-create-result-dialog .btn-cancel").addEventListener("click", formCreateResultCancelClicked);
+  document.querySelector("#senior-select-filter-by").addEventListener("change", () => filterByChanged(results));
 }
 
 async function updateSeniorTable() {
@@ -19,10 +19,7 @@ async function updateSeniorTable() {
   for (const result of results) {
     const member = members.find((member) => member.id == result.memberId);
     result.member = member;
-
-    console.log(result);
   }
-  console.log(results);
   seniorShowMembers(results);
 }
 function seniorShowMembers(results) {
@@ -34,7 +31,6 @@ function seniorShowMembers(results) {
 }
 
 function showSeniorTable(result) {
-  // const member = members.find((member) => member.id == result.memberId);
   let age = ageCalculator(result.member);
   if (age >= 18) {
     const seniorHTML = /*html*/ `
@@ -127,15 +123,12 @@ function searchMembersSenior() {
 
 function filterByChanged(results) {
   const filterValue = document.querySelector("#senior-select-filter-by").value;
-  console.log(results);
   let filterResults = [];
   if (filterValue === "showAll") {
     filterResults = results;
   } else {
     filterResults = results.filter((result) => result.discipline === filterValue);
   }
-  console.log(filterValue);
-  console.log(filterResults);
   seniorShowMembers(filterResults);
 }
 
