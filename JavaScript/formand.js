@@ -1,18 +1,7 @@
 "use strict";
 
-import {
-  memberAgeGroup,
-  compSwimmer,
-  subscriptionType,
-  memberGender,
-  ageCalculator,
-} from "./helpers.js";
-import {
-  getMembers,
-  createMember,
-  deleteMember,
-  updateMember,
-} from "./rest-service.js";
+import { memberAgeGroup, compSwimmer, subscriptionType, memberGender, ageCalculator } from "./helpers.js";
+import { getMembers, createMember, deleteMember, updateMember } from "./rest-service.js";
 
 window.addEventListener("load", initApp);
 
@@ -61,9 +50,7 @@ function showTable(member) {
       <td>${subscriptionType(member)}</td>
     </tr>
     `;
-  document
-    .querySelector("#formand-table-body")
-    .insertAdjacentHTML("beforeend", html); // append html to the DOM - section#posts
+  document.querySelector("#formand-table-body").insertAdjacentHTML("beforeend", html); // append html to the DOM - section#posts
   const rows = document.querySelectorAll("#formand-table-body tr");
   const lastRow = rows[rows.length - 1];
   lastRow.addEventListener("click", () => memberClicked(member));
@@ -86,15 +73,9 @@ function memberClicked(member) {
   `;
   document.querySelector("#member-detail-view").innerHTML = memberInfo;
   document.querySelector("#member-detail-view").showModal();
-  document
-    .querySelector("#delete-member-btn")
-    .addEventListener("click", () => deleteClicked(member));
-  document
-    .querySelector("#update-member-btn")
-    .addEventListener("click", () => updateClicked(member));
-  document
-    .querySelector("#member-clicked-cancel-btn")
-    .addEventListener("click", memberClickedCancel);
+  document.querySelector("#delete-member-btn").addEventListener("click", () => deleteClicked(member));
+  document.querySelector("#update-member-btn").addEventListener("click", () => updateClicked(member));
+  document.querySelector("#member-clicked-cancel-btn").addEventListener("click", memberClickedCancel);
 }
 function createMemberCancel() {
   document.querySelector("#create-member-dialog").close();
@@ -104,16 +85,11 @@ function memberClickedCancel() {
 }
 function showCreateMemberDialog() {
   document.querySelector("#create-member-dialog").showModal();
-  document
-    .querySelector("#create-member-form")
-    .addEventListener("submit", prepareNewMemberData);
+  document.querySelector("#create-member-form").addEventListener("submit", prepareNewMemberData);
 }
 function deleteClicked(memberObject) {
-  document.querySelector("#dialog-delete-member-name").textContent =
-    memberObject.firstName + " " + memberObject.lastName;
-  document
-    .querySelector("#form-delete-member")
-    .setAttribute("data-id", memberObject.id);
+  document.querySelector("#dialog-delete-member-name").textContent = memberObject.firstName + " " + memberObject.lastName;
+  document.querySelector("#form-delete-member").setAttribute("data-id", memberObject.id);
   document.querySelector("#dialog-delete-member").showModal();
 }
 async function deleteMemberClicked(event) {
@@ -159,18 +135,7 @@ async function updateMemberClicked(event) {
   const compSwimmer = form.compSwimmer.value;
   const id = form.getAttribute("data-id");
 
-  const response = await updateMember(
-    id,
-    firstName,
-    lastName,
-    address,
-    phone,
-    email,
-    compSwimmer,
-    active,
-    gender,
-    dateOfBirth
-  );
+  const response = await updateMember(id, firstName, lastName, address, phone, email, compSwimmer, active, gender, dateOfBirth);
   document.querySelector("#member-detail-view").close();
   if (response.ok) {
     updateMemberTable();
@@ -186,21 +151,12 @@ async function prepareNewMemberData() {
   const gender = document.querySelector("#gender").value;
   const active = document.querySelector("#active").value;
   const compSwimmer = document.querySelector("#compSwimmer").value;
-  const response = await createMember(
-    firstName,
-    lastName,
-    address,
-    phone,
-    email,
-    dateOfBirth,
-    gender,
-    active,
-    compSwimmer
-  );
+  const response = await createMember(firstName, lastName, address, phone, email, dateOfBirth, gender, active, compSwimmer);
   if (response.ok) {
     updateMemberTable();
     document.querySelector("#create-member-dialog").close();
     document.querySelector("#create-member-form").reset();
+    location.reload();
   }
 }
 async function filterByChanged() {
@@ -213,9 +169,7 @@ async function filterByChanged() {
   } else if (filterValue === "senior") {
     results = members.filter((member) => ageCalculator(member) >= 18);
   } else if (filterValue.startsWith("!")) {
-    results = members.filter(
-      (member) => member[filterValue.substring(1)] === "false"
-    );
+    results = members.filter((member) => member[filterValue.substring(1)] === "false");
   } else if (filterValue === "showAll") {
     results = members;
   } else {

@@ -140,15 +140,25 @@ function searchMembersJunior() {
 }
 
 function filterByChanged(results) {
+  console.log(results);
   const filterValue = document.querySelector("#junior-select-filter-by").value;
   let topFiveResults = [];
   if (filterValue === "showAll") {
     topFiveResults = results.filter((result) => ageCalculator(result.member) < 18);
   } else {
     const filterResults = results.filter((result) => result.discipline === filterValue && ageCalculator(result.member) < 18);
-    const sortedResults = filterResults.sort((a, b) => a.time - b.time);
+    const uniqueMembers = new Map();
+    filterResults.forEach((result) => {
+      const member = result.member;
+      const time = result.time;
+      if (!uniqueMembers.has(member) || time < uniqueMembers.get(member).time) {
+        uniqueMembers.set(member, result);
+      }
+    });
+    const sortedResults = Array.from(uniqueMembers.values()).sort((a, b) => a.time - b.time);
     topFiveResults = sortedResults.slice(0, 5);
   }
+
   juniorShowMembers(topFiveResults);
 }
 
