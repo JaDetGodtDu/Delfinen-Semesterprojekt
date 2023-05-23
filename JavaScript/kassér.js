@@ -8,7 +8,7 @@ import {
   yearlyIncome,
   ageCalculator,
 } from "./helpers.js";
-import { getMembers, createMember } from "./rest-service.js";
+import { getMembers, createMember, endpoint } from "./rest-service.js";
 
 window.addEventListener("load", initApp);
 
@@ -119,7 +119,7 @@ function kassérDetailView(member) {
   <p>Årligt kontingent: ${memberPrice(member)}kr</p>
   <p>Betalingsstatus: </p>
   <label class="slider">
-    <input type="checkbox" id="toggle">
+    <input type="checkbox" id="toggle" ${member.hasPayed ? "checked" : ""}>
     <div class="oval">
       <div class="circle"></div>
     </div>
@@ -135,18 +135,44 @@ function kassérDetailView(member) {
   document
     .querySelector("#kassér-detail-view-cancel-btn")
     .addEventListener("click", kassérViewCancel);
+  document
+    .getElementById("kassér-detail-view-update-btn")
+    .addEventListener("click", handleUpdate);
   document.getElementById("toggle").addEventListener("change", handleToggle);
 
   function handleToggle() {
     if (toggle.checked) {
-      // Kode, der skal udføres, når knappen er aktiveret (tilstand: sand)
       console.log("Knappen er aktiveret");
     } else {
-      // Kode, der skal udføres, når knappen er deaktiveret (tilstand: falsk)
       console.log("Knappen er deaktiveret");
     }
   }
 }
+async function handleUpdate(member) {
+  const toggle = document.getElementById("toggle");
+  const memberId = member.id;
+  const newPaymentStatus = toggle.checked ? "true" : "false";
+  const updatedMember = { member, hasPayed: newPaymentStatus };
+
+  console.log(member);
+
+  try {
+    const response = await fetch(`${endpoint}/members/${memberId}.json`, {
+      method: "PUT",
+      body: JSON.stringify(updatedMember),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to update payment status.");
+    }
+
+    console.log("Payment status updated successfully.");
+  } catch (error) {
+    console.error(error);
+    // Handle error accordingly
+  }
+}
+
 function kassérViewCancel() {
   document.querySelector("#kassér-detail-view").close();
 }

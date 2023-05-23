@@ -187,4 +187,5 @@ export {
   deleteMember,
   updateMember,
   updateResult,
+  endpoint,
 };
