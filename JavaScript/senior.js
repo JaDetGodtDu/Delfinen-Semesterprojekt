@@ -1,7 +1,7 @@
 "use strict";
 import { getMembers, getResults, createResult } from "./rest-service.js";
 import { ageCalculator, seniorCompetitionTypeChange, convertTime } from "./helpers.js";
-import { ageCalculator, seniorCompetitionTypeChange, convertTime } from "./helpers.js";
+
 window.addEventListener("load", initApp);
 let members = [];
 let results = [];
@@ -32,6 +32,7 @@ function seniorShowMembers(results) {
 }
 
 function showSeniorTable(result) {
+  const member = members.find((member) => member.id == result.memberId);
   let age = ageCalculator(result.member);
   if (age >= 18) {
     const seniorHTML = /*html*/ `
@@ -159,6 +160,5 @@ function filterByChanged(results) {
   }
   seniorShowMembers(topFiveResults);
 }
-
 
 export { seniorShowMembers, searchMembersSenior };
