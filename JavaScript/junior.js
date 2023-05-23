@@ -1,25 +1,15 @@
 "use strict";
 import { getMembers, getResults, createResult } from "./rest-service.js";
-import {
-  convertTime,
-  ageCalculator,
-  juniorCompetitionTypeChange,
-} from "./helpers.js";
+import { convertTime, ageCalculator, juniorCompetitionTypeChange } from "./helpers.js";
 window.addEventListener("load", initApp);
 let members = [];
 let swimmerSelect;
 
 function initApp() {
   updateJuniorTable();
-  document
-    .querySelector("#junior-create-new-time-btn")
-    .addEventListener("click", juniorShowCreateResultDialog);
-  document
-    .querySelector("#junior-type")
-    .addEventListener("change", (event) => juniorCompetitionTypeChange(event));
-  document
-    .querySelector("#junior-create-result-dialog .btn-cancel")
-    .addEventListener("click", formCreateResultCancelClicked);
+  document.querySelector("#junior-create-new-time-btn").addEventListener("click", juniorShowCreateResultDialog);
+  document.querySelector("#junior-type").addEventListener("change", (event) => juniorCompetitionTypeChange(event));
+  document.querySelector("#junior-create-result-dialog .btn-cancel").addEventListener("click", formCreateResultCancelClicked);
 }
 
 async function updateJuniorTable() {
@@ -41,21 +31,34 @@ function showJuniorTable(result) {
   if (age < 18) {
     const juniorHTML = /*html*/ `
     <tr>
-      <td class="name">${member.firstName} ${member.lastName}</td>
+      <td style="color: blue; cursor: pointer" class="name">${member.firstName} ${member.lastName}</td>
       <td class="discipline">${result.discipline}</td>
-      <td class="trainTime">${
-        result.type === "Træning" ? convertTime(result.time) : ""
-      }</td>
-      <td class="compTime">${
-        result.type === "Konkurrence" ? convertTime(result.time) : ""
-      }</td>
+      <td class="trainTime">${result.type === "Træning" ? convertTime(result.time) : ""}</td>
+      <td class="compTime">${result.type === "Konkurrence" ? convertTime(result.time) : ""}</td>
     </tr>
   `;
 
-    document
-      .querySelector("#junior-table-body")
-      .insertAdjacentHTML("beforeend", juniorHTML);
+    document.querySelector("#junior-table-body").insertAdjacentHTML("beforeend", juniorHTML);
+    const rows = document.querySelectorAll("#junior-table-body tr");
+    const lastRow = rows[rows.length - 1];
+    lastRow.addEventListener("click", () => memberClicked(result));
   }
+}
+function memberClicked(result) {
+  const member = members.find((member) => member.id == result.memberId);
+  let memberInfo = /*html*/ `
+  <h3>${member.firstName} ${member.lastName}</h3><br>
+  <h4>Træninger</h4>
+  <p>Dato: ${result.date}</p>
+  <p>Tid: ${result.type === "Træning" ? convertTime(result.time) : ""}</p>
+  <p>Disciplin: ${result.discipline}</p>
+  <h4>Konkurrencer</h4>
+  <p>Dato: ${result.date}</p>
+  <p>Tid: ${result.type === "Konkurrence" ? convertTime(result.time) : ""}</p>
+  <p>Disciplin: ${result.discipline}</p>
+`;
+  document.querySelector("#member-detail-view").innerHTML = memberInfo;
+  document.querySelector("#member-detail-view").showModal();
 }
 function juniorShowCreateResultDialog() {
   document.querySelector("#junior-create-result-dialog").showModal();
@@ -64,17 +67,11 @@ function juniorShowCreateResultDialog() {
   members.forEach((member, index) => {
     let age = ageCalculator(member);
     if (age < 18) {
-      optionsHTML += `<option value="junior-swimmer-name${index + 1}">${
-        member.firstName
-      } ${member.lastName}</option>`;
+      optionsHTML += `<option value="junior-swimmer-name${index + 1}">${member.firstName} ${member.lastName}</option>`;
     }
   });
   swimmerSelect.innerHTML = optionsHTML;
-  document
-    .querySelector("#junior-create-result-dialog")
-    .addEventListener("submit", (event) =>
-      prepareNewResultData(event, swimmerSelect)
-    );
+  document.querySelector("#junior-create-result-dialog").addEventListener("submit", (event) => prepareNewResultData(event, swimmerSelect));
 }
 function formCreateResultCancelClicked() {
   document.querySelector("#junior-create-result-dialog").close();
@@ -95,20 +92,9 @@ async function prepareNewResultData(event, swimmerSelect) {
   const date = document.querySelector("#junior-date").value;
   console.log(date);
   const type = document.querySelector("#junior-type").value;
-  const competitionName = document.querySelector(
-    "#junior-competition-name"
-  ).value;
-  const placement =
-    type === "Konkurrence" ? document.querySelector("#placement").value : "";
-  const response = await createResult(
-    memberId,
-    discipline,
-    time,
-    date,
-    type,
-    competitionName,
-    placement
-  );
+  const competitionName = document.querySelector("#junior-competition-name").value;
+  const placement = type === "Konkurrence" ? document.querySelector("#placement").value : "";
+  const response = await createResult(memberId, discipline, time, date, type, competitionName, placement);
   if (response.ok) {
     updateJuniorTable();
     document.querySelector("#junior-create-result-dialog").close();

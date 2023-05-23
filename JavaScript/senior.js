@@ -44,17 +44,21 @@ function showSeniorTable(result) {
     document.querySelector("#senior-table-body").insertAdjacentHTML("beforeend", seniorHTML);
     const rows = document.querySelectorAll("#senior-table-body tr");
     const lastRow = rows[rows.length - 1];
-    lastRow.addEventListener("click", () => memberClicked(member));
+    lastRow.addEventListener("click", () => memberClicked(result));
   }
 }
-function memberClicked(member) {
+function memberClicked(result) {
+  const member = members.find((member) => member.id == result.memberId);
   let memberInfo = /*html*/ `
   <h3>${member.firstName} ${member.lastName}</h3><br>
-  <p>Email: ${member.email}</p>
-  <p>Telefon nr: ${member.phone}</p>
-  <p>Køn: ${member.gender}</p>
-  <p>Addresse: ${member.address}</p>
-  <p>Fødselsdato: ${member.dateOfBirth}</p>
+  <h4>Træninger</h4>
+  <p>Dato: ${result.date}</p>
+  <p>Tid: ${result.type === "Træning" ? convertTime(result.time) : ""}</p>
+  <p>Disciplin: ${result.discipline}</p>
+  <h4>Konkurrencer</h4>
+  <p>Dato: ${result.date}</p>
+  <p>Tid: ${result.type === "Konkurrence" ? convertTime(result.time) : ""}</p>
+  <p>Disciplin: ${result.discipline}</p>
 `;
   document.querySelector("#member-detail-view").innerHTML = memberInfo;
   document.querySelector("#member-detail-view").showModal();
