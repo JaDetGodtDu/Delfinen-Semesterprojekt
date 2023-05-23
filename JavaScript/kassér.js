@@ -137,7 +137,7 @@ function kassérDetailView(member) {
     .addEventListener("click", kassérViewCancel);
   document
     .getElementById("kassér-detail-view-update-btn")
-    .addEventListener("click", handleUpdate);
+    .addEventListener("click", () => handleUpdate(member));
   document.getElementById("toggle").addEventListener("change", handleToggle);
 
   function handleToggle() {
@@ -156,20 +156,16 @@ async function handleUpdate(member) {
 
   console.log(member);
 
-  try {
-    const response = await fetch(`${endpoint}/members/${memberId}.json`, {
-      method: "PUT",
-      body: JSON.stringify(updatedMember),
-    });
-
-    if (!response.ok) {
-      throw new Error("Failed to update payment status.");
-    }
-
-    console.log("Payment status updated successfully.");
-  } catch (error) {
-    console.error(error);
-    // Handle error accordingly
+  const response = await fetch(`${endpoint}/members/${memberId}.json`, {
+    method: "PATCH",
+    body: JSON.stringify(updatedMember),
+  });
+  if (response.ok) {
+    kassérViewCancel();
+    location.reload();
+    return response;
+  } else {
+    console.log("An error occured!");
   }
 }
 
