@@ -122,14 +122,18 @@ function searchMembersSenior() {
 }
 
 function filterByChanged(results) {
+  console.log(results);
   const filterValue = document.querySelector("#senior-select-filter-by").value;
-  let filterResults = [];
+  let topFiveResults = [];
   if (filterValue === "showAll") {
-    filterResults = results;
+    topFiveResults = results;
   } else {
-    filterResults = results.filter((result) => result.discipline === filterValue);
+    const filterResults = results.filter((result) => result.discipline === filterValue);
+    const sortedResults = filterResults.sort((a, b) => a.time - b.time);
+    topFiveResults = sortedResults.slice(0, 5);
   }
-  seniorShowMembers(filterResults);
+  console.log(topFiveResults);
+  seniorShowMembers(topFiveResults);
 }
 
 function showTop5Senior(result) {
