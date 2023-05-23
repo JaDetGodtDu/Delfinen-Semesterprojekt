@@ -45,24 +45,33 @@ function showJuniorTable(result) {
     document.querySelector("#junior-table-body").insertAdjacentHTML("beforeend", juniorHTML);
     const rows = document.querySelectorAll("#junior-table-body tr");
     const lastRow = rows[rows.length - 1];
-    lastRow.addEventListener("click", () => memberClicked(result));
+    lastRow.addEventListener("click", () => resultClicked(result));
   }
 }
-function memberClicked(result) {
+function resultClicked(result) {
+  console.log(results);
   const member = members.find((member) => member.id == result.memberId);
-  let memberInfo = /*html*/ `
+  if (result.type === "Træning") {
+    let memberInfo = /*html*/ `
   <h3>${member.firstName} ${member.lastName}</h3><br>
-  <h4>Træninger</h4>
   <p>Dato: ${result.date}</p>
-  <p>Tid: ${result.type === "Træning" ? convertTime(result.time) : ""}</p>
-  <p>Disciplin: ${result.discipline}</p>
-  <h4>Konkurrencer</h4>
-  <p>Dato: ${result.date}</p>
-  <p>Tid: ${result.type === "Konkurrence" ? convertTime(result.time) : ""}</p>
+  <p>Tid: ${convertTime(result.time)}</p>
   <p>Disciplin: ${result.discipline}</p>
 `;
-  document.querySelector("#member-detail-view").innerHTML = memberInfo;
-  document.querySelector("#member-detail-view").showModal();
+    document.querySelector("#junior-result-detail-view").innerHTML = memberInfo;
+    document.querySelector("#junior-result-detail-view").showModal();
+  } else {
+    let memberInfo = /*html*/ `
+  <h3>${member.firstName} ${member.lastName}</h3><br>
+  <p>Dato: ${result.date}</p>
+  <p>Tid: ${convertTime(result.time)}</p>
+  <p>Disciplin: ${result.discipline}</p>
+  <p>Stævne: ${result.competitionName}</p>
+  <p>Placering: ${result.placement}</p>
+`;
+    document.querySelector("#junior-result-detail-view").innerHTML = memberInfo;
+    document.querySelector("#junior-result-detail-view").showModal();
+  }
 }
 function juniorShowCreateResultDialog() {
   document.querySelector("#junior-create-result-dialog").showModal();
@@ -96,8 +105,8 @@ async function prepareNewResultData(event, swimmerSelect) {
   const date = document.querySelector("#junior-date").value;
   console.log(date);
   const type = document.querySelector("#junior-type").value;
-  const competitionName = document.querySelector("#competition-name").value;
-  const placement = type === "Konkurrence" ? document.querySelector("#placement").value : "";
+  const competitionName = document.querySelector("#junior-competition-name").value;
+  const placement = type === "Konkurrence" ? document.querySelector("#junior-placement").value : "";
   const response = await createResult(memberId, discipline, time, date, type, competitionName, placement);
   if (response.ok) {
     updateJuniorTable();
