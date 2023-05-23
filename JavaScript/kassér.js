@@ -8,7 +8,8 @@ import {
   yearlyIncome,
   ageCalculator,
 } from "./helpers.js";
-import { getMembers, createMember } from "./rest-service.js";
+import { updateMember } from "./rest-service.js";
+import { getMembers, createMember, endpoint } from "./rest-service.js";
 
 window.addEventListener("load", initApp);
 
@@ -37,7 +38,9 @@ function showKassérTable(member) {
   const memberId = `member-${member.id}`;
   const kassérHTML = /*html*/ `
           <tr>
-            <td class="name">${member.firstName} ${member.lastName}</td>
+            <td style="color:blue" class="name">
+              <u>${member.firstName} ${member.lastName}</u>
+            </td>
             <td class="email">${member.email}</td>
             <td class="phone">${member.phone}</td>
             <td class="age">${memberAgeGroup(member)}</td>
@@ -48,6 +51,11 @@ function showKassérTable(member) {
   document
     .querySelector("#kassér-table-body")
     .insertAdjacentHTML("beforeend", kassérHTML);
+
+  const rows = document.querySelectorAll("#kassér-table-body tr");
+  const lastRow = rows[rows.length - 1];
+
+  lastRow.addEventListener("click", () => kassérDetailView(member));
 }
 
 function searchMembersKassér() {
@@ -101,4 +109,77 @@ async function filterByChanged() {
   }
   kassérShowMembers(results);
 }
+function kassérDetailView(member) {
+  const kassérDetailHTML = /*html*/ `
+  <h3>${member.firstName} ${member.lastName}</h3><br>
+  <p>Email: ${member.email}</p>
+  <p>Telefon nr: ${member.phone}</p>
+  <p>Addresse: ${member.address}</p>
+  <p>Aldersgruppe: ${memberAgeGroup(member)}</p>
+  <p>Medlemsskab: ${subscriptionType(member)}</p>
+  <p>Årligt kontingent: ${memberPrice(member)}kr</p>
+  <p>Betalingsstatus: </p>
+  <label class="slider">
+    <input type="checkbox" id="toggle">
+    <div class="oval">
+      <div class="circle"></div>
+    </div>
+  </label>
+  <br>
+  <br>
+  <br>
+  <input type="button" button value="Opdater status" id="kassér-detail-view-update-btn">
+  <input type="button" value="Tilbage"button id="kassér-detail-view-cancel-btn">
+  `;
+  document.querySelector("#kassér-detail-view").innerHTML = kassérDetailHTML;
+  document.querySelector("#kassér-detail-view").showModal();
+
+  const toggle = document.querySelector("#toggle");
+  toggle.checked = member.hasPayed === "true";
+
+  document
+    .querySelector("#kassér-detail-view-cancel-btn")
+    .addEventListener("click", kassérViewCancel);
+  document.getElementById("kassér-detail-view-update-btn");
+  document.getElementById("toggle").addEventListener("change", handleToggle);
+  document
+    .querySelector("#kassér-detail-view-update-btn")
+    .addEventListener("click", async () => {
+      const toggle = document.querySelector("#toggle");
+      const hasPayed = toggle.checked ? "true" : "false";
+      member.hasPayed = hasPayed;
+      const response = await updateMember(
+        member.id,
+        member.firstName,
+        member.lastName,
+        member.address,
+        member.phone,
+        member.email,
+        member.compSwimmer,
+        member.active,
+        member.gender,
+        member.dateOfBirth,
+        member.hasPayed
+      );
+      if (response.ok) {
+        console.log("Paymentstatus succesfully updated!");
+        kassérViewCancel();
+      } else {
+        console.log("And error has occured!");
+      }
+    });
+
+  function handleToggle() {
+    if (toggle.checked) {
+      console.log("Knappen er aktiveret");
+    } else {
+      console.log("Knappen er deaktiveret");
+    }
+  }
+}
+function kassérViewCancel() {
+  location.reload();
+  document.querySelector("#kassér-detail-view").close();
+}
+
 export { kassérShowMembers, searchMembersKassér };
