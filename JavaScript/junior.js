@@ -125,39 +125,11 @@ function filterByChanged(results) {
   const filterValue = document.querySelector("#junior-select-filter-by").value;
   let filterResults = [];
   if (filterValue === "showAll") {
-    filterResults = results;
+    filterResults = results.filter((result) => ageCalculator(result.member) < 18);
   } else {
-    filterResults = results.filter((result) => result.discipline === filterValue);
+    filterResults = results.filter((result) => result.discipline === filterValue && ageCalculator(result.member) < 18);
   }
   juniorShowMembers(filterResults);
 }
 
-function showTop5Junior(result) {
-  {
-    const member = members.find((member) => member.id == result.memberId);
-    let age = ageCalculator(member);
-    if (age < 18) {
-      const top5JuniorHTML = /*html*/ `
-         <table>
-            <tbody id="top-5-junior-body">
-            <thead>
-            <tr>
-              <th class="clickable">Navn</th>
-              <th class="clickable">Disciplin</th>
-              <th class="clickable">Konkurrencetid</th>
-            </tr>
-          </thead>
-    <tr>
-      <td class="name">${member.firstName} ${member.lastName}</td>
-      <td class="discipline">${result.discipline}</td>
-      <td class="compTime">${result.type === "Konkurrence" ? convertTime(result.time) : ""}</td>
-    </tr>
-    </tbody>
-          </table>
-  `;
-      document.querySelector("#top-5-junior").insertAdjacentHTML("beforeend", top5JuniorHTML);
-    }
-  }
-}
-
-export { juniorShowMembers, searchMembersJunior, showTop5Junior };
+export { juniorShowMembers, searchMembersJunior };
