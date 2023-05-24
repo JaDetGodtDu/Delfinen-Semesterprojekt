@@ -55,7 +55,8 @@ function resultClicked(result) {
   const member = members.find((member) => member.id == result.memberId);
   if (result.type === "Træning") {
     let memberInfo = /*html*/ `
-  <h3>${member.firstName} ${member.lastName}</h3><br>
+    <h2>Træning</h2>
+  <p><strong>Navn:</strong> ${member.firstName} ${member.lastName}</p>
   <p><strong>Dato:</strong> ${result.date}</p>
   <p><strong>Tid:</strong> ${convertTime(result.time)}</p>
   <p><strong>Disciplin:</strong> ${result.discipline}</p>
@@ -66,7 +67,8 @@ function resultClicked(result) {
     document.querySelector("#junior-result-detail-view").showModal();
   } else {
     let memberInfo = /*html*/ `
-  <h3>${member.firstName} ${member.lastName}</h3><br>
+    <h2>Konkurrence</h2>
+  <p><strong>Navn:</strong> ${member.firstName} ${member.lastName}</p><br>
   <p><strong>Dato:</strong> ${result.date}</p>
   <p><strong>Tid:</strong> ${convertTime(result.time)}</p>
   <p><strong>Disciplin:</strong> ${result.discipline}</p>
