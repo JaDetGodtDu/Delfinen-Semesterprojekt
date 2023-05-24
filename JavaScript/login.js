@@ -1,10 +1,4 @@
 "use strict";
-
-import { showMembers } from "./formand.js";
-import { getMembers, getResults } from "./rest-service.js";
-import { kassérShowMembers } from "./kassér.js";
-import { seniorShowMembers } from "./senior.js";
-
 window.addEventListener("load", initListeners);
 
 async function initListeners() {

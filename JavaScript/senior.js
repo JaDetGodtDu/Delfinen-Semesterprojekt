@@ -156,18 +156,12 @@ async function prepareNewResultData(event, swimmerSelect) {
 function searchMembersSenior() {
   let searchInput = document.getElementById("input-search-senior");
   let table = document.getElementById("senior-table-body");
-
-  // Add an event listener to the input field
   searchInput.addEventListener("input", function () {
     let filter = searchInput.value.toUpperCase();
     let rows = table.getElementsByTagName("tr");
-
-    // Loop through the table rows and hide those that don't match the filter
     for (let i = 0; i < rows.length; i++) {
       let cells = rows[i].getElementsByTagName("td");
       let shouldHide = true;
-
-      // Loop through the cells of each row
       for (let j = 0; j < cells.length; j++) {
         let cell = cells[j];
         if (cell) {
@@ -178,8 +172,6 @@ function searchMembersSenior() {
           }
         }
       }
-
-      // Toggle the display property based on the filter condition
       rows[i].style.display = shouldHide ? "none" : "";
     }
   });

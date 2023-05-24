@@ -55,8 +55,6 @@ function memberClicked(member) {
   <input type="button" value="Opdater medlem" button id="update-member-btn">
   <input type="button" value="Slet medlem" button id="delete-member-btn">
   <input type="button" value="Tilbage" button id="member-clicked-cancel-btn">
-
- 
   `;
   document.querySelector("#member-detail-view").innerHTML = memberInfo;
   document.querySelector("#member-detail-view").showModal();
@@ -167,18 +165,12 @@ async function filterByChanged() {
 function searchMembersFormand() {
   let searchInput = document.getElementById("input-search-formand");
   let table = document.getElementById("formand-table-body");
-
-  // Add an event listener to the input field
   searchInput.addEventListener("input", function () {
     let filter = searchInput.value.toUpperCase();
     let rows = table.getElementsByTagName("tr");
-
-    // Loop through the table rows and hide those that don't match the filter
     for (let i = 0; i < rows.length; i++) {
       let cells = rows[i].getElementsByTagName("td");
       let shouldHide = true;
-
-      // Loop through the cells of each row
       for (let j = 0; j < cells.length; j++) {
         let cell = cells[j];
         if (cell) {
@@ -189,7 +181,6 @@ function searchMembersFormand() {
           }
         }
       }
-      // Toggle the display property based on the filter condition
       rows[i].style.display = shouldHide ? "none" : "";
     }
   });
