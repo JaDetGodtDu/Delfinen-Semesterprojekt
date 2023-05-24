@@ -49,28 +49,30 @@
           <a href="#kontakt-information">Kontaktinformation</a>
           <a href="#login-view" class="button" id="logout-user-btn">Log Ud</a>
         </nav>
-        <section id="formand-tools" class="formand-tools">
+        <section id="formand-tools-grid">
           <button id="create-new-member-btn">Opret medlem</button>
-          <label for="select-filter-by"
-            >Filtrer:
-            <select id="formand-select-filter-by">
-              <option value="showAll" selected>Vis alle</option>
-              <option value="active">Aktiv</option>
-              <option value="!active">Passiv</option>
-              <option value="compSwimmer">Konkurrence</option>
-              <option value="!compSwimmer">Motionist</option>
-              <option value="junior">Junior</option>
-              <option value="senior">Senior</option>
-            </select>
-          </label>
-          <div>
-            <label for="input-search-formand">Søg:</label>
-            <input
-              type="search"
-              id="input-search-formand"
-              placeholder="Hvad søger du?"
-            />
-          </div>
+          <section id="formand-tools" class="formand-tools">
+            <label for="select-filter-by"
+              >Filtrer:
+              <select id="formand-select-filter-by">
+                <option value="showAll" selected>Vis alle</option>
+                <option value="active">Aktiv</option>
+                <option value="!active">Passiv</option>
+                <option value="compSwimmer">Konkurrence</option>
+                <option value="!compSwimmer">Motionist</option>
+                <option value="junior">Junior</option>
+                <option value="senior">Senior</option>
+              </select>
+            </label>
+            <div>
+              <label for="input-search-formand">Søg:</label>
+              <input
+                type="search"
+                id="input-search-formand"
+                placeholder="Hvad søger du?"
+              />
+            </div>
+          </section>
         </section>
         <table id="formand-table">
           <thead>
