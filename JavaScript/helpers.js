@@ -109,6 +109,16 @@ function yearlyIncome(members) {
   }
   return totalIncome;
 }
+function yearlyIncome2(members) {
+  let totalIncome = 0;
+  for (const member of members) {
+    if (member.hasPayed === "true") {
+      const price = parseFloat(memberPrice(member));
+      totalIncome += price;
+    }
+  }
+  return totalIncome;
+}
 function seniorCompetitionTypeChange(event) {
   const selectedTargetValue = event.target.value;
   if (selectedTargetValue === "Konkurrence") {
@@ -173,4 +183,5 @@ export {
   memberHasPayed,
   yearlyIncome,
   filterMembersByAge,
+  yearlyIncome2,
 };

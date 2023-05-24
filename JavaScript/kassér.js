@@ -7,6 +7,7 @@ import {
   memberHasPayed,
   yearlyIncome,
   ageCalculator,
+  yearlyIncome2,
 } from "./helpers.js";
 import { updateMember } from "./rest-service.js";
 import { getMembers, createMember } from "./rest-service.js";
@@ -27,6 +28,9 @@ async function updateKassérTable() {
 function kassérShowMembers(members) {
   document.querySelector("#kassér-table-body").innerHTML = "";
   document.querySelector("#yearly-earnings").innerHTML = `${yearlyIncome(
+    members
+  )}kr`;
+  document.querySelector("#yearly-earnings2").innerHTML = `${yearlyIncome2(
     members
   )}kr`;
   for (const member of members) {
