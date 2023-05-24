@@ -216,7 +216,6 @@ function searchMembersSenior() {
   searchInput.addEventListener("input", function () {
     let filter = searchInput.value.toUpperCase();
     let rows = table.getElementsByTagName("tr");
-
     for (let i = 0; i < rows.length; i++) {
       let cells = rows[i].getElementsByTagName("td");
       let shouldHide = true;

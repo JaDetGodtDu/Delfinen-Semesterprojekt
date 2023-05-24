@@ -5,7 +5,6 @@ import { prepareMemberData, prepareResultData } from "./helpers.js";
 
 let members;
 
-// FETCH MEMBERS
 async function getMembers() {
   const response = await fetch(`${endpoint}/members.json`);
   const data = await response.json();
@@ -13,7 +12,6 @@ async function getMembers() {
   prepareMemberData(data);
   return members;
 }
-// FETCH COMPETITION RESULTS
 async function getResults() {
   const response = await fetch(`${endpoint}/results.json`);
   const data = await response.json();
@@ -84,11 +82,11 @@ async function deleteMember(id) {
   const deleteMemberResponse = await fetch(`${endpoint}/members/${id}.json`, {
     method: "DELETE",
   });
+
   if (deleteMemberResponse.ok) {
     const resultsResponse = await fetch(`${endpoint}/results.json`);
     if (resultsResponse.ok) {
       const resultsData = await resultsResponse.json();
-
       for (const resultId in resultsData) {
         const result = resultsData[resultId];
         if (result.memberId === id) {
