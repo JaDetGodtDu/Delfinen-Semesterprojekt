@@ -19,7 +19,6 @@ async function getResults() {
   prepareResultData(data);
   return results;
 }
-// CREATE NEW MEMBERS
 async function createMember(
   firstName,
   lastName,
@@ -51,7 +50,6 @@ async function createMember(
   });
   return response;
 }
-// CREATE NEW RESULTS
 async function createResult(
   memberId,
   discipline,
@@ -77,7 +75,6 @@ async function createResult(
   });
   return response;
 }
-// DELETE MEMBER
 async function deleteMember(id) {
   const deleteMemberResponse = await fetch(`${endpoint}/members/${id}.json`, {
     method: "DELETE",
@@ -107,7 +104,6 @@ async function deleteResult(id) {
   location.reload();
   return deleteResultResponse;
 }
-// UPDATE MEMBERS
 async function updateMember(
   id,
   firstName,

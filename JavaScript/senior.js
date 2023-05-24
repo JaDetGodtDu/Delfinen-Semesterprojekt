@@ -36,7 +36,6 @@ function initApp() {
     .querySelector("#form-delete-result .btn-cancel")
     .addEventListener("click", deleteResultCancelClicked);
 }
-
 async function updateSeniorTable() {
   members = await getMembers();
   results = await getResults();
@@ -53,7 +52,6 @@ function seniorShowMembers(results) {
     showSeniorTable(result);
   }
 }
-
 function showSeniorTable(result) {
   const member = members.find((member) => member.id == result.memberId);
   let age = ageCalculator(result.member);
@@ -143,7 +141,6 @@ function deleteResultCancelClicked() {
 function resultDetailViewCancelClicked() {
   document.querySelector("#senior-result-detail-view").close();
 }
-
 function seniorShowCreateResultDialog() {
   document.querySelector("#senior-create-result-dialog").showModal();
   const swimmerSelect = document.querySelector("#senior-swimmer-name");
@@ -208,7 +205,6 @@ async function prepareNewResultData(event, swimmerSelect) {
     location.reload();
   }
 }
-
 function searchMembersSenior() {
   let searchInput = document.getElementById("input-search-senior");
   let table = document.getElementById("senior-table-body");
@@ -234,7 +230,6 @@ function searchMembersSenior() {
     }
   });
 }
-
 function filterByChanged(results) {
   const filterValue = document.querySelector("#senior-select-filter-by").value;
   let topFiveResults = [];
@@ -260,7 +255,6 @@ function filterByChanged(results) {
     );
     topFiveResults = sortedResults.slice(0, 5);
   }
-
   seniorShowMembers(topFiveResults);
 }
 
