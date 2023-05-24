@@ -29,3 +29,32 @@ footer {
 #kontakt-grid .kontakt-element p {
   padding-left: 15px;
 }
+
+.dialog {
+  width: 400px;
+  padding: 20px;
+  border: 1px solid black;
+}
+.dialog input[type="text"],
+.dialog input[type="email"],
+.dialog select {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+.dialog input[type="date"] {
+  height: 30px;
+}
+.dialog input[type="submit"],
+.dialog button,
+.dialog input[type="button"] {
+  background-color: blue;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
