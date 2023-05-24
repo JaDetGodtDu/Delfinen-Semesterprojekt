@@ -36,6 +36,7 @@ async function createMember(firstName, lastName, address, phone, email, dateOfBi
     method: "POST",
     body: json,
   });
+  location.reload();
   return response;
 }
 async function createResult(memberId, discipline, time, date, type, competitionName, placement) {
@@ -53,6 +54,7 @@ async function createResult(memberId, discipline, time, date, type, competitionN
     method: "POST",
     body: json,
   });
+  location.reload();
   return response;
 }
 async function deleteMember(id) {
@@ -102,6 +104,7 @@ async function updateMember(id, firstName, lastName, address, phone, email, comp
     method: "PUT",
     body: json,
   });
+  location.reload();
   return response;
 }
 

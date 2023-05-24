@@ -93,6 +93,7 @@ function updateCancelClicked() {
   document.querySelector("#dialog-update-member").close();
 }
 function updateClicked(memberObject) {
+  console.log(memberObject.hasPayed);
   const updateForm = document.querySelector("#form-update-member");
   updateForm.firstName.value = memberObject.firstName;
   updateForm.lastName.value = memberObject.lastName;
@@ -103,6 +104,7 @@ function updateClicked(memberObject) {
   updateForm.gender.value = memberObject.gender;
   updateForm.active.value = memberObject.active;
   updateForm.compSwimmer.value = memberObject.compSwimmer;
+  updateForm.hasPayed.value = memberObject.hasPayed;
   updateForm.setAttribute("data-id", memberObject.id);
   document.querySelector("#dialog-update-member").showModal();
 }
@@ -117,9 +119,9 @@ async function updateMemberClicked(event) {
   const gender = form.gender.value;
   const active = form.active.value;
   const compSwimmer = form.compSwimmer.value;
+  const hasPayed = form.hasPayed.value;
   const id = form.getAttribute("data-id");
-
-  const response = await updateMember(id, firstName, lastName, address, phone, email, compSwimmer, active, gender, dateOfBirth);
+  const response = await updateMember(id, firstName, lastName, address, phone, email, compSwimmer, active, gender, dateOfBirth, hasPayed);
   document.querySelector("#member-detail-view").close();
   if (response.ok) {
     updateMemberTable();
@@ -141,7 +143,6 @@ async function prepareNewMemberData() {
     updateMemberTable();
     document.querySelector("#create-member-dialog").close();
     document.querySelector("#create-member-form").reset();
-    location.reload();
   }
 }
 async function filterByChanged() {
