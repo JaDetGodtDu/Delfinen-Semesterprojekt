@@ -7,8 +7,8 @@
   display: none;
 }
 .hasPayedTrue {
-  background-color: rgb(1, 192, 1);
+  background-color: rgb(85, 190, 85);
 }
 .hasPayedFalse {
-  background-color: red;
+  background-color: rgb(236, 77, 77);
 }
