@@ -1,14 +1,5 @@
 "use strict";
-import {
-  memberAgeGroup,
-  compSwimmer,
-  subscriptionType,
-  memberPrice,
-  memberHasPayed,
-  yearlyIncome,
-  ageCalculator,
-  yearlyIncome2,
-} from "./helpers.js";
+import { memberAgeGroup, compSwimmer, subscriptionType, memberPrice, memberHasPayed, yearlyIncome, ageCalculator, yearlyIncome2 } from "./helpers.js";
 import { updateMember } from "./rest-service.js";
 import { getMembers, createMember } from "./rest-service.js";
 
@@ -16,9 +7,7 @@ window.addEventListener("load", initApp);
 
 function initApp() {
   updateKassérTable();
-  document
-    .querySelector("#kassér-select-filter-by")
-    .addEventListener("change", filterByChanged);
+  document.querySelector("#kassér-select-filter-by").addEventListener("change", filterByChanged);
 }
 
 async function updateKassérTable() {
@@ -27,12 +16,8 @@ async function updateKassérTable() {
 }
 function kassérShowMembers(members) {
   document.querySelector("#kassér-table-body").innerHTML = "";
-  document.querySelector("#yearly-earnings").innerHTML = `${yearlyIncome(
-    members
-  )}kr`;
-  document.querySelector("#yearly-earnings2").innerHTML = `${yearlyIncome2(
-    members
-  )}kr`;
+  document.querySelector("#yearly-earnings").innerHTML = `${yearlyIncome(members)}kr`;
+  document.querySelector("#yearly-earnings2").innerHTML = `${yearlyIncome2(members)}kr`;
   for (const member of members) {
     showKassérTable(member);
     memberHasPayed(member, `member-${member.id}`);
@@ -52,9 +37,7 @@ function showKassérTable(member) {
             <td id="${memberId}" class="payment"> ${memberPrice(member)}kr</td>
           </tr>
     `;
-  document
-    .querySelector("#kassér-table-body")
-    .insertAdjacentHTML("beforeend", kassérHTML);
+  document.querySelector("#kassér-table-body").insertAdjacentHTML("beforeend", kassérHTML);
   const rows = document.querySelectorAll("#kassér-table-body tr");
   const lastRow = rows[rows.length - 1];
   lastRow.addEventListener("click", () => kassérDetailView(member));
@@ -95,9 +78,7 @@ async function filterByChanged() {
   } else if (filterValue === "senior") {
     results = members.filter((member) => ageCalculator(member) >= 18);
   } else if (filterValue.startsWith("!")) {
-    results = members.filter(
-      (member) => member[filterValue.substring(1)] === "false"
-    );
+    results = members.filter((member) => member[filterValue.substring(1)] === "false");
   } else if (filterValue === "showAll") {
     results = members;
   } else {
@@ -108,13 +89,13 @@ async function filterByChanged() {
 function kassérDetailView(member) {
   const kassérDetailHTML = /*html*/ `
   <h3>${member.firstName} ${member.lastName}</h3><br>
-  <p>Email: ${member.email}</p>
-  <p>Telefon nr: ${member.phone}</p>
-  <p>Addresse: ${member.address}</p>
-  <p>Aldersgruppe: ${memberAgeGroup(member)}</p>
-  <p>Medlemsskab: ${subscriptionType(member)}</p>
-  <p>Årligt kontingent: ${memberPrice(member)}kr</p>
-  <p>Betalingsstatus: </p>
+  <p><strong>Email:</strong> ${member.email}</p>
+  <p><strong>Telefon nr:</strong> ${member.phone}</p>
+  <p><strong>Addresse:</strong> ${member.address}</p>
+  <p><strong>Aldersgruppe:</strong> ${memberAgeGroup(member)}</p>
+  <p><strong>Medlemsskab:</strong> ${subscriptionType(member)}</p>
+  <p><strong>Årligt kontingent:</strong> ${memberPrice(member)}kr</p>
+  <p><strong>Betalingsstatus:</strong> </p>
   <label class="slider">
     <input type="checkbox" id="toggle">
     <div class="oval">
@@ -131,37 +112,21 @@ function kassérDetailView(member) {
   document.querySelector("#kassér-detail-view").showModal();
   const toggle = document.querySelector("#toggle");
   toggle.checked = member.hasPayed === "true";
-  document
-    .querySelector("#kassér-detail-view-cancel-btn")
-    .addEventListener("click", kassérViewCancel);
+  document.querySelector("#kassér-detail-view-cancel-btn").addEventListener("click", kassérViewCancel);
   document.getElementById("kassér-detail-view-update-btn");
   document.getElementById("toggle").addEventListener("change", handleToggle);
-  document
-    .querySelector("#kassér-detail-view-update-btn")
-    .addEventListener("click", async () => {
-      const toggle = document.querySelector("#toggle");
-      const hasPayed = toggle.checked ? "true" : "false";
-      member.hasPayed = hasPayed;
-      const response = await updateMember(
-        member.id,
-        member.firstName,
-        member.lastName,
-        member.address,
-        member.phone,
-        member.email,
-        member.compSwimmer,
-        member.active,
-        member.gender,
-        member.dateOfBirth,
-        member.hasPayed
-      );
-      if (response.ok) {
-        console.log("Paymentstatus succesfully updated!");
-        kassérViewCancel();
-      } else {
-        console.log("And error has occured!");
-      }
-    });
+  document.querySelector("#kassér-detail-view-update-btn").addEventListener("click", async () => {
+    const toggle = document.querySelector("#toggle");
+    const hasPayed = toggle.checked ? "true" : "false";
+    member.hasPayed = hasPayed;
+    const response = await updateMember(member.id, member.firstName, member.lastName, member.address, member.phone, member.email, member.compSwimmer, member.active, member.gender, member.dateOfBirth, member.hasPayed);
+    if (response.ok) {
+      console.log("Paymentstatus succesfully updated!");
+      kassérViewCancel();
+    } else {
+      console.log("And error has occured!");
+    }
+  });
   function handleToggle() {
     if (toggle.checked) {
       console.log("Knappen er aktiveret");

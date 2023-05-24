@@ -44,14 +44,14 @@ function showTable(member) {
 function memberClicked(member) {
   let memberInfo = /*html*/ `
   <h3>${member.firstName} ${member.lastName}</h3><br>
-  <p>Email: ${member.email}</p>
-  <p>Telefon nr: ${member.phone}</p>
-  <p>Addresse: ${member.address}</p>
-  <p>Fødselsdato: ${member.dateOfBirth}</p>
-  <p>Aldersgruppe: ${memberAgeGroup(member)}</p>
-  <p>Køn: ${memberGender(member)}</p>
-  <p>Medlemsskab: ${subscriptionType(member)}</p>
-  <p>Hold: ${compSwimmer(member)}</p>
+  <p><strong>Email:</strong> ${member.email}</p>
+  <p><strong>Telefon nr:</strong> ${member.phone}</p>
+  <p><strong>Addresse:</strong> ${member.address}</p>
+  <p><strong>Fødselsdato:</strong> ${member.dateOfBirth}</p>
+  <p><strong>Aldersgruppe:</strong> ${memberAgeGroup(member)}</p>
+  <p><strong>Køn:</strong> ${memberGender(member)}</p>
+  <p><strong>Medlemsskab:</strong> ${subscriptionType(member)}</p>
+  <p><strong>Hold:</strong> ${compSwimmer(member)}</p>
   <input type="button" value="Opdater medlem" button id="update-member-btn">
   <input type="button" value="Slet medlem" button id="delete-member-btn">
   <input type="button" value="Tilbage" button id="member-clicked-cancel-btn">

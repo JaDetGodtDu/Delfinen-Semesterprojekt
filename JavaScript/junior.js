@@ -56,9 +56,9 @@ function resultClicked(result) {
   if (result.type === "Træning") {
     let memberInfo = /*html*/ `
   <h3>${member.firstName} ${member.lastName}</h3><br>
-  <p>Dato: ${result.date}</p>
-  <p>Tid: ${convertTime(result.time)}</p>
-  <p>Disciplin: ${result.discipline}</p>
+  <p><strong>Dato:</strong> ${result.date}</p>
+  <p><strong>Tid:</strong> ${convertTime(result.time)}</p>
+  <p><strong>Disciplin:</strong> ${result.discipline}</p>
   <button type="button" class ="btn-delete">Slet resultat</button>
   <button type="button" class ="btn-cancel">Tilbage</button>
 `;
@@ -67,11 +67,11 @@ function resultClicked(result) {
   } else {
     let memberInfo = /*html*/ `
   <h3>${member.firstName} ${member.lastName}</h3><br>
-  <p>Dato: ${result.date}</p>
-  <p>Tid: ${convertTime(result.time)}</p>
-  <p>Disciplin: ${result.discipline}</p>
-  <p>Stævne: ${result.competitionName}</p>
-  <p>Placering: ${result.placement}. plads</p>
+  <p><strong>Dato:</strong> ${result.date}</p>
+  <p><strong>Tid:</strong> ${convertTime(result.time)}</p>
+  <p><strong>Disciplin:</strong> ${result.discipline}</p>
+  <p><strong>Stævne:</strong> ${result.competitionName}</p>
+  <p><strong>Placering:</strong> ${result.placement}. plads</p>
   <button type="button" class="btn-delete">Slet resultat</button>
   <button type="button" class="btn-cancel">Tilbage</button>
 `;
