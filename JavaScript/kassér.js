@@ -125,10 +125,7 @@ function kassérDetailView(member) {
     member.hasPayed = hasPayed;
     const response = await updateMember(member.id, member.firstName, member.lastName, member.address, member.phone, member.email, member.compSwimmer, member.active, member.gender, member.dateOfBirth, member.hasPayed);
     if (response.ok) {
-      console.log("Paymentstatus succesfully updated!");
       kassérViewCancel();
-    } else {
-      console.log("And error has occured!");
     }
   });
   function handleToggle() {
