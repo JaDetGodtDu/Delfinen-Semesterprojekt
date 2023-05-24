@@ -107,3 +107,17 @@ body {
 .slider input:checked + .oval .circle {
   transform: translateX(26px);
 }
+#kassér-select-filter-by {
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+#input-search-kassér {
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}

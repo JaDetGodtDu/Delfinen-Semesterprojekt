@@ -77,3 +77,17 @@ body {
   border: 2px solid #fff;
   padding: 10px;
 }
+#junior-select-filter-by {
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+#input-search-junior {
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
