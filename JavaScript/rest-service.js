@@ -21,7 +21,7 @@ async function getResults() {
   return results;
 }
 // CREATE NEW MEMBERS
-async function createMember(firstName, lastName, address, phone, email, dateOfBirth, gender, active, compSwimmer) {
+async function createMember(firstName, lastName, address, phone, email, dateOfBirth, gender, active, compSwimmer, hasPayed) {
   const newMember = {
     firstName,
     lastName,
@@ -32,6 +32,7 @@ async function createMember(firstName, lastName, address, phone, email, dateOfBi
     gender,
     active,
     compSwimmer,
+    hasPayed,
   };
   const json = JSON.stringify(newMember);
   const response = await fetch(`${endpoint}/members.json`, {
@@ -95,19 +96,7 @@ async function deleteResult(id) {
   return deleteResultResponse;
 }
 // UPDATE MEMBERS
-async function updateMember(
-  id,
-  firstName,
-  lastName,
-  address,
-  phone,
-  email,
-  compSwimmer,
-  active,
-  gender,
-  dateOfBirth,
-  hasPayed
-) {
+async function updateMember(id, firstName, lastName, address, phone, email, compSwimmer, active, gender, dateOfBirth, hasPayed) {
   const memberToUpdate = {
     firstName,
     lastName,

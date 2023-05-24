@@ -137,7 +137,8 @@ async function prepareNewMemberData() {
   const gender = document.querySelector("#gender").value;
   const active = document.querySelector("#active").value;
   const compSwimmer = document.querySelector("#compSwimmer").value;
-  const response = await createMember(firstName, lastName, address, phone, email, dateOfBirth, gender, active, compSwimmer);
+  const hasPayed = "false";
+  const response = await createMember(firstName, lastName, address, phone, email, dateOfBirth, gender, active, compSwimmer, hasPayed);
   if (response.ok) {
     updateMemberTable();
     document.querySelector("#create-member-dialog").close();
