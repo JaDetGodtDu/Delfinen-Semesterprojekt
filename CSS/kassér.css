@@ -86,3 +86,85 @@
 .slider input:checked + .oval .circle {
   transform: translateX(26px);
 }
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f2f2f2;
+  margin: 0;
+  padding: 0;
+}
+
+#kassér-view {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+}
+
+#kassér-view button {
+  cursor: pointer;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+#kassér-view .name {
+  cursor: pointer;
+  color: #007bff;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+#kassér-tools {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  background-color: #007bff;
+  margin: 20px 0 50px 0;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  color: white;
+}
+
+.grid-container {
+  display: grid;
+  place-items: center;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 10px;
+  align-items: center;
+}
+
+#kassér-view .box {
+  border: 1px solid #007bff;
+  padding: 10px;
+  text-align: center;
+  background-color: #fff;
+  color: #333;
+}
+
+#kassér-view table {
+  border-collapse: collapse;
+  width: 90%;
+}
+
+#kassér-view table th {
+  color: #fff;
+  background-color: #007bff;
+  border: 2px solid #fff;
+  padding: 10px;
+}
+
+#kassér-view table td {
+  border: 2px solid #fff;
+  padding: 10px;
+}
