@@ -15,7 +15,7 @@ body {
 
 #formand-view button {
   cursor: pointer;
-  background-color: #007bff;
+  background-color: var(--blue);
   color: #fff;
   border: none;
   padding: 10px 20px;
@@ -35,7 +35,7 @@ body {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
-  background-color: #007bff;
+  background-color: var(--blue);
   margin: 20px 0 50px 0;
   padding: 10px;
   border-radius: 5px;
@@ -56,7 +56,7 @@ body {
 }
 
 #formand-view .box {
-  border: 1px solid #007bff;
+  border: 1px solid var(--blue);
   padding: 10px;
   text-align: center;
   background-color: #fff;
@@ -70,7 +70,7 @@ body {
 
 #formand-view table th {
   color: #fff;
-  background-color: #007bff;
+  background-color: var(--blue);
   border: 2px solid #fff;
   padding: 10px;
 }
