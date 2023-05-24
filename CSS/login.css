@@ -7,7 +7,7 @@
   background-color: aliceblue;
   border-width: 2px;
   border-style: solid;
-  border-color: black;
+  border-color: var(--blue);
   justify-content: center;
 }
 #login-view-img {
@@ -40,5 +40,11 @@
   margin: 10px 0px;
   padding: 10px;
   width: 100%;
+  border-color: var(--blue);
+  border-width: 1px;
+}
+.login-btn:hover {
   cursor: pointer;
+  box-shadow: 1px 1px 5px 0px #333;
+  transition: box-shadow 0.3s;
 }
