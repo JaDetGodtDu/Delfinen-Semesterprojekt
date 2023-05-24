@@ -1,18 +1,39 @@
 "use strict";
-import { getMembers, getResults, createResult, deleteResult } from "./rest-service.js";
-import { ageCalculator, juniorCompetitionTypeChange, convertTime } from "./helpers.js";
+import {
+  getMembers,
+  getResults,
+  createResult,
+  deleteResult,
+} from "./rest-service.js";
+import {
+  ageCalculator,
+  juniorCompetitionTypeChange,
+  convertTime,
+} from "./helpers.js";
 window.addEventListener("load", initApp);
 let members = [];
 let results = [];
 
 function initApp() {
   updateJuniorTable();
-  document.querySelector("#junior-create-new-time-btn").addEventListener("click", juniorShowCreateResultDialog);
-  document.querySelector("#junior-type").addEventListener("change", (event) => juniorCompetitionTypeChange(event));
-  document.querySelector("#junior-create-result-dialog .btn-cancel").addEventListener("click", formCreateResultCancelClicked);
-  document.querySelector("#junior-select-filter-by").addEventListener("change", () => filterByChanged(results));
-  document.querySelector("#form-delete-result").addEventListener("submit", deleteResultClicked);
-  document.querySelector("#form-delete-result .btn-cancel").addEventListener("click", deleteResultCancelClicked);
+  document
+    .querySelector("#junior-create-new-time-btn")
+    .addEventListener("click", juniorShowCreateResultDialog);
+  document
+    .querySelector("#junior-type")
+    .addEventListener("change", (event) => juniorCompetitionTypeChange(event));
+  document
+    .querySelector("#junior-create-result-dialog .btn-cancel")
+    .addEventListener("click", formCreateResultCancelClicked);
+  document
+    .querySelector("#junior-select-filter-by")
+    .addEventListener("change", () => filterByChanged(results));
+  document
+    .querySelector("#form-delete-result")
+    .addEventListener("submit", deleteResultClicked);
+  document
+    .querySelector("#form-delete-result .btn-cancel")
+    .addEventListener("click", deleteResultCancelClicked);
 }
 
 async function updateJuniorTable() {
@@ -37,16 +58,24 @@ function showJuniorTable(result) {
   if (age < 18) {
     const juniorHTML = /*html*/ `
     <tr>
-      <td style="color: blue; cursor: pointer" class="name">${result.member.firstName} ${result.member.lastName}</td>
+      <td style="color: blue; cursor: pointer" class="name">${
+        result.member.firstName
+      } ${result.member.lastName}</td>
       <td class="discipline">${result.discipline}</td>
-      <td class="trainTime">${result.type === "Træning" ? convertTime(result.time) : ""}</td>
-      <td class="compTime">${result.type === "Konkurrence" ? convertTime(result.time) : ""}</td>
+      <td class="trainTime">${
+        result.type === "Træning" ? convertTime(result.time) : ""
+      }</td>
+      <td class="compTime">${
+        result.type === "Konkurrence" ? convertTime(result.time) : ""
+      }</td>
       <td class="date">${result.date}</td>
 
     </tr>
   `;
 
-    document.querySelector("#junior-table-body").insertAdjacentHTML("beforeend", juniorHTML);
+    document
+      .querySelector("#junior-table-body")
+      .insertAdjacentHTML("beforeend", juniorHTML);
     const rows = document.querySelectorAll("#junior-table-body tr");
     const lastRow = rows[rows.length - 1];
     lastRow.addEventListener("click", () => resultClicked(result));
@@ -81,12 +110,20 @@ function resultClicked(result) {
     document.querySelector("#junior-result-detail-view").innerHTML = memberInfo;
     document.querySelector("#junior-result-detail-view").showModal();
   }
-  document.querySelector("#junior-result-detail-view").setAttribute("data-id", result.id);
-  document.querySelector("#junior-result-detail-view .btn-cancel").addEventListener("click", resultDetailViewCancelClicked);
-  document.querySelector("#junior-result-detail-view .btn-delete").addEventListener("click", () => deleteClicked(result));
+  document
+    .querySelector("#junior-result-detail-view")
+    .setAttribute("data-id", result.id);
+  document
+    .querySelector("#junior-result-detail-view .btn-cancel")
+    .addEventListener("click", resultDetailViewCancelClicked);
+  document
+    .querySelector("#junior-result-detail-view .btn-delete")
+    .addEventListener("click", () => deleteClicked(result));
 }
 function deleteClicked(resultObject) {
-  document.querySelector("#form-delete-result").setAttribute("data-id", resultObject.id);
+  document
+    .querySelector("#form-delete-result")
+    .setAttribute("data-id", resultObject.id);
   document.querySelector("#dialog-delete-result").showModal();
 }
 async function deleteResultClicked(event) {
@@ -111,11 +148,17 @@ function juniorShowCreateResultDialog() {
   members.forEach((member, index) => {
     let age = ageCalculator(member);
     if (age < 18) {
-      optionsHTML += `<option value="junior-swimmer-name${index + 1}">${member.firstName} ${member.lastName}</option>`;
+      optionsHTML += `<option value="junior-swimmer-name${index + 1}">${
+        member.firstName
+      } ${member.lastName}</option>`;
     }
   });
   swimmerSelect.innerHTML = optionsHTML;
-  document.querySelector("#junior-create-result-dialog").addEventListener("submit", (event) => prepareNewResultData(event, swimmerSelect));
+  document
+    .querySelector("#junior-create-result-dialog")
+    .addEventListener("submit", (event) =>
+      prepareNewResultData(event, swimmerSelect)
+    );
 }
 function formCreateResultCancelClicked() {
   document.querySelector("#junior-create-result-dialog").close();
@@ -135,9 +178,22 @@ async function prepareNewResultData(event, swimmerSelect) {
   const time = minutes * 60 * 1000 + seconds * 1000 + milliseconds;
   const date = document.querySelector("#junior-date").value;
   const type = document.querySelector("#junior-type").value;
-  const competitionName = document.querySelector("#junior-competition-name").value;
-  const placement = type === "Konkurrence" ? document.querySelector("#junior-placement").value : "";
-  const response = await createResult(memberId, discipline, time, date, type, competitionName, placement);
+  const competitionName = document.querySelector(
+    "#junior-competition-name"
+  ).value;
+  const placement =
+    type === "Konkurrence"
+      ? document.querySelector("#junior-placement").value
+      : "";
+  const response = await createResult(
+    memberId,
+    discipline,
+    time,
+    date,
+    type,
+    competitionName,
+    placement
+  );
   if (response.ok) {
     updateJuniorTable();
     document.querySelector("#junior-create-result-dialog").close();
@@ -149,9 +205,11 @@ async function prepareNewResultData(event, swimmerSelect) {
 function searchMembersJunior() {
   let searchInput = document.getElementById("input-search-junior");
   let table = document.getElementById("junior-table-body");
+
   searchInput.addEventListener("input", function () {
     let filter = searchInput.value.toUpperCase();
     let rows = table.getElementsByTagName("tr");
+
     for (let i = 0; i < rows.length; i++) {
       let cells = rows[i].getElementsByTagName("td");
       let shouldHide = true;
@@ -174,9 +232,14 @@ function filterByChanged(results) {
   const filterValue = document.querySelector("#junior-select-filter-by").value;
   let topFiveResults = [];
   if (filterValue === "showAll") {
-    topFiveResults = results.filter((result) => ageCalculator(result.member) < 18);
+    topFiveResults = results.filter(
+      (result) => ageCalculator(result.member) < 18
+    );
   } else {
-    const filterResults = results.filter((result) => result.discipline === filterValue && ageCalculator(result.member) < 18);
+    const filterResults = results.filter(
+      (result) =>
+        result.discipline === filterValue && ageCalculator(result.member) < 18
+    );
     const uniqueMembers = new Map();
     filterResults.forEach((result) => {
       const member = result.member;
@@ -185,7 +248,9 @@ function filterByChanged(results) {
         uniqueMembers.set(member, result);
       }
     });
-    const sortedResults = Array.from(uniqueMembers.values()).sort((a, b) => a.time - b.time);
+    const sortedResults = Array.from(uniqueMembers.values()).sort(
+      (a, b) => a.time - b.time
+    );
     topFiveResults = sortedResults.slice(0, 5);
   }
 
