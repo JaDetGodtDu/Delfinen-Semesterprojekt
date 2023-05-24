@@ -48,6 +48,7 @@ async function createMember(
     method: "POST",
     body: json,
   });
+  location.reload();
   return response;
 }
 async function createResult(
@@ -73,6 +74,7 @@ async function createResult(
     method: "POST",
     body: json,
   });
+  location.reload();
   return response;
 }
 async function deleteMember(id) {
@@ -134,6 +136,7 @@ async function updateMember(
     method: "PUT",
     body: json,
   });
+  location.reload();
   return response;
 }
 

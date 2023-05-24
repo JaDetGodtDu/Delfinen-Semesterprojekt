@@ -31,14 +31,10 @@
             <button class="login-btn" id="login-kassér-btn">Kassér</button>
           </div>
           <div>
-            <button class="login-btn" id="login-senior-btn">
-              Seniortræner
-            </button>
+            <button class="login-btn" id="login-senior-btn">Seniortræner</button>
           </div>
           <div>
-            <button class="login-btn" id="login-junior-btn">
-              Juniortræner
-            </button>
+            <button class="login-btn" id="login-junior-btn">Juniortræner</button>
           </div>
         </article>
       </section>
@@ -66,11 +62,7 @@
             </label>
             <div>
               <label for="input-search-formand">Søg:</label>
-              <input
-                type="search"
-                id="input-search-formand"
-                placeholder="Hvad søger du?"
-              />
+              <input type="search" id="input-search-formand" placeholder="Hvad søger du?" />
             </div>
           </section>
         </section>
@@ -121,11 +113,7 @@
           </label>
           <div>
             <label for="input-search">Søg:</label>
-            <input
-              type="search"
-              id="input-search-kassér"
-              placeholder="Hvad søger du?"
-            />
+            <input type="search" id="input-search-kassér" placeholder="Hvad søger du?" />
           </div>
         </section>
         <table id="kassér-table">
@@ -164,11 +152,7 @@
             </label>
             <div>
               <label for="input-search">Søg:</label>
-              <input
-                type="search"
-                id="input-search-senior"
-                placeholder="Hvad søger du?"
-              />
+              <input type="search" id="input-search-senior" placeholder="Hvad søger du?" />
             </div>
           </section>
         </section>
@@ -209,11 +193,7 @@
             </label>
             <div>
               <label for="input-search">Søg:</label>
-              <input
-                type="search"
-                id="input-search-junior"
-                placeholder="Hvad søger du?"
-              />
+              <input type="search" id="input-search-junior" placeholder="Hvad søger du?" />
             </div>
           </section>
         </section>
@@ -306,11 +286,7 @@
           <option value="false">Motionist</option></select
         ><br />
         <br />
-        <input
-          type="submit"
-          class="btn-registrér"
-          value="Registrér nyt medlem"
-        />
+        <input type="submit" class="btn-registrér" value="Registrér nyt medlem" />
         <button type="button" class="btn-cancel">Tilbage</button>
       </form>
     </dialog>
@@ -335,53 +311,17 @@
       <h2>Opdater medlemsoplysninger</h2>
       <form id="form-update-member" method="dialog">
         <label for="firstName-update">Fornavn: </label>
-        <input
-          type="text"
-          id="firstName-update"
-          name="firstName"
-          placeholder="Opdater fornavn"
-          required
-        /><br />
+        <input type="text" id="firstName-update" name="firstName" placeholder="Opdater fornavn" required /><br />
         <label for="lastName-update">Efternavn: </label>
-        <input
-          type="text"
-          id="lastName-update"
-          name="lastName"
-          placeholder="Opdater efternavn"
-          required
-        /><br />
+        <input type="text" id="lastName-update" name="lastName" placeholder="Opdater efternavn" required /><br />
         <label for="adress-update">Addresse: </label>
-        <input
-          type="text"
-          id="address-update"
-          name="address"
-          placeholder="Opdater addresse"
-          required
-        /><br />
+        <input type="text" id="address-update" name="address" placeholder="Opdater addresse" required /><br />
         <label for="phone-update">Telefon nr: </label>
-        <input
-          type="text"
-          id="phone-update"
-          name="phone"
-          placeholder="Opdater telefon nr."
-          required
-        /><br />
+        <input type="text" id="phone-update" name="phone" placeholder="Opdater telefon nr." required /><br />
         <label for="email-update">Email: </label>
-        <input
-          type="email"
-          id="email-update"
-          name="email"
-          placeholder="Opdater email"
-          required
-        /><br />
+        <input type="email" id="email-update" name="email" placeholder="Opdater email" required /><br />
         <label for="dateOfBirth-update">Fødselsdato: </label>
-        <input
-          type="date"
-          id="dateOfBirth-update"
-          name="dateOfBirth"
-          placeholder="Opdater fødselsdato"
-          required
-        /><br />
+        <input type="date" id="dateOfBirth-update" name="dateOfBirth" placeholder="Opdater fødselsdato" required /><br />
         <label for="gender-update">Køn: </label>
         <select id="gender-update" name="gender">
           <option value="male">Mand</option>
@@ -398,6 +338,7 @@
           <option value="true">Konkurrence</option>
           <option value="false">Motionist</option></select
         ><br />
+        <input type="text" id="hasPayed" hidden />
         <button>Opdater</button>
         <button type="button" class="btn-cancel">Tilbage</button>
       </form>
@@ -415,13 +356,7 @@
           <option value="Rygsvømning">Rygsvømning</option></select
         ><br />
         <label for="time">Tid: </label>
-        <input
-          type="text"
-          id="senior-time"
-          name="time"
-          pattern="[0-5][0-9]:[0-5][0-9]:[0-9]{3}"
-          required
-        />
+        <input type="text" id="senior-time" name="time" pattern="[0-5][0-9]:[0-5][0-9]:[0-9]{3}" required />
         <br />
         <label for="date">Dato:</label>
         <input type="date" id="senior-date" name="date" /> <br />
@@ -431,15 +366,8 @@
           <option value="Konkurrence">Konkurrence</option>
         </select>
         <br />
-        <label for="competition-name" id="competition-name-label" hidden
-          >Stævne:
-        </label>
-        <input
-          type="text"
-          id="competition-name"
-          name="competition-name"
-          hidden
-        />
+        <label for="competition-name" id="competition-name-label" hidden>Stævne: </label>
+        <input type="text" id="competition-name" name="competition-name" hidden />
         <br />
         <label for="placement" id="placement-label" hidden>Placering: </label>
         <select id="placement" name="placement" hidden>
@@ -471,13 +399,7 @@
           <option value="Rygsvømning">Rygsvømning</option></select
         ><br />
         <label for="time">Tid: </label>
-        <input
-          type="text"
-          id="junior-time"
-          name="time"
-          pattern="[0-5][0-9]:[0-5][0-9]:[0-9]{3}"
-          required
-        />
+        <input type="text" id="junior-time" name="time" pattern="[0-5][0-9]:[0-5][0-9]:[0-9]{3}" required />
         <br />
         <label for="date">Dato:</label>
         <input type="date" id="junior-date" name="date" /> <br />
@@ -487,19 +409,10 @@
           <option value="Konkurrence">Konkurrence</option>
         </select>
         <br />
-        <label for="competition-name" id="junior-competition-name-label" hidden
-          >Stævne:
-        </label>
-        <input
-          type="text"
-          id="junior-competition-name"
-          name="competition-name"
-          hidden
-        />
+        <label for="competition-name" id="junior-competition-name-label" hidden>Stævne: </label>
+        <input type="text" id="junior-competition-name" name="competition-name" hidden />
         <br />
-        <label for="placement" id="junior-placement-label" hidden
-          >Placering:
-        </label>
+        <label for="placement" id="junior-placement-label" hidden>Placering: </label>
         <select id="junior-placement" name="placement" hidden>
           <option value="1">1.</option>
           <option value="2">2.</option>
