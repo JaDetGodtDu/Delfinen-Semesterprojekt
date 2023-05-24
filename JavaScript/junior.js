@@ -41,6 +41,8 @@ function showJuniorTable(result) {
       <td class="discipline">${result.discipline}</td>
       <td class="trainTime">${result.type === "Træning" ? convertTime(result.time) : ""}</td>
       <td class="compTime">${result.type === "Konkurrence" ? convertTime(result.time) : ""}</td>
+      <td class="date">${result.date}</td>
+
     </tr>
   `;
 
