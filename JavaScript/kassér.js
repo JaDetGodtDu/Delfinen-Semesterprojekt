@@ -81,6 +81,10 @@ async function filterByChanged() {
     results = members.filter((member) => member[filterValue.substring(1)] === "false");
   } else if (filterValue === "showAll") {
     results = members;
+  } else if (filterValue === "has-payed") {
+    results = members.filter((member) => member.hasPayed === "true");
+  } else if (filterValue === "has-not-payed") {
+    results = members.filter((member) => member.hasPayed === "false");
   } else {
     results = members.filter((member) => member[filterValue] === "true");
   }
