@@ -118,29 +118,19 @@ function kassérDetailView(member) {
   toggle.checked = member.hasPayed === "true";
   document.querySelector("#kassér-detail-view-cancel-btn").addEventListener("click", kassérViewCancel);
   document.getElementById("kassér-detail-view-update-btn");
-  document.getElementById("toggle").addEventListener("change", handleToggle);
   document.querySelector("#kassér-detail-view-update-btn").addEventListener("click", async () => {
     const toggle = document.querySelector("#toggle");
     const hasPayed = toggle.checked ? "true" : "false";
     member.hasPayed = hasPayed;
     const response = await updateMember(member.id, member.firstName, member.lastName, member.address, member.phone, member.email, member.compSwimmer, member.active, member.gender, member.dateOfBirth, member.hasPayed);
     if (response.ok) {
-      console.log("Paymentstatus succesfully updated!");
-      kassérViewCancel();
-    } else {
-      console.log("And error has occured!");
+      updateKassérTable();
+      document.querySelector("#kassér-detail-view").close();
+      location.reload();
     }
   });
-  function handleToggle() {
-    if (toggle.checked) {
-      console.log("Knappen er aktiveret");
-    } else {
-      console.log("Knappen er deaktiveret");
-    }
-  }
 }
 function kassérViewCancel() {
-  location.reload();
   document.querySelector("#kassér-detail-view").close();
 }
 export { kassérShowMembers, searchMembersKassér };
