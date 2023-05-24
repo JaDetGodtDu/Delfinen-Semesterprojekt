@@ -141,7 +141,6 @@ async function prepareNewResultData(event, swimmerSelect) {
   const milliseconds = parseInt(timeParts[2]);
   const time = minutes * 60 * 1000 + seconds * 1000 + milliseconds;
   const date = document.querySelector("#senior-date").value;
-  console.log(date);
   const type = document.querySelector("#senior-type").value;
   const competitionName = document.querySelector("#competition-name").value;
   const placement = type === "Konkurrence" ? document.querySelector("#placement").value : "";
@@ -187,7 +186,6 @@ function searchMembersSenior() {
 }
 
 function filterByChanged(results) {
-  console.log(results);
   const filterValue = document.querySelector("#senior-select-filter-by").value;
   let topFiveResults = [];
   if (filterValue === "showAll") {

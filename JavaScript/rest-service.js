@@ -52,7 +52,6 @@ async function createResult(memberId, discipline, time, date, type, competitionN
     competitionName,
     placement,
   };
-  console.log(newResult);
   const json = JSON.stringify(newResult);
   const response = await fetch(`${endpoint}/results.json`, {
     method: "POST",

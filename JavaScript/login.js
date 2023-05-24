@@ -57,34 +57,29 @@ async function handleHashChange() {
 
 async function showFormandView(event) {
   event.preventDefault(); 
-  console.log("show formand view");
   window.location.hash = "formand-view"; 
   localStorage.setItem("previousHash", window.location.hash);
 }
 
 async function showKassérView(event) {
   event.preventDefault(); 
-  console.log("show kassér view");
   window.location.hash = "kass%C3%A9r-view";
   localStorage.setItem("previousHash", window.location.hash); 
 }
 
 async function showSeniorView(event) {
   event.preventDefault(); 
-  console.log("show senior view");
   window.location.hash = "senior-view"; 
   localStorage.setItem("previousHash", window.location.hash);
 }
 
 async function showJuniorView(event) {
   event.preventDefault(); 
-  console.log("show junior view");
   window.location.hash = "junior-view"; 
   localStorage.setItem("previousHash", window.location.hash);
 }
 
 async function showLoginView(event) {
   event.preventDefault(); 
-  console.log("show login view");
   window.location.hash = "login-view"; 
 }

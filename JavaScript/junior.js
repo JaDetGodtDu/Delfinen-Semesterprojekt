@@ -53,7 +53,6 @@ function showJuniorTable(result) {
   }
 }
 function resultClicked(result) {
-  console.log(results);
   const member = members.find((member) => member.id == result.memberId);
   if (result.type === "Træning") {
     let memberInfo = /*html*/ `
@@ -135,7 +134,6 @@ async function prepareNewResultData(event, swimmerSelect) {
   const milliseconds = parseInt(timeParts[2]);
   const time = minutes * 60 * 1000 + seconds * 1000 + milliseconds;
   const date = document.querySelector("#junior-date").value;
-  console.log(date);
   const type = document.querySelector("#junior-type").value;
   const competitionName = document.querySelector("#junior-competition-name").value;
   const placement = type === "Konkurrence" ? document.querySelector("#junior-placement").value : "";
@@ -181,7 +179,6 @@ function searchMembersJunior() {
 }
 
 function filterByChanged(results) {
-  console.log(results);
   const filterValue = document.querySelector("#junior-select-filter-by").value;
   let topFiveResults = [];
   if (filterValue === "showAll") {
