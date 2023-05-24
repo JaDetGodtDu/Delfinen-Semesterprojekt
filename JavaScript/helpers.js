@@ -150,5 +150,4 @@ export {
   memberGender,
   memberPrice,
   memberHasPayed,
-  filterMembersByAge,
 };
