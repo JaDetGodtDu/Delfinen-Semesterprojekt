@@ -62,3 +62,10 @@ footer {
   border-radius: 4px;
   cursor: pointer;
 }
+.dialog input[type="submit"]:hover,
+.dialog button:hover,
+.dialog input[type="button"]:hover {
+  cursor: pointer;
+  box-shadow: 1px 1px 5px 0px #333;
+  transition: box-shadow 0.3s;
+}
