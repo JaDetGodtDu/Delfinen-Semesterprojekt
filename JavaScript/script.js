@@ -1,15 +1,10 @@
 "use strict";
 
-import { showCreateMemberDialog, searchMembersFormand } from "./formand.js";
+import { searchMembersFormand } from "./formand.js";
 import { searchMembersKassér } from "./kassér.js";
 import { searchMembersSenior } from "./senior.js";
 import { searchMembersJunior } from "./junior.js";
-import {
-  getMembers,
-  getResults,
-  createMember,
-  createResult,
-} from "./rest-service.js";
+import { getMembers } from "./rest-service.js";
 window.addEventListener("load", initApp);
 
 function initApp() {

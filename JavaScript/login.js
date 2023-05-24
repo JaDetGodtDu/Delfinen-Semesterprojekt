@@ -1,10 +1,5 @@
 "use strict";
 
-import { showMembers } from "./formand.js";
-import { getMembers, getResults } from "./rest-service.js";
-import { kassérShowMembers } from "./kassér.js";
-import { seniorShowMembers } from "./senior.js";
-
 window.addEventListener("load", initListeners);
 
 async function initListeners() {
@@ -23,8 +18,7 @@ async function initListeners() {
   document
     .querySelector("#logout-user-btn")
     .addEventListener("click", showLoginView);
-  window
-    .addEventListener("hashchange", handleHashChange);
+  window.addEventListener("hashchange", handleHashChange);
   handleHashChange();
 }
 
@@ -36,8 +30,8 @@ async function handleHashChange() {
       window.location.hash = previousHash;
       return;
     }
-  }  
-  document.querySelectorAll("section").forEach(section => {
+  }
+  document.querySelectorAll("section").forEach((section) => {
     section.classList.add("hidden");
   });
   if (hash === "#formand-view") {
@@ -56,30 +50,30 @@ async function handleHashChange() {
 }
 
 async function showFormandView(event) {
-  event.preventDefault(); 
-  window.location.hash = "formand-view"; 
+  event.preventDefault();
+  window.location.hash = "formand-view";
   localStorage.setItem("previousHash", window.location.hash);
 }
 
 async function showKassérView(event) {
-  event.preventDefault(); 
+  event.preventDefault();
   window.location.hash = "kass%C3%A9r-view";
-  localStorage.setItem("previousHash", window.location.hash); 
+  localStorage.setItem("previousHash", window.location.hash);
 }
 
 async function showSeniorView(event) {
-  event.preventDefault(); 
-  window.location.hash = "senior-view"; 
+  event.preventDefault();
+  window.location.hash = "senior-view";
   localStorage.setItem("previousHash", window.location.hash);
 }
 
 async function showJuniorView(event) {
-  event.preventDefault(); 
-  window.location.hash = "junior-view"; 
+  event.preventDefault();
+  window.location.hash = "junior-view";
   localStorage.setItem("previousHash", window.location.hash);
 }
 
 async function showLoginView(event) {
-  event.preventDefault(); 
-  window.location.hash = "login-view"; 
+  event.preventDefault();
+  window.location.hash = "login-view";
 }

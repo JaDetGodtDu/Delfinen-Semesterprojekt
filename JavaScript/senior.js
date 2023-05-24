@@ -1,6 +1,15 @@
 "use strict";
-import { getMembers, getResults, createResult, deleteResult } from "./rest-service.js";
-import { ageCalculator, seniorCompetitionTypeChange, convertTime } from "./helpers.js";
+import {
+  getMembers,
+  getResults,
+  createResult,
+  deleteResult,
+} from "./rest-service.js";
+import {
+  ageCalculator,
+  seniorCompetitionTypeChange,
+  convertTime,
+} from "./helpers.js";
 
 window.addEventListener("load", initApp);
 let members = [];
@@ -8,12 +17,24 @@ let results = [];
 
 function initApp() {
   updateSeniorTable();
-  document.querySelector("#senior-create-new-time-btn").addEventListener("click", seniorShowCreateResultDialog);
-  document.querySelector("#senior-type").addEventListener("change", (event) => seniorCompetitionTypeChange(event));
-  document.querySelector("#senior-create-result-dialog .btn-cancel").addEventListener("click", formCreateResultCancelClicked);
-  document.querySelector("#senior-select-filter-by").addEventListener("change", () => filterByChanged(results));
-  document.querySelector("#form-delete-result").addEventListener("submit", deleteResultClicked);
-  document.querySelector("#form-delete-result .btn-cancel").addEventListener("click", deleteResultCancelClicked);
+  document
+    .querySelector("#senior-create-new-time-btn")
+    .addEventListener("click", seniorShowCreateResultDialog);
+  document
+    .querySelector("#senior-type")
+    .addEventListener("change", (event) => seniorCompetitionTypeChange(event));
+  document
+    .querySelector("#senior-create-result-dialog .btn-cancel")
+    .addEventListener("click", formCreateResultCancelClicked);
+  document
+    .querySelector("#senior-select-filter-by")
+    .addEventListener("change", () => filterByChanged(results));
+  document
+    .querySelector("#form-delete-result")
+    .addEventListener("submit", deleteResultClicked);
+  document
+    .querySelector("#form-delete-result .btn-cancel")
+    .addEventListener("click", deleteResultCancelClicked);
 }
 
 async function updateSeniorTable() {
@@ -44,13 +65,19 @@ function showSeniorTable(result) {
 </td>
 
       <td class="discipline">${result.discipline}</td>
-      <td class="trainTime">${result.type === "Træning" ? convertTime(result.time) : ""}</td>
-      <td class="compTime">${result.type === "Konkurrence" ? convertTime(result.time) : ""}</td>
+      <td class="trainTime">${
+        result.type === "Træning" ? convertTime(result.time) : ""
+      }</td>
+      <td class="compTime">${
+        result.type === "Konkurrence" ? convertTime(result.time) : ""
+      }</td>
       <td class="date">${result.date}</td>
     </tr>
     `;
 
-    document.querySelector("#senior-table-body").insertAdjacentHTML("beforeend", seniorHTML);
+    document
+      .querySelector("#senior-table-body")
+      .insertAdjacentHTML("beforeend", seniorHTML);
     const rows = document.querySelectorAll("#senior-table-body tr");
     const lastRow = rows[rows.length - 1];
     lastRow.addEventListener("click", () => resultClicked(result));
@@ -85,12 +112,20 @@ function resultClicked(result) {
     document.querySelector("#senior-result-detail-view").innerHTML = memberInfo;
     document.querySelector("#senior-result-detail-view").showModal();
   }
-  document.querySelector("#senior-result-detail-view").setAttribute("data-id", result.id);
-  document.querySelector("#senior-result-detail-view .btn-cancel").addEventListener("click", resultDetailViewCancelClicked);
-  document.querySelector("#senior-result-detail-view .btn-delete").addEventListener("click", () => deleteClicked(result));
+  document
+    .querySelector("#senior-result-detail-view")
+    .setAttribute("data-id", result.id);
+  document
+    .querySelector("#senior-result-detail-view .btn-cancel")
+    .addEventListener("click", resultDetailViewCancelClicked);
+  document
+    .querySelector("#senior-result-detail-view .btn-delete")
+    .addEventListener("click", () => deleteClicked(result));
 }
 function deleteClicked(resultObject) {
-  document.querySelector("#form-delete-result").setAttribute("data-id", resultObject.id);
+  document
+    .querySelector("#form-delete-result")
+    .setAttribute("data-id", resultObject.id);
   document.querySelector("#dialog-delete-result").showModal();
 }
 async function deleteResultClicked(event) {
@@ -116,13 +151,25 @@ function seniorShowCreateResultDialog() {
   members.forEach((member, index) => {
     let age = ageCalculator(member);
     if (age >= 18) {
-      optionsHTML += `<option value="senior-swimmer-name${index + 1}">${member.firstName} ${member.lastName}</option>`;
-      optionsHTML += `<option value="senior-swimmer-name${index + 1}">${member.firstName} ${member.lastName}</option>`;
+      optionsHTML += `<option value="senior-swimmer-name${index + 1}">${
+        member.firstName
+      } ${member.lastName}</option>`;
+      optionsHTML += `<option value="senior-swimmer-name${index + 1}">${
+        member.firstName
+      } ${member.lastName}</option>`;
     }
   });
   swimmerSelect.innerHTML = optionsHTML;
-  document.querySelector("#senior-create-result-dialog").addEventListener("submit", (event) => prepareNewResultData(event, swimmerSelect));
-  document.querySelector("#senior-create-result-dialog").addEventListener("submit", (event) => prepareNewResultData(event, swimmerSelect));
+  document
+    .querySelector("#senior-create-result-dialog")
+    .addEventListener("submit", (event) =>
+      prepareNewResultData(event, swimmerSelect)
+    );
+  document
+    .querySelector("#senior-create-result-dialog")
+    .addEventListener("submit", (event) =>
+      prepareNewResultData(event, swimmerSelect)
+    );
 }
 function formCreateResultCancelClicked() {
   document.querySelector("#senior-create-result-dialog").close();
@@ -143,8 +190,17 @@ async function prepareNewResultData(event, swimmerSelect) {
   const date = document.querySelector("#senior-date").value;
   const type = document.querySelector("#senior-type").value;
   const competitionName = document.querySelector("#competition-name").value;
-  const placement = type === "Konkurrence" ? document.querySelector("#placement").value : "";
-  const response = await createResult(memberId, discipline, time, date, type, competitionName, placement);
+  const placement =
+    type === "Konkurrence" ? document.querySelector("#placement").value : "";
+  const response = await createResult(
+    memberId,
+    discipline,
+    time,
+    date,
+    type,
+    competitionName,
+    placement
+  );
   if (response.ok) {
     updateSeniorTable();
     document.querySelector("#senior-create-result-dialog").close();
@@ -157,17 +213,14 @@ function searchMembersSenior() {
   let searchInput = document.getElementById("input-search-senior");
   let table = document.getElementById("senior-table-body");
 
-  // Add an event listener to the input field
   searchInput.addEventListener("input", function () {
     let filter = searchInput.value.toUpperCase();
     let rows = table.getElementsByTagName("tr");
 
-    // Loop through the table rows and hide those that don't match the filter
     for (let i = 0; i < rows.length; i++) {
       let cells = rows[i].getElementsByTagName("td");
       let shouldHide = true;
 
-      // Loop through the cells of each row
       for (let j = 0; j < cells.length; j++) {
         let cell = cells[j];
         if (cell) {
@@ -178,8 +231,6 @@ function searchMembersSenior() {
           }
         }
       }
-
-      // Toggle the display property based on the filter condition
       rows[i].style.display = shouldHide ? "none" : "";
     }
   });
@@ -189,9 +240,14 @@ function filterByChanged(results) {
   const filterValue = document.querySelector("#senior-select-filter-by").value;
   let topFiveResults = [];
   if (filterValue === "showAll") {
-    topFiveResults = results.filter((result) => ageCalculator(result.member) >= 18);
+    topFiveResults = results.filter(
+      (result) => ageCalculator(result.member) >= 18
+    );
   } else {
-    const filterResults = results.filter((result) => result.discipline === filterValue && ageCalculator(result.member) >= 18);
+    const filterResults = results.filter(
+      (result) =>
+        result.discipline === filterValue && ageCalculator(result.member) >= 18
+    );
     const uniqueMembers = new Map();
     filterResults.forEach((result) => {
       const member = result.member;
@@ -200,7 +256,9 @@ function filterByChanged(results) {
         uniqueMembers.set(member, result);
       }
     });
-    const sortedResults = Array.from(uniqueMembers.values()).sort((a, b) => a.time - b.time);
+    const sortedResults = Array.from(uniqueMembers.values()).sort(
+      (a, b) => a.time - b.time
+    );
     topFiveResults = sortedResults.slice(0, 5);
   }
 

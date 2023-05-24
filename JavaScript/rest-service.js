@@ -1,4 +1,5 @@
-const endpoint = "https://delfinen-8e9fa-default-rtdb.europe-west1.firebasedatabase.app/";
+const endpoint =
+  "https://delfinen-8e9fa-default-rtdb.europe-west1.firebasedatabase.app/";
 
 import { prepareMemberData, prepareResultData } from "./helpers.js";
 
@@ -21,7 +22,18 @@ async function getResults() {
   return results;
 }
 // CREATE NEW MEMBERS
-async function createMember(firstName, lastName, address, phone, email, dateOfBirth, gender, active, compSwimmer, hasPayed) {
+async function createMember(
+  firstName,
+  lastName,
+  address,
+  phone,
+  email,
+  dateOfBirth,
+  gender,
+  active,
+  compSwimmer,
+  hasPayed
+) {
   const newMember = {
     firstName,
     lastName,
@@ -42,7 +54,15 @@ async function createMember(firstName, lastName, address, phone, email, dateOfBi
   return response;
 }
 // CREATE NEW RESULTS
-async function createResult(memberId, discipline, time, date, type, competitionName, placement) {
+async function createResult(
+  memberId,
+  discipline,
+  time,
+  date,
+  type,
+  competitionName,
+  placement
+) {
   const newResult = {
     memberId,
     discipline,
@@ -59,21 +79,16 @@ async function createResult(memberId, discipline, time, date, type, competitionN
   });
   return response;
 }
-// DELETE MEMBERS
+// DELETE MEMBER
 async function deleteMember(id) {
-  // Delete member
   const deleteMemberResponse = await fetch(`${endpoint}/members/${id}.json`, {
     method: "DELETE",
   });
-
-  // Delete associated results
   if (deleteMemberResponse.ok) {
-    // Fetch all results
     const resultsResponse = await fetch(`${endpoint}/results.json`);
     if (resultsResponse.ok) {
       const resultsData = await resultsResponse.json();
 
-      // Find and delete results with matching memberId
       for (const resultId in resultsData) {
         const result = resultsData[resultId];
         if (result.memberId === id) {
@@ -95,7 +110,19 @@ async function deleteResult(id) {
   return deleteResultResponse;
 }
 // UPDATE MEMBERS
-async function updateMember(id, firstName, lastName, address, phone, email, compSwimmer, active, gender, dateOfBirth, hasPayed) {
+async function updateMember(
+  id,
+  firstName,
+  lastName,
+  address,
+  phone,
+  email,
+  compSwimmer,
+  active,
+  gender,
+  dateOfBirth,
+  hasPayed
+) {
   const memberToUpdate = {
     firstName,
     lastName,
@@ -116,4 +143,13 @@ async function updateMember(id, firstName, lastName, address, phone, email, comp
   return response;
 }
 
-export { members, getMembers, getResults, createMember, createResult, deleteMember, updateMember, deleteResult };
+export {
+  members,
+  getMembers,
+  getResults,
+  createMember,
+  createResult,
+  deleteMember,
+  updateMember,
+  deleteResult,
+};
