@@ -4,15 +4,12 @@ body {
   margin: 0;
   padding: 0;
 }
-
 #junior-view {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 20px;
 }
-
 #junior-view button {
   cursor: pointer;
   background-color: #007bff;
@@ -23,58 +20,50 @@ body {
   font-size: 16px;
   margin-top: 10px;
 }
-
 #junior-view .name {
   cursor: pointer;
   color: #007bff;
   font-weight: bold;
   text-decoration: underline;
 }
-
 #junior-tools {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
-  background-color: #007bff;
+  background-color: var(--blue);
   margin: 20px 0 50px 0;
   padding: 10px;
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   color: white;
 }
-
 .grid-container {
   display: grid;
   place-items: center;
 }
-
 .container {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 10px;
   align-items: center;
 }
-
 #junior-view .box {
-  border: 1px solid #007bff;
+  border: 1px solid var(--blue);
   padding: 10px;
   text-align: center;
   background-color: #fff;
   color: #333;
 }
-
 #junior-view table {
   border-collapse: collapse;
   width: 90%;
 }
-
 #junior-view table th {
   color: #fff;
-  background-color: #007bff;
+  background-color: var(--blue);
   border: 2px solid #fff;
   padding: 10px;
 }
-
 #junior-view table td {
   border: 2px solid #fff;
   padding: 10px;

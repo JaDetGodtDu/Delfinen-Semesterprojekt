@@ -1,3 +1,7 @@
+:root {
+  --blue: #007bff;
+}
+
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
@@ -5,7 +9,7 @@ body {
 header {
   height: auto;
   color: white;
-  background-color: #007bff;
+  background-color: var(--blue);
   padding: 2em;
   text-align: center;
   font-size: xx-large;
@@ -13,7 +17,7 @@ header {
 footer {
   height: 50px;
   color: white;
-  background-color: #007bff;
+  background-color: var(--blue);
   padding: 2em;
   text-align: center;
   margin-top: 96px;
@@ -51,7 +55,7 @@ footer {
 .dialog input[type="submit"],
 .dialog button,
 .dialog input[type="button"] {
-  background-color: blue;
+  background-color: var(--blue);
   color: white;
   padding: 10px 15px;
   border: none;
