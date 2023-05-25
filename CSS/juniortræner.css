@@ -19,6 +19,7 @@ body {
   border-radius: 5px;
   margin: 20px 40px 50px 40px;
   padding: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 #junior-create-new-time-btn:hover {
   cursor: pointer;
@@ -79,14 +80,12 @@ body {
 }
 #junior-select-filter-by {
   padding: 8px;
-  margin-bottom: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
 }
 #input-search-junior {
   padding: 8px;
-  margin-bottom: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
