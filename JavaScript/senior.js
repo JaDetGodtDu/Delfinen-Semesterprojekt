@@ -32,13 +32,12 @@ function seniorShowMembers(results) {
   }
 }
 function showSeniorTable(result) {
-  const member = members.find((member) => member.id == result.memberId);
   let age = ageCalculator(result.member);
   if (age >= 18) {
     const seniorHTML = /*html*/ `
     <tr>
 <td class="name">
-  <u>${member.firstName} ${member.lastName}</u>
+  <u>${result.member.firstName} ${result.member.lastName}</u>
 </td>
 
       <td class="discipline">${result.discipline}</td>
@@ -47,7 +46,6 @@ function showSeniorTable(result) {
       <td class="date">${result.date}</td>
     </tr>
     `;
-
     document.querySelector("#senior-table-body").insertAdjacentHTML("beforeend", seniorHTML);
     const rows = document.querySelectorAll("#senior-table-body tr");
     const lastRow = rows[rows.length - 1];
@@ -118,7 +116,6 @@ function seniorShowCreateResultDialog() {
   });
   swimmerSelect.innerHTML = optionsHTML;
   document.querySelector("#senior-create-result-dialog").addEventListener("submit", (event) => prepareNewResultData(event, swimmerSelect));
-  document.querySelector("#senior-create-result-dialog").addEventListener("submit", (event) => prepareNewResultData(event, swimmerSelect));
 }
 function formCreateResultCancelClicked() {
   document.querySelector("#senior-create-result-dialog").close();
@@ -145,7 +142,6 @@ async function prepareNewResultData(event, swimmerSelect) {
     updateSeniorTable();
     document.querySelector("#senior-create-result-dialog").close();
     document.querySelector("#senior-create-result-form").reset();
-    location.reload();
   }
 }
 function searchMembersSenior() {

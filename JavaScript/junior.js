@@ -42,10 +42,8 @@ function showJuniorTable(result) {
       <td class="trainTime">${result.type === "Træning" ? convertTime(result.time) : ""}</td>
       <td class="compTime">${result.type === "Konkurrence" ? convertTime(result.time) : ""}</td>
       <td class="date">${result.date}</td>
-
     </tr>
   `;
-
     document.querySelector("#junior-table-body").insertAdjacentHTML("beforeend", juniorHTML);
     const rows = document.querySelectorAll("#junior-table-body tr");
     const lastRow = rows[rows.length - 1];
@@ -142,10 +140,8 @@ async function prepareNewResultData(event, swimmerSelect) {
     updateJuniorTable();
     document.querySelector("#junior-create-result-dialog").close();
     document.querySelector("#junior-create-result-form").reset();
-    location.reload();
   }
 }
-
 function searchMembersJunior() {
   let searchInput = document.getElementById("input-search-junior");
   let table = document.getElementById("junior-table-body");
@@ -171,7 +167,6 @@ function searchMembersJunior() {
     }
   });
 }
-
 function filterByChanged(results) {
   const filterValue = document.querySelector("#junior-select-filter-by").value;
   let topFiveResults = [];
@@ -190,7 +185,6 @@ function filterByChanged(results) {
     const sortedResults = Array.from(uniqueMembers.values()).sort((a, b) => a.time - b.time);
     topFiveResults = sortedResults.slice(0, 5);
   }
-
   juniorShowMembers(topFiveResults);
 }
 
