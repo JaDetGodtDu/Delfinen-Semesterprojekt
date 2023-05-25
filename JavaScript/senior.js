@@ -37,7 +37,7 @@ function showSeniorTable(result) {
   if (age >= 18) {
     const seniorHTML = /*html*/ `
     <tr>
-<td style="color: blue; cursor: pointer;" class="name">
+<td class="name">
   <u>${member.firstName} ${member.lastName}</u>
 </td>
 
