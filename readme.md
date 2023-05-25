@@ -6,9 +6,9 @@ This is an app for administrive purposes in a swimming association.
 - The cashier can see and update the paymentstatus of members.
 - The trainers can see an overview of the members on their team and see a top 5 of the best swim-times on their respective teams. Furthermore they can create and delete swim-times.
 
-Link to github-pages deployment:
+Link to github-pages deployment: https://jadetgodtdu.github.io/Delfinen-Semesterprojekt/
 
-Link to github repository:
+Link to github repository: https://github.com/JaDetGodtDu/Delfinen-Semesterprojekt
 
 Link to firebase: https://console.firebase.google.com/project/delfinen-8e9fa/database/delfinen-8e9fa-default-rtdb/data
 
