@@ -1,4 +1,4 @@
-Semesterprojekt - Delfinen
+Semesterprojekt - Svømmeklubben Delfinen
 
 This is an app for administrive purposes in a swimming association.
 
